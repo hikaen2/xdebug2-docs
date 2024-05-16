@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Xdebug: Documentation » Installation</title>
+	<meta name="ROBOTS" content="ALL" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta name="DESCRIPTION" content="Xdebug: A powerful debugger for PHP" />
+	<meta name="AUTHOR" content="Derick Rethans, as in derick@xdebug.org" />
+	<link rel="icon" type="image/png" href="../images/favicon.png">
+		<link rel="stylesheet" type="text/css" href="../core2.css" />
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<body>
+	<nav>
+	<div class="content_width">
+		<h1><a href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="351" height="181" viewBox="0 0 351 181"><title>Xdebug</title><g fill="none" fill-rule="evenodd" stroke="#FFF"><g transform="translate(5 5)"><path fill="#317E1E" fill-rule="nonzero" stroke-width="5" d="M127.9 85.5l68.2 70.7.4 17.3h-38.6l-60.8-59.7-60 59.7h-39v-17.6l69.7-69.8-69.6-71.2V-2.5h38.7l60.2 60 61-60h38.3v16l-68.5 72z"/><circle cx="75.9" cy="74.6" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="105.1" cy="85" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="158.4" cy="15" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="50.9" cy="140" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="180.4" cy="158.5" r="3.5" stroke-opacity=".8" stroke-width="4"/><path stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M32.6 158.2L42 149M104.3 69.1l49.4-49.4"/><path stroke-linejoin="round" stroke-width="4" d="M102.3 82.7L30.3 10H11.2M167.4 10H183M11.2 160.7l79.2-78"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 74.6L181 10"/><path stroke-linejoin="round" stroke-width="4" d="M20.7 19.7l52.7 52.6"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 96.7l32 32"/><path stroke-linejoin="round" stroke-width="4" d="M155.2 133.6l22.1 22M53.6 137.5L97 94.9l67.1 66.6h4.9"/></g><g fill="#000" fill-rule="nonzero" stroke-width="4"><path d="M158.3 107.7V72.9c0-.5 0-.5-.8-.5-.7 0-.7 0-.7.6v34.7c0 .6 0 .5.7.5.8 0 .7 0 .7-.5zm3.9 11.2a22.5 22.5 0 0 1-20-.7c-3.4-2-5.2-4.8-5.2-8.4V69.6c0-3 1.5-5.6 4.3-7.4a17 17 0 0 1 9.2-2.4c3 0 5.6.3 7.7 1V47H178v73h-15l-.8-1.1zM200.9 84V73.2c0-.8 0-.8-.8-.8s-.8 0-.8.8V84h1.6zm-1.6 12.5v11c0 .7 0 .7.8.7.7 0 .8 0 .8-.8V97.2h19.8v10.4c0 8.9-7.3 13.2-20.7 13.2-13.3 0-20.5-4.5-20.5-13.7V73.6c0-9.2 7.2-13.8 20.5-13.8 13.4 0 20.7 4.4 20.7 13.4v23.3h-21.4zM243.3 107.7V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.5v34.8c0 .6 0 .5.8.5.7 0 .7 0 .7-.5zm-5.4 11.1l-.9 1.3h-15V47h19.8v13.8c2.1-.7 4.7-1 7.9-1 3.1 0 6.1.8 8.8 2.3 3 1.6 4.6 4.2 4.6 7.5v40.2c0 3.6-1.8 6.4-5.3 8.4a22.5 22.5 0 0 1-19.9.6zM285.8 119.7c-2.1.8-4.7 1.1-7.8 1.1a17 17 0 0 1-9.1-2.4c-2.8-1.7-4.4-4.2-4.4-7.2v-51h19.8v47.5c0 .6 0 .5.8.5.7 0 .7 0 .7-.4V60h19.8v60h-19.8v-.4zM328.3 108.3V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.6V108c0 .6 0 .6.8.6.7 0 .7 0 .7-.4zm-.9 11.8c-2 .5-4.2.7-6.9.7a17 17 0 0 1-9.1-2.4c-2.9-1.7-4.4-4.2-4.4-7.2V71c0-7.4 5.2-11.2 14.6-11.2 2.3 0 5 .7 8.3 2l1.7-1.7H348v57.3c0 4.4-1 9.5-2.8 12-2.1 3.2-7.7 4.5-17 4.5h-18.4v-12h14.9c1.1 0 2-.7 2.7-1.8z"/></g></g></svg>
+</a></h1>
+		<ul id="menu">
+			<li><a href="install.html">Install</a></li>
+			<li><a href="index.html">Documentation</a></li>
+			<li><a href="../reporting-bugs.html">Report Issues</a></li>
+			<li><a href="https://github.com/xdebug/xdebug" target="_blank">GitHub</a></li>
+		</ul>
+	</div>
+</nav>
+<div class="deprecated">
+You're visiting the archived website and documentation of Xdebug 2, which is no longer supported. This website is temporarily available and will be discontinued on Dec 31st, 2021.
+</div>
+
+	<div class="content_width" id="support">If you find Xdebug useful, please consider <a href='../support.html'>supporting the project</a>.</div>
+
+	<main class="content_width">
+<h1>Installation</h1>
+
+<div class="doc_section">
+	<p class='intro'>This section describes on how to install Xdebug.</p>
+	<a name='pecl'></a>
+<h2>Installing with PECL</h2>
+
+<p>
+You can install Xdebug through PECL on Linux &amp; macOS with Homebrew</sup>.
+Run:
+</p>
+<pre class='example'>
+pecl install xdebug
+</pre>
+<p class="warning"><strong>Warning:</strong> You should ignore any prompts to add
+<code>"extension=xdebug.so"</code> to
+<code>php.ini</code> &mdash; this <strong>will</strong> cause problems.</p>
+
+<p>In some cases <code>pecl</code> will change the <code>php.ini</code> file to
+add a configuration line to load Xdebug. You can check whether it did by
+running <code>php -v</code>. If Xdebug shows up with a version number, than
+you're all set and you can configure Xdebug's other functions, such as
+<a href='remote.html'>Step Debugging</a>, or <a href='profiler.html'>Profiling</a>.</p>
+
+<p>If <code>pecl</code> did not add the right line, skip to the <a
+href='install.html#configure-php'>Configure PHP</a> section.</p>
+
+<a name='1'></a>
+<p class='footnote'><sup>1</sup> On macOS, you should have PHP installed with <a href='https://formulae.brew.sh/formula/php'>Homebrew</a>.</p>
+
+<a name='windows'></a>
+<h2>Installing on Windows</h2>
+
+<p>
+There are a few precompiled modules for Windows, they are all for the non-debug
+version of PHP. You can get those at the <a href='../download.html'>download</a>
+page. Follow <a href='../wizard.html'>these instructions</a> to get Xdebug
+installed.
+</p>
+
+<a name='source'></a>
+<h2>Installation From Source</h2>
+
+<p class="warning"><strong>Warning:</strong> This information is outdated.
+Xdebug 2 is no longer supported.</p>
+
+<a name='obtain'></a>
+<h3>Obtain</h3>
+
+<p>
+You can <a href='../download.html#releases'>download</a> the source of the latest <b>stable</b> release 2.9.8.
+</p>
+<p>
+Alternatively you can obtain Xdebug from GIT:
+</p>
+<pre class='example'>
+git clone git://github.com/xdebug/xdebug.git
+</pre>
+<p>
+This will checkout the latest development version which is currently
+2.9.8. This development branch might not always work as
+expected, and may have bugs.
+</p>
+<p>
+You can also browse the source on GitHub at <a
+href='https://github.com/xdebug/xdebug'>https://github.com/xdebug/xdebug</a>.
+</p>
+
+<a name='compile'></a>
+<h3>Compile</h3>
+
+<p>There is a <a href='http://localhost:8123/wizard.php'>wizard</a> available that provides you
+with the correct file to download, and which paths to use.</p>
+<p>
+You compile Xdebug separately from the rest of PHP. You need access to the
+scripts <code>phpize</code> and <code>php-config</code>. If your system
+does not have <code>phpize</code> and <code>php-config</code>, you will
+need to install the PHP development headers.</p>
+<p>
+Debian users can do that with:
+</p>
+<pre class="example">
+apt-get install php-dev
+</pre>
+<p>
+And RedHat and Fedora users with:
+</p>
+<pre>
+yum install php-devel
+</pre>
+
+<p>
+It is important that the source version matches the installed version as there
+are slight, but important, differences between PHP versions.  Once you have
+access to <code>phpize</code> and <code>php-config</code>, take the
+following steps:
+</p>
+<p>
+<ol>
+<li><p>Unpack the tarball:</p>
+<p><code>tar -xzf xdebug-2.9.8.tgz</code></p>
+<p>You should <strong>not</strong>
+unpack the tarball inside the PHP source code tree.
+Xdebug is compiled separately, all by itself, as stated above.</p></li>
+
+<li><p><code>cd xdebug-2.9.8</code></p></li>
+
+<li><p><code>phpize</code></p>
+<p>If phpize is not in your path, please make sure
+that it is by expanding the <code>PATH</code> environment variable. Make sure
+you use the phpize that belongs to the PHP version that you want to use Xdebug
+with. See <a href='faq.html#api'>this FAQ entry</a> if you're having some
+issues with finding which phpize to use.</p></li>
+
+<li><p><code>./configure --enable-xdebug</code></p></li>
+<li><p><code>make</code></p></li>
+<li><p><code>make install</code></p></li>
+</ol>
+
+<a name='configure-php'></a>
+<h3>Configure PHP</h3>
+
+<ol>
+<li><p>Add the following line to <code>php.ini</code>:</p>
+<p><code>zend_extension=/wherever/you/put/it/xdebug</code></p>
+
+<p>To find out which <code>php.ini</code> file to modify, run a script with the
+following:</p>
+<pre>
+&lt;?php
+var_dump(php_ini_loaded_file(), php_ini_scanned_files());
+</pre>
+<p>Alternatively, you can run <code>php --ini</code> on the command line.</p>
+
+<p class="warning"><strong>Note:</strong> There could be more than one
+<code>php.ini</code> file. In many set-ups there is a different one for the
+command line (often <code>cli/php.ini</code>) and the web server (often
+<code>fpm/php.ini</code>).</p>
+
+<p class="warning"><strong>Note:</strong> If you want to use Xdebug and
+OPCache together, you must have the <code>zend_extension</code> line for Xdebug
+below the line for OPCache. Otherwise, they won't work properly together.</p>
+</li>
+
+<li><p>Restart your webserver, or PHP-FPM, depending on what you are
+using.</p></li>
+
+<li><p>Verify that Xdebug is now loaded.</p>
+
+<p>Create a PHP page that calls <a href="all_functions.html#phpinfo">phpinfo()</a>. If you request the
+page through the browser, it should show you an overview of Xdebug's settings
+and log messages.</p>
+
+<p>On the command line, you can also run <code>php -v</code>. Xdebug and its
+version number should be present as in:</p>
+<pre>
+PHP 7.4.10 (cli) (built: Aug 18 2020 09:37:14) ( NTS DEBUG )
+Copyright (c) The PHP Group
+Zend Engine v3.4.0, Copyright (c) Zend Technologies
+  with Zend OPcache v7.4.10, Copyright (c), by Zend Technologies
+  with Xdebug v2.9.8, Copyright (c) 2002-2020, by Derick Rethans
+</pre>
+</li>
+</ol>
+
+<p>With Xdebug loaded, you can now enable individual features, such as
+<a href='remote.html'>Step Debugging</a>, or <a href='profiler.html'>Profiling</a>.</p>
+
+	
+	<a name='settings'></a>
+	
+	<a name='functions'></a>
+	</div>
+
+
+</main>
+
+
+	<footer class="content_width">
+		<p>
+		This site and all of its contents are Copyright &copy; 2002-2020 by Derick Rethans.<br />
+		All rights reserved.
+		</p>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,746 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Xdebug: Documentation » Step Debugging</title>
+	<meta name="ROBOTS" content="ALL" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta name="DESCRIPTION" content="Xdebug: A powerful debugger for PHP" />
+	<meta name="AUTHOR" content="Derick Rethans, as in derick@xdebug.org" />
+	<link rel="icon" type="image/png" href="../images/favicon.png">
+		<link rel="stylesheet" type="text/css" href="../core2.css" />
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<body>
+	<nav>
+	<div class="content_width">
+		<h1><a href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="351" height="181" viewBox="0 0 351 181"><title>Xdebug</title><g fill="none" fill-rule="evenodd" stroke="#FFF"><g transform="translate(5 5)"><path fill="#317E1E" fill-rule="nonzero" stroke-width="5" d="M127.9 85.5l68.2 70.7.4 17.3h-38.6l-60.8-59.7-60 59.7h-39v-17.6l69.7-69.8-69.6-71.2V-2.5h38.7l60.2 60 61-60h38.3v16l-68.5 72z"/><circle cx="75.9" cy="74.6" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="105.1" cy="85" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="158.4" cy="15" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="50.9" cy="140" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="180.4" cy="158.5" r="3.5" stroke-opacity=".8" stroke-width="4"/><path stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M32.6 158.2L42 149M104.3 69.1l49.4-49.4"/><path stroke-linejoin="round" stroke-width="4" d="M102.3 82.7L30.3 10H11.2M167.4 10H183M11.2 160.7l79.2-78"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 74.6L181 10"/><path stroke-linejoin="round" stroke-width="4" d="M20.7 19.7l52.7 52.6"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 96.7l32 32"/><path stroke-linejoin="round" stroke-width="4" d="M155.2 133.6l22.1 22M53.6 137.5L97 94.9l67.1 66.6h4.9"/></g><g fill="#000" fill-rule="nonzero" stroke-width="4"><path d="M158.3 107.7V72.9c0-.5 0-.5-.8-.5-.7 0-.7 0-.7.6v34.7c0 .6 0 .5.7.5.8 0 .7 0 .7-.5zm3.9 11.2a22.5 22.5 0 0 1-20-.7c-3.4-2-5.2-4.8-5.2-8.4V69.6c0-3 1.5-5.6 4.3-7.4a17 17 0 0 1 9.2-2.4c3 0 5.6.3 7.7 1V47H178v73h-15l-.8-1.1zM200.9 84V73.2c0-.8 0-.8-.8-.8s-.8 0-.8.8V84h1.6zm-1.6 12.5v11c0 .7 0 .7.8.7.7 0 .8 0 .8-.8V97.2h19.8v10.4c0 8.9-7.3 13.2-20.7 13.2-13.3 0-20.5-4.5-20.5-13.7V73.6c0-9.2 7.2-13.8 20.5-13.8 13.4 0 20.7 4.4 20.7 13.4v23.3h-21.4zM243.3 107.7V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.5v34.8c0 .6 0 .5.8.5.7 0 .7 0 .7-.5zm-5.4 11.1l-.9 1.3h-15V47h19.8v13.8c2.1-.7 4.7-1 7.9-1 3.1 0 6.1.8 8.8 2.3 3 1.6 4.6 4.2 4.6 7.5v40.2c0 3.6-1.8 6.4-5.3 8.4a22.5 22.5 0 0 1-19.9.6zM285.8 119.7c-2.1.8-4.7 1.1-7.8 1.1a17 17 0 0 1-9.1-2.4c-2.8-1.7-4.4-4.2-4.4-7.2v-51h19.8v47.5c0 .6 0 .5.8.5.7 0 .7 0 .7-.4V60h19.8v60h-19.8v-.4zM328.3 108.3V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.6V108c0 .6 0 .6.8.6.7 0 .7 0 .7-.4zm-.9 11.8c-2 .5-4.2.7-6.9.7a17 17 0 0 1-9.1-2.4c-2.9-1.7-4.4-4.2-4.4-7.2V71c0-7.4 5.2-11.2 14.6-11.2 2.3 0 5 .7 8.3 2l1.7-1.7H348v57.3c0 4.4-1 9.5-2.8 12-2.1 3.2-7.7 4.5-17 4.5h-18.4v-12h14.9c1.1 0 2-.7 2.7-1.8z"/></g></g></svg>
+</a></h1>
+		<ul id="menu">
+			<li><a href="install.html">Install</a></li>
+			<li><a href="index.html">Documentation</a></li>
+			<li><a href="../reporting-bugs.html">Report Issues</a></li>
+			<li><a href="https://github.com/xdebug/xdebug" target="_blank">GitHub</a></li>
+		</ul>
+	</div>
+</nav>
+<div class="deprecated">
+You're visiting the archived website and documentation of Xdebug 2, which is no longer supported. This website is temporarily available and will be discontinued on Dec 31st, 2021.
+</div>
+
+	<div class="content_width" id="support">If you find Xdebug useful, please consider <a href='../support.html'>supporting the project</a>.</div>
+
+	<main class="content_width">
+<h1>Step Debugging</h1>
+
+<div class="doc_section">
+	<p class='intro'>Xdebug provides an interface for debugger clients that interact with
+			running PHP scripts. This section explains how to set-up PHP and Xdebug
+			to allow this, and introduces a few clients.</p>
+	<a name="introduction"></a>
+<h2>Introduction</h2>
+
+<p>Xdebug's (remote) debugger allows you to examine data structure,
+interactively walk through your and debug your code. The protocol that is being
+used is open, and is called <a href="../docs-dbgp.php.html">DBGp</a>. This protocol is
+implemented in Xdebug 2, and replaces an older GDB-like protocol that is no
+longer supported.
+</p>
+
+<a name="clients"></a>
+<h2>Clients</h2>
+<p>
+There are many client implementations (both free and commercial). There are all
+third party tools, so please refer to the original authors for <b>support</b>:
+<ul>
+<li><b>Eclipse <a href="https://wiki.eclipse.org/Debugging_using_XDebug">plugin</a></b> (IDE).</li>
+<li><b><a href="https://www.kdevelop.org/">KDevelop</a></b> (IDE: Linux (KDE); Open Source).</li>
+<li>ActiveState's <b><a href="https://www.activestate.com/products/komodo-ide/">Komodo</a></b> (IDE: Windows, Linux, Mac; Commercial).</li>
+<li><b><a href="http://php.netbeans.org">NetBeans</a></b> (IDE: Windows, Linux, Mac OS X and Solaris).</li>
+<li><b><a href="https://notepad-plus-plus.org/">Notepad++</a></b> <a href="http://sourceforge.net/project/showfiles.php?group_id=189927&package_id=236520">plugin</a> (Editor: Windows).</li>
+<li>Devsense's <b><a href="http://www.devsense.com/products/php-tools">PHP Tools for Visual Studio</a></b> (MS Visual Studio Plugin; Commercial).</li>
+<li>JetBrain's <b><a href="http://www.jetbrains.com/phpstorm/">PhpStorm</a></b> (IDE; Commercial).</li>
+<li><b><a href="https://github.com/mte90/pugdebug">pugdebug</a></b> (Standalone client for Linux, Windows and Mac OS X; Open Source).</li>
+<li><b><a href="https://packagecontrol.io/packages/Xdebug%20Client">SublimeTextXdebug</a></b> (Plugin for Sublime Text 2 and 3, Open Source).</li>
+<li><b>VIM <a href="https://github.com/joonty/vdebug">plugin</a></b> (Editor Plugin).</li>
+</ul>
+</p>
+<p>
+The simple command line client <code>dbgpClient</code> for debugging is
+available on the <a href='../download.html#dbgpClient'>download page</a>.
+</p>
+
+<a name="starting"></a>
+<h2>Starting The Debugger</h2>
+
+<p>In order to enable Xdebug's debugger you need to make some configuration
+settings in php.ini. These settings are <a href="all_settings.html#remote_enable">xdebug.remote_enable</a> to enable the
+debugger, <a href="all_settings.html#remote_host">xdebug.remote_host</a> and <a href="all_settings.html#remote_port">xdebug.remote_port</a> to configure the IP address
+and port where the debugger should connect to. There is also a
+<a href="all_settings.html#remote_connect_back">xdebug.remote_connect_back</a> setting that can be used if your development server
+is shared with multiple developers.</p>
+
+<p>If you want the debugger to initiate a session when an error situation
+occurs (PHP error or exception) then you also need to change the
+<a href="all_settings.html#remote_mode">xdebug.remote_mode</a> setting. Allowed values for this setting are "req" (the
+default) which makes the debugger initiate a session as soon as a script is
+started, or "jit" when a session should only be initiated on an error.
+</p>
+
+<a name="activate_debugger"></a>
+<p>
+After made all those settings Xdebug will still not start a debugging session
+automatically when a script is run. You need to activate Xdebug's debugger
+and you can do that in three ways:
+
+<h3>Using an environment variable</h3>
+
+<p>
+When running the script from the command line you need to set an
+environment variable, like:
+</p>
+<pre class="example">
+export XDEBUG_CONFIG="<a href="all_settings.html#idekey">idekey</a>=session_name"
+php myscript.php
+</pre>
+<p>
+On Windows, setting an environment variable is done with <code>set</code>:
+</p>
+<pre class="example">
+set XDEBUG_CONFIG="<a href="all_settings.html#idekey">idekey</a>=session_name"
+</pre>
+<p>
+You can also configure the <a href="all_settings.html#remote_host">xdebug.remote_host</a>, <a href="all_settings.html#remote_port">xdebug.remote_port</a>,
+<a href="all_settings.html#remote_mode">xdebug.remote_mode</a> and <a href="all_settings.html#remote_handler">xdebug.remote_handler</a> in this same environment variable as
+long as you separate the values by a space:
+</p>
+<pre class="example">
+export XDEBUG_CONFIG="<a href="all_settings.html#idekey">idekey</a>=session_name <a href="all_settings.html#remote_host">remote_host</a>=localhost <a href="all_settings.html#profiler_enable">profiler_enable</a>=1"
+</pre>
+<p>
+All settings that you can set through the XDEBUG_CONFIG setting can also be set
+with normal php.ini settings.</p>
+
+<h3>Using a GET parameter</h3>
+
+<p>If you want to debug a script started through a web browser, simply add
+<code>XDEBUG_SESSION_START=session_name</code> as parameter to the URL.
+Instead of using a GET parameter, you can also set XDEBUG_SESSION_START as a
+POST parameter, or through a cookie named XDEBUG_SESSION. Refer to the <a
+href="remote.html#browser_session">next section</a> to read on how debug sessions work
+from within a browser window.</p>
+
+<h3>Using a browser extension</h3>
+<p>An alternative way to activate the debugger while running PHP through a web
+server is by installing one of the following four browser extensions. Each of
+them allows you to simply enable the debugger by clicking on one button. When
+these extensions are active, they set the XDEBUG_SESSION cookie directly,
+instead of going through XDEBUG_SESSION_START as described in
+<a href="remote.html#browser_session">HTTP Debug Sessions</a> further on.</p>
+
+<p>
+The extensions are:
+</p>
+<a name="browser-extensions"></a><a name="firefox-ext"></a>
+<dl>
+	<dt>Xdebug Helper for Firefox</dt>
+	<dd>
+		This <a href="https://addons.mozilla.org/en-GB/firefox/addon/xdebug-helper-for-firefox/">extension</a>
+		for Firefox was built to make debugging with an IDE easier. You can
+		find the extension at
+		<a href="https://addons.mozilla.org/en-GB/firefox/addon/xdebug-helper-for-firefox/">https://addons.mozilla.org/en-GB/firefox/addon/xdebug-helper-for-firefox/</a>.
+		The source code for this extension is on <a href="https://github.com/BrianGilbert/xdebug-helper-for-firefox">GitHub</a>.
+	</dd>
+
+	<dt>Xdebug Helper for Chrome</dt>
+	<dd>
+		This <a href="https://chrome.google.com/extensions/detail/eadndfjplgieldjbigjakmdgkmoaaaoc">extension</a>
+		for Chrome will help you to enable/disable debugging and profiling with
+		a single click. You can find the extension at
+		<a href="https://chrome.google.com/extensions/detail/eadndfjplgieldjbigjakmdgkmoaaaoc">https://chrome.google.com/extensions/detail/eadndfjplgieldjbigjakmdgkmoaaaoc</a>.
+	</dd>
+
+	<dt>XDebugToggle for Safari</dt>
+	<dd>
+		This <a href="https://apps.apple.com/app/safari-xdebug-toggle/id1437227804?mt=12">extension</a>
+		for Safari allows you to auto start Xdebug debugging from within Safari.
+		You can get it from Github at
+		<a href="https://github.com/kampfq/SafariXDebugToggle">https://github.com/kampfq/SafariXDebugToggle</a>.
+	</dd>
+
+	<dt>Xdebug launcher for Opera</dt>
+	<dd>
+		This <a
+		href="https://addons.opera.com/addons/extensions/details/xdebug-launcher/?display=en">extension</a>
+		for Opera allows you to start an Xdebug session from Opera. 
+	</dd>
+</dl>
+
+<p>
+Before you start your script you will need to tell your client that it can
+receive debug connections, please refer to the documentation of the specific
+client on how to do this. To use the bundled client simply start it after
+<a href='../download.html#dbgpClient'>downloading</a> it. You can
+start it by running <code>dbgpClient</code> on Linux,
+<code>dbgpClient-macos</code> on MacOS, and <code>dbgpClient.exe</code> on
+Windows.
+</p>
+<p>
+When the debug client starts it will show version information and then
+waits until a connection is initiated by the debug server (Xdebug):
+</p>
+<pre class="shell"
+>Xdebug Simple DBGp client (<font color="#FFFFFF"><b>0.2</b></font>)
+Copyright 2019-2020 by Derick Rethans
+In dumb client mode
+
+Waiting for debug server to connect on port 9000.
+</pre>
+<p>
+After a connection is made the output of the debug server is shown:
+</p>
+<pre class="shell">
+Connect from [::1]:53764
+DBGp/<font color="#55FF55"><b>1.0</b></font>: <font color="#FFFFFF"><b>Xdebug</b></font> <font color="#55FF55"><b>3.0.0-dev</b></font> — For <font color="#FFFFFF"><b>PHP</b></font> <font color="#55FF55"><b>7.4.3-dev</b></font>
+Debugging <font color="#FFFF55"><b>file:///tmp/test-async.php</b></font> (ID: <font color="#FFFF55">13699</font>/<font color="#FFFF55">derick</font>)
+<font color="#FFFFFF"><b>(cmd) </b></font> 
+</pre>
+<p>
+Now you can use the commands as explained on the <a
+href="../docs-dbgp.php.html">DBGp</a> documentation page. When the script ends the
+debug server disconnects from the client and the debug client resumes with
+waiting for a new connection. There is a more comprehensive documentation
+available for <a href='dbgpClient.html'>Command Line Debug Client</a> as well.
+</p>
+
+<a name="communication"></a>
+<h2>Communication Set-up</h2>
+<h3>With a static IP/single developer</h3>
+<p>
+With remote debugging, Xdebug embedded in PHP acts like the client, and the IDE
+as the server. The following animation shows how the communication channel is
+set-up:
+</p>
+<p align="center">
+<img src="../images/docs/dbgp-setup.gif"/>
+</p>
+<p>
+<ul>
+	<li>The IP of the server is 10.0.1.2 with HTTP on port 80</li>
+	<li>The IDE is on IP 10.0.1.42, so <a href="all_settings.html#remote_host">xdebug.remote_host</a> is set to
+	10.0.1.42</li>
+	<li>The IDE listens on port 9000, so <a href="all_settings.html#remote_port">xdebug.remote_port</a> is set to 9000</li>
+	<li>The HTTP request is started on the machine running the IDE</li>
+	<li>Xdebug connects to 10.0.1.42:9000</li>
+	<li>Debugging runs, HTTP Response provided</li>
+</ul>
+</p>
+<h3>With an unknown IP/multiple developers</h3>
+<p>
+If <a href="all_settings.html#remote_connect_back">xdebug.remote_connect_back</a> is used, the set-up is slightly different:
+</p>
+<p align="center">
+<img src="../images/docs/dbgp-setup2.gif"/>
+</p>
+<p>
+<ul>
+	<li>The IP of the server is 10.0.1.2 with HTTP on port 80</li>
+	<li>The IDE is on an unknown IP, so <a href="all_settings.html#remote_connect_back">xdebug.remote_connect_back</a> is set to
+	1</li>
+	<li>The IDE listens on port 9000, so <a href="all_settings.html#remote_port">xdebug.remote_port</a> is set to 9000</li>
+	<li>The HTTP request is made, Xdebug detects the IP address from the HTTP
+	headers</li>
+	<li>Xdebug connects to the detected IP (10.0.1.42) on port 9000</li>
+	<li>Debugging runs, HTTP Response provided</li>
+</ul>
+</p>
+
+<a name="browser_session"></a>
+<h2>HTTP Debug Sessions</h2>
+<p>
+Xdebug contains functionality to keep track of a debug session when started
+through a browser: cookies. This works like this:
+<ul>
+<li>When the URL variable <code>XDEBUG_SESSION_START=name</code> is appended
+to an URL—or through a POST variable with the same name—Xdebug emits a cookie
+with the name "XDEBUG_SESSION" and as value the value of the
+XDEBUG_SESSION_START URL parameter. The default expiry time of the cookie is
+one hour, but this can be configured through the
+<a href="all_settings.html#remote_cookie_expire_time">xdebug.remote_cookie_expire_time</a> setting. The DBGp protocol also passes this
+same value to the <code>init</code> packet when connecting to the debugging
+client in the "idekey" attribute.</li>
+<li>When there is a GET (or POST) variable XDEBUG_SESSION_START or the
+XDEBUG_SESSION cookie is set, Xdebug will try to connect to a debugging
+client.</li>
+<li>To stop a debug session (and to destroy the cookie) simply add the URL
+parameter <code>XDEBUG_SESSION_STOP</code>. Xdebug will then no longer try
+to make a connection to the debugging client.</li>
+</ul>
+</p>
+
+
+<a name="multiple-users"></a>
+<h2>Multiple Users Debugging</h2>
+<p>
+Xdebug only allows you to specify one IP address to connect to with
+<a href="all_settings.html#remote_host">xdebug.remote_host</a>) while doing remote debugging. It does not
+automatically connect back to the IP address of the machine the browser 
+runs on, unless you use <a href="all_settings.html#remote_connect_back">xdebug.remote_connect_back</a>.
+</p>
+<p>
+If all of your developers work on different projects on the same (development)
+server, you can make the <a href="all_settings.html#remote_host">xdebug.remote_host</a> setting for each directory
+through Apache's .htaccess functionality by using <code>php_value
+xdebug.remote_host=10.0.0.5</code>.  However, for the case where multiple
+developers work on the same code, the .htaccess trick does not work as the
+directory in which the code lives is the same.
+</p>
+<p>
+There are two solutions to this. First of all, you can use a <b>DBGp proxy</b>.
+For an overview on how to use this proxy, please refer to the article at <a
+href="http://derickrethans.nl/debugging-with-multiple-users.html">Debugging
+with multiple users</a>. You can download the proxy on
+<a href="http://code.activestate.com/komodo/remotedebugging/">ActiveState's web
+site</a> as part of the python remote debugging package. There is some
+more documentation in the
+<a href="http://community.activestate.com/faq/komodo-ide-debugger-proxy-pydbgpproxy">Komodo FAQ</a>.
+</p>
+<p>
+Secondly you can
+use the <a href="all_settings.html#remote_connect_back">xdebug.remote_connect_back</a> <b>setting</b> that was introduced in
+Xdebug
+2.1.
+</p>
+
+
+<a name="implementation-details"></a>
+<h2>Implementation Details</h2>
+<p>
+Xdebug's implementation of the
+<a href="../docs-dbgp.php.html#context-names">DBGp protocol's <code>context_names</code></a>
+command does not depend on the stack level. The returned value is always the
+same during each debugger session, and hence, can be safely cached.
+</p>
+
+<h2>Custom DBGp commands</h2>
+<p>
+The DBGp protocol allows for debugger engine specific commands, prefixed with
+the <code>xcmd_</code> prefix. Xdebug includes a few of these, and they're
+documented here.
+</p>
+
+<a name="xcmd_profiler_get_name"></a>
+<h3>DBGp: xcmd_profiler_name_get</h3>
+<p>
+If Xdebug's profiler is currently active (See: <a href='profiler.html'>Profiling</a>), this command
+returns the name of the file that is being used to write the profiling
+information to.
+</p>
+
+<a name="xcmd_get_executable_lines"></a>
+<h3>DBGp: xcmd_get_executable_lines</h3>
+<p>
+This command returns which lines in an active stack frame can have a working
+breakpoint. These are the lines which have an <code>EXT_STMT</code>
+opcode on them. This commands accepts a <code>-d</code> option, which
+indicates the stack depth, with <code>0</code> being the top leve stack frame.
+</p>
+<p>
+The command returns the information in the following XML format:
+</p>
+<pre class="example">
+&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;
+&lt;response
+  xmlns="urn:debugger_protocol_v1"
+  xmlns:xdebug="https://xdebug.org/dbgp/xdebug"
+  command="xcmd_get_executable_lines"
+  transaction_id="10"&gt;
+	&lt;xdebug:lines&gt;
+		&lt;xdebug:line lineno="2"&gt;&lt;/xdebug:line&gt;
+		&lt;xdebug:line lineno="3"&gt;&lt;/xdebug:line&gt;
+		&lt;xdebug:line lineno="4"&gt;&lt;/xdebug:line&gt;
+		&lt;xdebug:line lineno="6"&gt;&lt;/xdebug:line&gt;
+		&lt;xdebug:line lineno="8"&gt;&lt;/xdebug:line&gt;
+	&lt;/xdebug:lines&gt;
+&lt;/response&gt;
+</pre>
+
+			<h2>Related Settings and Functions</h2>
+		<ul>
+							<li><span class='type'>integer</span> <a href='remote.html#extended_info'>xdebug.extended_info</a> = <span class='default'>1</span></li>
+							<li><span class='type'>string</span> <a href='remote.html#idekey'>xdebug.idekey</a> = <span class='default'>*complex*</span></li>
+							<li><span class='type'>string</span> <a href='remote.html#remote_addr_header'>xdebug.remote_addr_header</a> = <span class='default'>""</span></li>
+							<li><span class='type'>boolean</span> <a href='remote.html#remote_autostart'>xdebug.remote_autostart</a> = <span class='default'>false</span></li>
+							<li><span class='type'>boolean</span> <a href='remote.html#remote_connect_back'>xdebug.remote_connect_back</a> = <span class='default'>false</span></li>
+							<li><span class='type'>integer</span> <a href='remote.html#remote_cookie_expire_time'>xdebug.remote_cookie_expire_time</a> = <span class='default'>3600</span></li>
+							<li><span class='type'>boolean</span> <a href='remote.html#remote_enable'>xdebug.remote_enable</a> = <span class='default'>false</span></li>
+							<li><span class='type'>string</span> <a href='remote.html#remote_handler'>xdebug.remote_handler</a> = <span class='default'>dbgp</span></li>
+							<li><span class='type'>string</span> <a href='remote.html#remote_host'>xdebug.remote_host</a> = <span class='default'>localhost</span></li>
+							<li><span class='type'>string</span> <a href='remote.html#remote_log'>xdebug.remote_log</a> = <span class='default'></span></li>
+							<li><span class='type'>integer</span> <a href='remote.html#remote_log_level'>xdebug.remote_log_level</a> = <span class='default'>7</span></li>
+							<li><span class='type'>string</span> <a href='remote.html#remote_mode'>xdebug.remote_mode</a> = <span class='default'>req</span></li>
+							<li><span class='type'>integer</span> <a href='remote.html#remote_port'>xdebug.remote_port</a> = <span class='default'>9000</span></li>
+							<li><span class='type'>integer</span> <a href='remote.html#remote_timeout'>xdebug.remote_timeout</a> = <span class='default'>200</span></li>
+					</ul>
+		<ul>
+							<li><a href='remote.html#xdebug_break'><span class='name'>xdebug_break</span></a>()<span class='type'> : bool</span></li>
+							<li><a href='remote.html#xdebug_is_debugger_active'><span class='name'>xdebug_is_debugger_active</span></a>()<span class='type'> : bool</span></li>
+					</ul>
+	
+	<a name='settings'></a>
+			<div class='settings'>
+			<h3>Settings</h3>
+
+							<hr>
+				<div class="doc_setting">
+	<a name='extended_info'></a>
+	<a name='xdebug.extended_info'></a>
+	<h4><span class='type'>integer</span> xdebug.extended_info = <span class='default'>1</span> <a href='remote.html#extended_info'>#</a></h4>
+
+		<p>Available in <span class='type'>Xdebug < 2.8</span></p>
+	<div class='description'><p>Controls whether Xdebug should enforce 'extended_info' mode for the PHP
+parser; this allows Xdebug to do file/line breakpoints with the remote
+debugger. When tracing or profiling scripts you generally want to turn off this
+option as PHP's generated oparrays will increase with about a third of the size
+slowing down your scripts. This setting can not be set in your scripts with
+ini_set(), but only in php.ini.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='idekey'></a>
+	<a name='xdebug.idekey'></a>
+	<h4><span class='type'>string</span> xdebug.idekey = <span class='default'>*complex*</span> <a href='remote.html#idekey'>#</a></h4>
+
+		
+	<div class='description'><p>Controls which IDE Key Xdebug should pass on to the debugging client or
+proxy. The IDE Key is only important for use with the <a href='dbgpProxy.html'>DBGp Proxy Tool</a>,
+although some IDEs are incorrectly picky as to what its value is.</p>
+
+<p>The default is based on the <code>DBGP_IDEKEY</code> environment setting. If
+it is not present, the default falls back to an empty string.</p>
+
+<p>If this setting is set to a non-empty string, it selects its value over
+<code>DBGP_IDEKEY</code> environment variable as default value.</p>
+
+<p>The internal IDE Key also gets updated through debugging session management
+and overrides the value of this setting as is explained in the
+<a href='http://localhost:8123/docs/step_debug#activate_debugger'></a> documentation.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_addr_header'></a>
+	<a name='xdebug.remote_addr_header'></a>
+	<h4><span class='type'>string</span> xdebug.remote_addr_header = <span class='default'>""</span> <a href='remote.html#remote_addr_header'>#</a></h4>
+
+	<p>Introduced in <span class='type'>Xdebug >= 2.4</span></p>	
+	<div class='description'><p>If <a href="all_settings.html#remote_addr_header">xdebug.remote_addr_header</a> is configured to be a non-empty string, then
+the value is used as key in the $SERVER superglobal array to determine which
+header to use to find the IP address or hostname to use for 'connecting back
+to'. This setting is only used in combination with <a href="all_settings.html#remote_connect_back">xdebug.remote_connect_back</a>
+and is otherwise ignored.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_autostart'></a>
+	<a name='xdebug.remote_autostart'></a>
+	<h4><span class='type'>boolean</span> xdebug.remote_autostart = <span class='default'>false</span> <a href='remote.html#remote_autostart'>#</a></h4>
+
+		
+	<div class='description'><p>Normally you need to use a specific HTTP GET/POST variable to start
+remote debugging (see <a href='remote.html#browser_session'>Step Debugging</a>). When
+this setting is set to 1, Xdebug will always attempt to start a remote
+debugging session and try to connect to a client, even if the GET/POST/COOKIE
+variable was not present.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_connect_back'></a>
+	<a name='xdebug.remote_connect_back'></a>
+	<h4><span class='type'>boolean</span> xdebug.remote_connect_back = <span class='default'>false</span> <a href='remote.html#remote_connect_back'>#</a></h4>
+
+	<p>Introduced in <span class='type'>Xdebug >= 2.1</span></p>	
+	<div class='description'><p>If enabled, the <a href="all_settings.html#remote_host">xdebug.remote_host</a> setting is ignored and Xdebug will
+try to connect to the client that made the HTTP request. It checks the
+$_SERVER['HTTP_X_FORWARDED_FOR'] and $_SERVER['REMOTE_ADDR'] variables to
+find out which IP address to use.</p>
+<p>If <a href="all_settings.html#remote_addr_header">xdebug.remote_addr_header</a> is configured, then the $SERVER variable with
+the configured name will be checked before the
+$_SERVER['HTTP_X_FORWARDED_FOR'] and $_SERVER['REMOTE_ADDR'] variables.</p>
+<p>This setting does not apply for debugging through the CLI, as the $SERVER
+header variables are not available there.</p>
+<p>Please note that there is <strong>no</strong> filter
+available, and anybody who can connect to the webserver will then be able to
+start a debugging session, even if their address does not match
+<a href="all_settings.html#remote_host">xdebug.remote_host</a>.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_cookie_expire_time'></a>
+	<a name='xdebug.remote_cookie_expire_time'></a>
+	<h4><span class='type'>integer</span> xdebug.remote_cookie_expire_time = <span class='default'>3600</span> <a href='remote.html#remote_cookie_expire_time'>#</a></h4>
+
+	<p>Introduced in <span class='type'>Xdebug >= 2.1</span></p>	
+	<div class='description'><p>This setting can be used to increase (or decrease) the time that the
+		remote debugging session stays alive via the session cookie.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_enable'></a>
+	<a name='xdebug.remote_enable'></a>
+	<h4><span class='type'>boolean</span> xdebug.remote_enable = <span class='default'>false</span> <a href='remote.html#remote_enable'>#</a></h4>
+
+		
+	<div class='description'><p>This switch controls whether Xdebug should try to contact a debug client
+which is listening on the host and port as set with the settings
+<a href="all_settings.html#remote_host">xdebug.remote_host</a> and
+<a href="all_settings.html#remote_port">xdebug.remote_port</a>. If a connection can not be established the script will just
+continue as if this setting was 0.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_handler'></a>
+	<a name='xdebug.remote_handler'></a>
+	<h4><span class='type'>string</span> xdebug.remote_handler = <span class='default'>dbgp</span> <a href='remote.html#remote_handler'>#</a></h4>
+
+		<p>Available in <span class='type'>Xdebug < 2.9</span></p>
+	<div class='description'><p>Can only be 'dbgp' to represent the
+<a href='https://xdebug.org/docs/dbgp'>debugger protocol</a>. The DBGp
+protocol is the only supported protocol.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_host'></a>
+	<a name='xdebug.remote_host'></a>
+	<h4><span class='type'>string</span> xdebug.remote_host = <span class='default'>localhost</span> <a href='remote.html#remote_host'>#</a></h4>
+
+		
+	<div class='description'><p>Selects the host where the debug client is running, you can either use a
+host name, IP address, or 'unix:///path/to/sock' for a Unix domain socket.
+This setting is ignored if <a href="all_settings.html#remote_connect_back">xdebug.remote_connect_back</a> is enabled.</p>
+<p>Support for Unix domain sockets was introduced in Xdebug 2.6.</p></div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_log'></a>
+	<a name='xdebug.remote_log'></a>
+	<h4><span class='type'>string</span> xdebug.remote_log = <span class='default'></span> <a href='remote.html#remote_log'>#</a></h4>
+
+		
+	<div class='description'><p>Configures a file name to log all <a href='remote.html'>Step Debugging</a> connection attempts,
+failures, and communication.</p>
+<p>Enable this functionality by setting the value to a absolute path. Make sure
+that the system user that PHP runs at (such as <code>www-data</code> if you are
+running with Apache) can create and write to the file.</p>
+
+<p>The file is opened in append-mode,
+and will therefore not be overwritten by default. There is no concurrency
+protection available.</p>
+
+<p>When successfully enabled, the log file will include any attempt that Xdebug
+makes to connect to an IDE:</p>
+
+<pre>
+[1603325] Log opened at 2020-06-21 17:54:05
+[1603325] I: Connecting to configured address/port: localhost:9000.
+[1603325] W: Creating socket for 'localhost:9000', poll success, but error: Operation now in progress (29).
+[1603325] I: Connected to client. :-)
+</pre>
+<p>It includes the opening time (<code>2020-06-21 17:54:05</code>), the
+IP/Hostname and port Xdebug is trying to connect to
+(<code>localhost:9000</code>), and whether it succeeded (<code>Connected to
+client :-)</code>). The number in brackets (<code>[1603325]</code>) is the
+Process ID.</p>
+
+<p>It also logs the debugging communication itself, which starts with the <code>&lt;init</code> XML element:</p>
+<pre>
+&lt;init
+    xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug"
+    fileuri="file:///home/httpd/www.xdebug.org/html/router.php"
+    language="PHP" xdebug:language_version="7.4.2-dev"
+    protocol_version="1.0" appid="1603325" idekey="XDEBUG_ECLIPSE"&gt;
+        &lt;engine version="2.9.6-dev"&gt;&lt;![CDATA[Xdebug]]&gt;&lt;/engine&gt;
+        &lt;author&gt;&lt;![CDATA[Derick Rethans]]&gt;&lt;/author&gt;
+        &lt;url&gt;&lt;![CDATA[https://xdebug.org]]&gt;&lt;/url&gt;
+        &lt;copyright&gt;&lt;![CDATA[Copyright (c) 2002-2020 by Derick Rethans]]&gt;&lt;/copyright&gt;
+&lt;/init&gt;
+</pre>
+<p>The <code>fileuri</code> attribute lists the entry point of your
+application, which can be useful to compare to <code>breakpoint_set</code>
+commands to see if path mappings are set-up correctly.</p>
+
+<p>Beyond the <code>&lt;init</code> element, you will find the configuration of
+<a href="../docs-dbgp.php.html#feature-names">features</a>:</p>
+
+<pre>
+&lt;- feature_set -i 4 -n extended_properties -v 1
+-&gt; &lt;response
+       xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug"
+       command="feature_set" transaction_id="4" feature="extended_properties" success="1"&gt;
+   &lt;/response&gt;
+</pre>
+
+<p>And <a href="../docs-dbgp.php.html#continuation-commands">continuation commands</a>:</p>
+
+<pre>
+&lt;- step_into -i 9
+-&gt; &lt;response
+       xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug"
+       command="step_into" transaction_id="9"
+       status="break" reason="ok"&gt;
+           &lt;xdebug:message filename="file:///home/httpd/www.xdebug.org/html/router.php" lineno="3"&gt;
+           &lt;/xdebug:message&gt;
+   &lt;/response&gt;
+</pre>
+
+<p>You can read about <a href='../docs-dbgp.php.html'>DBGP - A common debugger protocol specification</a> at its dedicated documation page.</p>
+
+<p>The <a href="all_settings.html#remote_log_level">xdebug.remote_log_level</a> setting controls how much information is
+logged.</p>
+
+<p><strong>Note:</strong> Many Linux distributions now use systemd, which
+implements <strong>private tmp</strong> directories. This means that when PHP
+is run through a web server or as PHP-FPM, the <code>/tmp</code> directory is
+prefixed with something akin to:
+<pre>
+/tmp/systemd-private-ea3cfa882b4e478993e1994033fc5feb-apache.service-FfWZRg
+</pre>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_log_level'></a>
+	<a name='xdebug.remote_log_level'></a>
+	<h4><span class='type'>integer</span> xdebug.remote_log_level = <span class='default'>7</span> <a href='remote.html#remote_log_level'>#</a></h4>
+
+	<p>Introduced in <span class='type'>Xdebug >= 2.8</span></p>	
+	<div class='description'><p>Configures which logging messages should be emitted by the <a href='remote.html'>Step Debugging</a>.</p>
+<p>The following levels are supported:</p>
+<table class='table'>
+<tr><th>Level</th><th>Name</th><th>Example</th></tr>
+<tr><td>1</td><td>Errors</td><td>Connection errors</td></tr>
+<tr><td>3</td><td>Warnings</td><td>Connection warnings</td></tr>
+<tr><td>5</td><td>Communication</td><td>Protocol messages</td></tr>
+<tr><td><strong>7</strong></td><td>Information</td><td>Information while connecting</td></tr>
+<tr><td>10</td><td>Debug</td><td>Breakpoint resolving information</td></tr>
+</table>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_mode'></a>
+	<a name='xdebug.remote_mode'></a>
+	<h4><span class='type'>string</span> xdebug.remote_mode = <span class='default'>req</span> <a href='remote.html#remote_mode'>#</a></h4>
+
+		
+	<div class='description'><p>Selects when a debug connection is initiated. This setting can have two
+different values:</p>
+<dl>
+<dt>req</dt>
+<dd>Xdebug will try to connect to the debug client as soon as the script
+starts.</dd>
+<dt>jit</dt>
+<dd>Xdebug will only try to connect to the debug client as soon as an error
+condition occurs.</dd>
+</dl></div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_port'></a>
+	<a name='xdebug.remote_port'></a>
+	<h4><span class='type'>integer</span> xdebug.remote_port = <span class='default'>9000</span> <a href='remote.html#remote_port'>#</a></h4>
+
+		
+	<div class='description'><p>The port to which Xdebug tries to connect on the remote host. Port
+9000 is the default for both Xdebug and the <a href='dbgpClient.html'>Command Line Debug Client</a>.
+As many clients use this port number, it is best to leave this setting
+unchanged.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='remote_timeout'></a>
+	<a name='xdebug.remote_timeout'></a>
+	<h4><span class='type'>integer</span> xdebug.remote_timeout = <span class='default'>200</span> <a href='remote.html#remote_timeout'>#</a></h4>
+
+	<p>Introduced in <span class='type'>Xdebug >= 2.6</span></p>	
+	<div class='description'><p>The amount of time in milliseconds that Xdebug will wait for on an
+IDE to acknowledge an incoming debugging connection. The default value of 200
+ms should in most cases be enough. In case you often get dropped debugging
+requests, perhaps because you have a high latency network, or a development box
+far away from your IDE, or have a slow firewall, then you can should increase
+this value.</p>
+<p>Please note that increasing this value might mean that your requests seem to
+'hang' in case Xdebug tries to establish a connection, but your IDE is not
+listening.</p></div>
+</div>
+					</div>
+	
+	<a name='functions'></a>
+			<div class='functions'>
+			<h3>Functions</h3>
+
+							<hr>
+				<div class="doc_function">
+	<a name='xdebug_break'></a>
+	<h3 class="name">
+					xdebug_break()
+				<span class='type'> : bool</span>
+		<a href='remote.html#xdebug_break'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Emits a breakpoint to the debug client</p></div>
+
+	
+	<div class='description'><p>
+This function makes the debugger break on the line it is called from, as if a
+ normal file/line breakpoint was set on this line through the debugger protocol.
+ 
+
+</p><p>
+The function returns <code>true</code> if a debugging session is (now) active,
+ and the breakpoint was succesfully set. It returns <code>false</code> if a
+ debugging session was not active and could not be activated.
+
+</p></div>
+</div>
+							<hr>
+				<div class="doc_function">
+	<a name='xdebug_is_debugger_active'></a>
+	<h3 class="name">
+					xdebug_is_debugger_active()
+				<span class='type'> : bool</span>
+		<a href='remote.html#xdebug_is_debugger_active'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns whether a debugging session is active</p></div>
+
+	
+	<div class='description'><p>
+Returns <code>true</code> if a debugging session through DBGp is currently
+ active with a client attached; <code>false</code>, if not.
+
+</p></div>
+</div>
+					</div>
+	</div>
+
+
+</main>
+
+
+	<footer class="content_width">
+		<p>
+		This site and all of its contents are Copyright &copy; 2002-2020 by Derick Rethans.<br />
+		All rights reserved.
+		</p>
+	</footer>
+</body>
+</html>

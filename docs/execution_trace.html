@@ -1,0 +1,833 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Xdebug: Documentation » Function Trace</title>
+	<meta name="ROBOTS" content="ALL" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta name="DESCRIPTION" content="Xdebug: A powerful debugger for PHP" />
+	<meta name="AUTHOR" content="Derick Rethans, as in derick@xdebug.org" />
+	<link rel="icon" type="image/png" href="../images/favicon.png">
+		<link rel="stylesheet" type="text/css" href="../yui/build/tabview/assets/tabview.css"/>
+	<link rel="stylesheet" type="text/css" href="../yui/build/tabview/assets/border_tabs.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Old+Standard+TT:400,400italic,700" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../yui/build/yahoo/yahoo.js"></script>
+	<script type="text/javascript" src="../yui/build/event/event.js"></script>
+	<script type="text/javascript" src="../yui/build/dom/dom.js"></script>
+	<script type="text/javascript" src="../yui/build/element/element-beta.js"></script>
+
+	<script type="text/javascript" src="../yui/build/tabview/tabview.js"></script>
+
+	<style type="text/css">
+					#collectparams .yui-content { padding:1em; } /* pad content container */
+					#othersettings .yui-content { padding:1em; } /* pad content container */
+			</style>
+
+	<script type="text/javascript">
+	YAHOO.example.init = function() {
+		    var tabViewcollectparams = new YAHOO.widget.TabView('collectparams');
+		    var tabViewothersettings = new YAHOO.widget.TabView('othersettings');
+		};
+
+	YAHOO.example.init();
+	</script>
+	<link rel="stylesheet" type="text/css" href="../core2.css" />
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<body>
+	<nav>
+	<div class="content_width">
+		<h1><a href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="351" height="181" viewBox="0 0 351 181"><title>Xdebug</title><g fill="none" fill-rule="evenodd" stroke="#FFF"><g transform="translate(5 5)"><path fill="#317E1E" fill-rule="nonzero" stroke-width="5" d="M127.9 85.5l68.2 70.7.4 17.3h-38.6l-60.8-59.7-60 59.7h-39v-17.6l69.7-69.8-69.6-71.2V-2.5h38.7l60.2 60 61-60h38.3v16l-68.5 72z"/><circle cx="75.9" cy="74.6" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="105.1" cy="85" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="158.4" cy="15" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="50.9" cy="140" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="180.4" cy="158.5" r="3.5" stroke-opacity=".8" stroke-width="4"/><path stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M32.6 158.2L42 149M104.3 69.1l49.4-49.4"/><path stroke-linejoin="round" stroke-width="4" d="M102.3 82.7L30.3 10H11.2M167.4 10H183M11.2 160.7l79.2-78"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 74.6L181 10"/><path stroke-linejoin="round" stroke-width="4" d="M20.7 19.7l52.7 52.6"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 96.7l32 32"/><path stroke-linejoin="round" stroke-width="4" d="M155.2 133.6l22.1 22M53.6 137.5L97 94.9l67.1 66.6h4.9"/></g><g fill="#000" fill-rule="nonzero" stroke-width="4"><path d="M158.3 107.7V72.9c0-.5 0-.5-.8-.5-.7 0-.7 0-.7.6v34.7c0 .6 0 .5.7.5.8 0 .7 0 .7-.5zm3.9 11.2a22.5 22.5 0 0 1-20-.7c-3.4-2-5.2-4.8-5.2-8.4V69.6c0-3 1.5-5.6 4.3-7.4a17 17 0 0 1 9.2-2.4c3 0 5.6.3 7.7 1V47H178v73h-15l-.8-1.1zM200.9 84V73.2c0-.8 0-.8-.8-.8s-.8 0-.8.8V84h1.6zm-1.6 12.5v11c0 .7 0 .7.8.7.7 0 .8 0 .8-.8V97.2h19.8v10.4c0 8.9-7.3 13.2-20.7 13.2-13.3 0-20.5-4.5-20.5-13.7V73.6c0-9.2 7.2-13.8 20.5-13.8 13.4 0 20.7 4.4 20.7 13.4v23.3h-21.4zM243.3 107.7V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.5v34.8c0 .6 0 .5.8.5.7 0 .7 0 .7-.5zm-5.4 11.1l-.9 1.3h-15V47h19.8v13.8c2.1-.7 4.7-1 7.9-1 3.1 0 6.1.8 8.8 2.3 3 1.6 4.6 4.2 4.6 7.5v40.2c0 3.6-1.8 6.4-5.3 8.4a22.5 22.5 0 0 1-19.9.6zM285.8 119.7c-2.1.8-4.7 1.1-7.8 1.1a17 17 0 0 1-9.1-2.4c-2.8-1.7-4.4-4.2-4.4-7.2v-51h19.8v47.5c0 .6 0 .5.8.5.7 0 .7 0 .7-.4V60h19.8v60h-19.8v-.4zM328.3 108.3V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.6V108c0 .6 0 .6.8.6.7 0 .7 0 .7-.4zm-.9 11.8c-2 .5-4.2.7-6.9.7a17 17 0 0 1-9.1-2.4c-2.9-1.7-4.4-4.2-4.4-7.2V71c0-7.4 5.2-11.2 14.6-11.2 2.3 0 5 .7 8.3 2l1.7-1.7H348v57.3c0 4.4-1 9.5-2.8 12-2.1 3.2-7.7 4.5-17 4.5h-18.4v-12h14.9c1.1 0 2-.7 2.7-1.8z"/></g></g></svg>
+</a></h1>
+		<ul id="menu">
+			<li><a href="install.html">Install</a></li>
+			<li><a href="index.html">Documentation</a></li>
+			<li><a href="../reporting-bugs.html">Report Issues</a></li>
+			<li><a href="https://github.com/xdebug/xdebug" target="_blank">GitHub</a></li>
+		</ul>
+	</div>
+</nav>
+<div class="deprecated">
+You're visiting the archived website and documentation of Xdebug 2, which is no longer supported. This website is temporarily available and will be discontinued on Dec 31st, 2021.
+</div>
+
+	<div class="content_width" id="support">If you find Xdebug useful, please consider <a href='../support.html'>supporting the project</a>.</div>
+
+	<main class="content_width">
+<h1>Function Trace</h1>
+
+<div class="doc_section">
+	<p class='intro'>Xdebug allows you to log all function calls, including parameters and
+			return values to a file in different formats.</p>
+	<p>
+Those so-called "function traces" can be a help for when you are new to an
+application or when you are trying to figure out what exactly is going on when
+your application is running. The function traces can optionally also show the
+values of variables passed to the functions and methods, and also return
+values. In the default traces those two elements are not available.
+</p>
+
+<h2>Output Formats</h2>
+<p>
+There are three output formats. One is meant as a human readable trace, another
+one is more suited for computer programs as it is easier to parse, and the last
+one uses HTML for formatting the trace. You can switch between the two
+different formats with the <a href="all_settings.html#trace_format">xdebug.trace_format</a> setting. There are a few settings
+that control which information is written to the trace files. There are
+settings for including variables (<a href="all_settings.html#collect_params">xdebug.collect_params</a>) and for including
+return values (<a href="all_settings.html#collect_return">xdebug.collect_return</a>) for example. The example below shows what
+effect the different settings have for the human readable function traces.
+</p>
+
+<h3>The Script</h3>
+<div class="example">
+
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$str&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"Xdebug"</span><span style="color: #007700">;<br />function&nbsp;</span><span style="color: #0000BB">ret_ord</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</span><span style="color: #0000BB">ord</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">);<br />}<br /><br />foreach&nbsp;(&nbsp;</span><span style="color: #0000BB">str_split</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$str&nbsp;</span><span style="color: #007700">)&nbsp;as&nbsp;</span><span style="color: #0000BB">$char&nbsp;</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$char</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">":&nbsp;"</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">ret_ord</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$char&nbsp;</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+</span>
+</code>
+
+</div>
+
+<h3>The Results</h3>
+
+<p>
+Below are the results with different settings of the <a href="all_settings.html#collect_params">xdebug.collect_params</a>
+setting. As this is not a web environment the value of 2 does not have any
+meaning as tool tips don't work in text files.
+</p>
+
+<div id="collectparams" class="yui-navset">
+	<ul class="yui-nav">
+		<li class="selected"><a href="execution_trace.html#default1"><em>default</em></a></li>
+		<li><a href="execution_trace.html#collect-params-1"><em>collect_params=1</em></a></li>
+		<li><a href="execution_trace.html#collect-params-3"><em>collect_params=3</em></a></li>
+		<li><a href="execution_trace.html#collect-params-4"><em>collect_params=4</em></a></li>
+	</ul>
+	<div class="yui-content">
+		<div id="default1">
+<pre class="shell">
+TRACE START [2007-05-06 14:37:06]
+    0.0003     114112   -> {main}() ../trace.php:0
+    0.0004     114272     -> str_split() ../trace.php:8
+    0.0153     117424     -> ret_ord() ../trace.php:10
+    0.0165     117584       -> ord() ../trace.php:5
+    0.0166     117584     -> ret_ord() ../trace.php:10
+    0.0167     117584       -> ord() ../trace.php:5
+    0.0168     117584     -> ret_ord() ../trace.php:10
+    0.0168     117584       -> ord() ../trace.php:5
+    0.0170     117584     -> ret_ord() ../trace.php:10
+    0.0170     117584       -> ord() ../trace.php:5
+    0.0172     117584     -> ret_ord() ../trace.php:10
+    0.0172     117584       -> ord() ../trace.php:5
+    0.0173     117584     -> ret_ord() ../trace.php:10
+    0.0174     117584       -> ord() ../trace.php:5
+    0.0177      41152
+TRACE END   [2007-05-06 14:37:07]
+</pre>
+		</div>
+		<div id="collect-params-1">
+<pre class="shell">
+TRACE START [2007-05-06 14:37:11]
+    0.0003     114112   -> {main}() ../trace.php:0
+    0.0004     114272     -> str_split(string(6)) ../trace.php:8
+    0.0007     117424     -> ret_ord(string(1)) ../trace.php:10
+    0.0007     117584       -> ord(string(1)) ../trace.php:5
+    0.0009     117584     -> ret_ord(string(1)) ../trace.php:10
+    0.0009     117584       -> ord(string(1)) ../trace.php:5
+    0.0010     117584     -> ret_ord(string(1)) ../trace.php:10
+    0.0011     117584       -> ord(string(1)) ../trace.php:5
+    0.0012     117584     -> ret_ord(string(1)) ../trace.php:10
+    0.0013     117584       -> ord(string(1)) ../trace.php:5
+    0.0014     117584     -> ret_ord(string(1)) ../trace.php:10
+    0.0014     117584       -> ord(string(1)) ../trace.php:5
+    0.0016     117584     -> ret_ord(string(1)) ../trace.php:10
+    0.0016     117584       -> ord(string(1)) ../trace.php:5
+    0.0019      41152
+TRACE END   [2007-05-06 14:37:11]
+</pre>
+		</div>
+		<div id="collect-params-3">
+<pre class="shell">
+TRACE START [2007-05-06 14:37:13]
+    0.0003     114112   -> {main}() ../trace.php:0
+    0.0004     114272     -> str_split('Xdebug') ../trace.php:8
+    0.0007     117424     -> ret_ord('X') ../trace.php:10
+    0.0007     117584       -> ord('X') ../trace.php:5
+    0.0009     117584     -> ret_ord('d') ../trace.php:10
+    0.0009     117584       -> ord('d') ../trace.php:5
+    0.0010     117584     -> ret_ord('e') ../trace.php:10
+    0.0011     117584       -> ord('e') ../trace.php:5
+    0.0012     117584     -> ret_ord('b') ../trace.php:10
+    0.0013     117584       -> ord('b') ../trace.php:5
+    0.0014     117584     -> ret_ord('u') ../trace.php:10
+    0.0014     117584       -> ord('u') ../trace.php:5
+    0.0016     117584     -> ret_ord('g') ../trace.php:10
+    0.0016     117584       -> ord('g') ../trace.php:5
+    0.0019      41152
+TRACE END   [2007-05-06 14:37:13]
+</pre>
+		</div>
+		<div id="collect-params-4">
+<pre class="shell">
+TRACE START [2007-05-06 14:37:16]
+    0.0003     114112   -> {main}() ../trace.php:0
+    0.0004     114272     -> str_split('Xdebug') ../trace.php:8
+    0.0007     117424     -> ret_ord($c = 'X') ../trace.php:10
+    0.0007     117584       -> ord('X') ../trace.php:5
+    0.0009     117584     -> ret_ord($c = 'd') ../trace.php:10
+    0.0009     117584       -> ord('d') ../trace.php:5
+    0.0010     117584     -> ret_ord($c = 'e') ../trace.php:10
+    0.0011     117584       -> ord('e') ../trace.php:5
+    0.0012     117584     -> ret_ord($c = 'b') ../trace.php:10
+    0.0013     117584       -> ord('b') ../trace.php:5
+    0.0014     117584     -> ret_ord($c = 'u') ../trace.php:10
+    0.0014     117584       -> ord('u') ../trace.php:5
+    0.0016     117584     -> ret_ord($c = 'g') ../trace.php:10
+    0.0016     117584       -> ord('g') ../trace.php:5
+    0.0019      41152
+TRACE END   [2007-05-06 14:37:16]
+</pre>
+		</div>
+	</div>
+</div>
+
+<p>
+Besides the <a href="all_settings.html#collect_params">xdebug.collect_params</a> settings there is another number of settings
+that affect the output of trace files. The first tab "default" shows the same
+as the default as above. The second tab "show_mem_delta=1" also shows the
+memory usage difference between two different lines in the output file.
+</p>
+<p>
+On the "collect_return=1" tab the return values of all the function calls are
+also visible.  This you turn on with the <a href="all_settings.html#collect_return">xdebug.collect_return</a> setting.
+</p>
+<p>
+The tab called "collect_assignments=1" shows variable assignments, which can be
+turned on with the <a href="all_settings.html#collect_assignments">xdebug.collect_assignments</a> setting.
+</p>
+<p>
+The last tab shows a different output format that is much easier to parse, but
+harder to read. The <a href="all_settings.html#trace_format">xdebug.trace_format</a> setting is therefore mostly useful if
+there is an additional tool to interpret the trace files.
+</p>
+
+<div id="othersettings" class="yui-navset">
+	<ul class="yui-nav">
+		<li class="selected"><a href="execution_trace.html#default2"><em>default</em></a></li>
+		<li><a href="execution_trace.html#mem-delta"><em>show_mem_delta=1</em></a></li>
+		<li><a href="execution_trace.html#collect-return"><em>collect_return=1</em></a></li>
+		<li><a href="execution_trace.html#trace-format"><em>trace_format=1</em></a></li>
+	</ul>
+	<div class="yui-content">
+		<div id="default2">
+<pre class="shell">
+TRACE START [2007-05-06 14:37:06]
+    0.0003     114112   -> {main}() ../trace.php:0
+    0.0004     114272     -> str_split() ../trace.php:8
+    0.0153     117424     -> ret_ord() ../trace.php:10
+    0.0165     117584       -> ord() ../trace.php:5
+    0.0166     117584     -> ret_ord() ../trace.php:10
+    0.0167     117584       -> ord() ../trace.php:5
+    0.0168     117584     -> ret_ord() ../trace.php:10
+    0.0168     117584       -> ord() ../trace.php:5
+    0.0170     117584     -> ret_ord() ../trace.php:10
+    0.0170     117584       -> ord() ../trace.php:5
+    0.0172     117584     -> ret_ord() ../trace.php:10
+    0.0172     117584       -> ord() ../trace.php:5
+    0.0173     117584     -> ret_ord() ../trace.php:10
+    0.0174     117584       -> ord() ../trace.php:5
+    0.0177      41152
+TRACE END   [2007-05-06 14:37:07]
+</pre>
+		</div>
+		<div id="mem-delta">
+<pre class="shell">
+TRACE START [2007-05-06 14:37:26]
+    0.0003     114112  +114112   -> {main}() ../trace.php:0
+    0.0004     114272     +160     -> str_split('Xdebug') ../trace.php:8
+    0.0007     117424    +3152     -> ret_ord($c = 'X') ../trace.php:10
+    0.0007     117584     +160       -> ord('X') ../trace.php:5
+    0.0009     117584       +0     -> ret_ord($c = 'd') ../trace.php:10
+    0.0009     117584       +0       -> ord('d') ../trace.php:5
+    0.0011     117584       +0     -> ret_ord($c = 'e') ../trace.php:10
+    0.0011     117584       +0       -> ord('e') ../trace.php:5
+    0.0013     117584       +0     -> ret_ord($c = 'b') ../trace.php:10
+    0.0013     117584       +0       -> ord('b') ../trace.php:5
+    0.0014     117584       +0     -> ret_ord($c = 'u') ../trace.php:10
+    0.0015     117584       +0       -> ord('u') ../trace.php:5
+    0.0016     117584       +0     -> ret_ord($c = 'g') ../trace.php:10
+    0.0017     117584       +0       -> ord('g') ../trace.php:5
+    0.0019      41152
+TRACE END   [2007-05-06 14:37:26]
+</pre>
+		</div>
+		<div id="collect-return">
+<pre class="shell">
+TRACE START [2007-05-06 14:37:35]
+    0.0003     114112   -> {main}() ../trace.php:0
+    0.0004     114272     -> str_split('Xdebug') ../trace.php:8
+                          >=> array (0 => 'X', 1 => 'd', 2 => 'e', 3 => 'b', 4 => 'u', 5 => 'g')
+    0.0007     117424     -> ret_ord($c = 'X') ../trace.php:10
+    0.0007     117584       -> ord('X') ../trace.php:5
+                            >=> 88
+                          >=> 88
+    0.0009     117584     -> ret_ord($c = 'd') ../trace.php:10
+    0.0009     117584       -> ord('d') ../trace.php:5
+                            >=> 100
+                          >=> 100
+    0.0011     117584     -> ret_ord($c = 'e') ../trace.php:10
+    0.0011     117584       -> ord('e') ../trace.php:5
+                            >=> 101
+                          >=> 101
+    0.0013     117584     -> ret_ord($c = 'b') ../trace.php:10
+    0.0013     117584       -> ord('b') ../trace.php:5
+                            >=> 98
+                          >=> 98
+    0.0015     117584     -> ret_ord($c = 'u') ../trace.php:10
+    0.0016     117584       -> ord('u') ../trace.php:5
+                            >=> 117
+                          >=> 117
+    0.0017     117584     -> ret_ord($c = 'g') ../trace.php:10
+    0.0018     117584       -> ord('g') ../trace.php:5
+                            >=> 103
+                          >=> 103
+                        >=> 1
+    0.0021      41152
+TRACE END   [2007-05-06 14:37:35]
+</pre>
+		</div>
+		<div id="trace-format">
+<pre class="shell">
+Version: 2.0.0RC4-dev
+TRACE START [2007-05-06 18:29:01]
+1	0	0	0.010870	114112	{main}	1	../trace.php	0
+2	1	0	0.032009	114272	str_split	0	../trace.php	8
+2	1	1	0.032073	116632
+2	2	0	0.033505	117424	ret_ord	1	../trace.php	10
+3	3	0	0.033531	117584	ord	0	../trace.php	5
+3	3	1	0.033551	117584
+2	2	1	0.033567	117584
+2	4	0	0.033718	117584	ret_ord	1	../trace.php	10
+3	5	0	0.033740	117584	ord	0	../trace.php	5
+3	5	1	0.033758	117584
+2	4	1	0.033770	117584
+2	6	0	0.033914	117584	ret_ord	1	../trace.php	10
+3	7	0	0.033936	117584	ord	0	../trace.php	5
+3	7	1	0.033953	117584
+2	6	1	0.033965	117584
+2	8	0	0.034108	117584	ret_ord	1	../trace.php	10
+3	9	0	0.034130	117584	ord	0	../trace.php	5
+3	9	1	0.034147	117584
+2	8	1	0.034160	117584
+2	10	0	0.034302	117584	ret_ord	1	../trace.php	10
+3	11	0	0.034325	117584	ord	0	../trace.php	5
+3	11	1	0.034342	117584
+2	10	1	0.034354	117584
+2	12	0	0.034497	117584	ret_ord	1	../trace.php	10
+3	13	0	0.034519	117584	ord	0	../trace.php	5
+3	13	1	0.034536	117584
+2	12	1	0.034549	117584
+1	0	1	0.034636	117584
+TRACE END   [2007-05-06 18:29:01]
+</pre>
+		</div>
+	</div>
+</div>
+
+<a name="vim"></a>
+<h2>VIM syntax file</h2>
+
+<p>
+Xdebug ships with a VIM syntax file that syntax highlights the trace files:
+xt.vim. In order to make VIM recognise this new format you need to perform the
+following steps:
+</p>
+<ol>
+<li>Copy the <i>xt.vim</i> file to <i>~/.vim/syntax</i></li>
+<li>Edit, or create, <i>~/.vim/filetype.vim</i> and add the following lines:
+<pre>
+augroup filetypedetect
+au BufNewFile,BufRead *.xt  setf xt
+augroup END
+</pre>
+</li>
+</ol>
+<p>
+With those settings made an opened trace file looks like:
+</p>
+<pre style="background-color: #000000; color: #fff;">
+<font color="#ffff00"><b>TRACE START</b></font> <font color="#ffff00"><b>[2007-05-15 20:06:02]</b></font>
+    0.0003     115208   <font color="#ff40ff"><b>-&gt;</b></font> <font color="#ff6060"><b>{main}()</b></font> ../trace.php<font color="#ff40ff"><b>:0</b></font>
+    0.0004     115368     <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>str_split(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:8</b></font>
+    0.0006     118520     <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ret_ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:10</b></font>
+    0.0007     118680       <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:5</b></font>
+    0.0008     118680     <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ret_ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:10</b></font>
+    0.0009     118680       <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:5</b></font>
+    0.0010     118680     <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ret_ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:10</b></font>
+    0.0010     118680       <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:5</b></font>
+    0.0012     118680     <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ret_ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:10</b></font>
+    0.0012     118680       <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:5</b></font>
+    0.0014     118680     <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ret_ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:10</b></font>
+    0.0014     118680       <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:5</b></font>
+    0.0016     118680     <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ret_ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:10</b></font>
+    0.0016     118680       <font color="#ff40ff"><b>-&gt;</b></font> <font color="#00ffff"><b>ord(</b></font><font color="#00ffff"><b>) </b></font>../trace.php<font color="#ff40ff"><b>:5</b></font>
+    0.0019      54880
+<font color="#ffff00"><b>TRACE END</b></font>   <font color="#ffff00"><b>[2007-05-15 20:06:02]</b></font>
+</pre>
+<p>
+Folding also sorta works so you can use <i>zc</i> and <i>zo</i> to fold away
+parts of the trace files.
+</p>
+
+			<h2>Related Settings and Functions</h2>
+		<ul>
+							<li><span class='type'>boolean</span> <a href='execution_trace.html#auto_trace'>xdebug.auto_trace</a> = <span class='default'>false</span></li>
+							<li><span class='type'>boolean</span> <a href='execution_trace.html#collect_assignments'>xdebug.collect_assignments</a> = <span class='default'>false</span></li>
+							<li><span class='type'>boolean</span> <a href='execution_trace.html#collect_includes'>xdebug.collect_includes</a> = <span class='default'>true</span></li>
+							<li><span class='type'>integer</span> <a href='execution_trace.html#collect_params'>xdebug.collect_params</a> = <span class='default'>0</span></li>
+							<li><span class='type'>boolean</span> <a href='execution_trace.html#collect_return'>xdebug.collect_return</a> = <span class='default'>false</span></li>
+							<li><span class='type'>integer</span> <a href='execution_trace.html#show_mem_delta'>xdebug.show_mem_delta</a> = <span class='default'>0</span></li>
+							<li><span class='type'>boolean</span> <a href='execution_trace.html#trace_enable_trigger'>xdebug.trace_enable_trigger</a> = <span class='default'>false</span></li>
+							<li><span class='type'>string</span> <a href='execution_trace.html#trace_enable_trigger_value'>xdebug.trace_enable_trigger_value</a> = <span class='default'>""</span></li>
+							<li><span class='type'>integer</span> <a href='execution_trace.html#trace_format'>xdebug.trace_format</a> = <span class='default'>0</span></li>
+							<li><span class='type'>integer</span> <a href='execution_trace.html#trace_options'>xdebug.trace_options</a> = <span class='default'>0</span></li>
+							<li><span class='type'>string</span> <a href='execution_trace.html#trace_output_dir'>xdebug.trace_output_dir</a> = <span class='default'>/tmp</span></li>
+							<li><span class='type'>string</span> <a href='execution_trace.html#trace_output_name'>xdebug.trace_output_name</a> = <span class='default'>trace.%c</span></li>
+							<li><span class='type'>integer</span> <a href='execution_trace.html#var_display_max_children'>xdebug.var_display_max_children</a> = <span class='default'>128</span></li>
+							<li><span class='type'>integer</span> <a href='execution_trace.html#var_display_max_data'>xdebug.var_display_max_data</a> = <span class='default'>512</span></li>
+							<li><span class='type'>integer</span> <a href='execution_trace.html#var_display_max_depth'>xdebug.var_display_max_depth</a> = <span class='default'>3</span></li>
+					</ul>
+		<ul>
+							<li><a href='execution_trace.html#xdebug_get_tracefile_name'><span class='name'>xdebug_get_tracefile_name</span></a>()<span class='type'> : mixed</span></li>
+							<li><a href='execution_trace.html#xdebug_start_trace'><span class='name'>xdebug_start_trace</span></a>()<span class='type'> : string</span></li>
+							<li><a href='execution_trace.html#xdebug_stop_trace'><span class='name'>xdebug_stop_trace</span></a>()<span class='type'> : string</span></li>
+					</ul>
+	
+	<a name='settings'></a>
+			<div class='settings'>
+			<h3>Settings</h3>
+
+							<hr>
+				<div class="doc_setting">
+	<a name='auto_trace'></a>
+	<a name='xdebug.auto_trace'></a>
+	<h4><span class='type'>boolean</span> xdebug.auto_trace = <span class='default'>false</span> <a href='execution_trace.html#auto_trace'>#</a></h4>
+
+		
+	<div class='description'><p>When this setting is set to on, the tracing of function calls will be
+enabled just before the script is run. This makes it possible to trace code in
+the <a href='https://www.php.net/manual/ini.core.php#ini.auto-prepend-file'>auto_prepend_file</a>.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='collect_assignments'></a>
+	<a name='xdebug.collect_assignments'></a>
+	<h4><span class='type'>boolean</span> xdebug.collect_assignments = <span class='default'>false</span> <a href='execution_trace.html#collect_assignments'>#</a></h4>
+
+	<p>Introduced in <span class='type'>Xdebug >= 2.1</span></p>	
+	<div class='description'><p>This setting, defaulting to 0, controls whether Xdebug should add
+variable assignments to function traces. Assign-by-var (<code>=&amp;</code>)
+assignments are included too.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='collect_includes'></a>
+	<a name='xdebug.collect_includes'></a>
+	<h4><span class='type'>boolean</span> xdebug.collect_includes = <span class='default'>true</span> <a href='execution_trace.html#collect_includes'>#</a></h4>
+
+		
+	<div class='description'><p>This setting, defaulting to 1, controls whether Xdebug should write the
+filename used in include(), include_once(), require() or require_once() to the
+trace files.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='collect_params'></a>
+	<a name='xdebug.collect_params'></a>
+	<h4><span class='type'>integer</span> xdebug.collect_params = <span class='default'>0</span> <a href='execution_trace.html#collect_params'>#</a></h4>
+
+		
+	<div class='description'><p>This setting, defaulting to 0, controls whether Xdebug should collect
+the parameters passed to functions when a function call is recorded in either
+the function trace or the stack trace.</p>
+<p>The setting defaults to 0 because for very large
+scripts it may use huge amounts of memory and therefore make it impossible for
+the huge script to run. You can most safely turn this setting on, but you can
+expect some problems in scripts with a lot of function calls and/or huge data
+structures as parameters. Xdebug 2 will not have this problem with increased
+memory usage, as it will never store this information in memory. Instead it
+will only be written to disk. This means that you need to have a look at the
+disk usage though.</p>
+<p>This setting can have four different values. For each of the values a
+different amount of information is shown. Below you will see what information
+each of the values provides. See also the introduction of the feature
+<a href='stack_trace.html'>Stack Traces</a> for a few screenshots.</p>
+<table class='table'>
+<tr><th>Value</th><th>Argument Information Shown</th></tr>
+<tr><td class='ctr'>0</td><td>None.</td></tr>
+<tr><td class='ctr'>1</td><td>Type and number of elements (f.e. string(6), array(8)).</td></tr>
+<tr><td class='ctr'>2</td><td><p>Type and number of elements, with a tool tip for the full information <sup>1</sup>.</p></td></tr>
+<tr><td class='ctr'>3</td><td>Full variable contents (with the limits respected as set by <a href="all_settings.html#var_display_max_children">xdebug.var_display_max_children</a>, <a href="all_settings.html#var_display_max_data">xdebug.var_display_max_data</a> and <a href="all_settings.html#var_display_max_depth">xdebug.var_display_max_depth</a>.</td></tr>
+<tr><td class='ctr'>4</td><td>Full variable contents and variable name.</td></tr>
+<tr><td class='ctr'>5</td><td>PHP serialized variable contents, without the name.</td></tr>
+</table>
+<p><sup>1</sup></a> in the CLI version of PHP it will not have the tool tip, nor in output files.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='collect_return'></a>
+	<a name='xdebug.collect_return'></a>
+	<h4><span class='type'>boolean</span> xdebug.collect_return = <span class='default'>false</span> <a href='execution_trace.html#collect_return'>#</a></h4>
+
+		
+	<div class='description'><p>This setting, defaulting to 0, controls whether Xdebug should write the
+return value of function calls to the trace files.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='show_mem_delta'></a>
+	<a name='xdebug.show_mem_delta'></a>
+	<h4><span class='type'>integer</span> xdebug.show_mem_delta = <span class='default'>0</span> <a href='execution_trace.html#show_mem_delta'>#</a></h4>
+
+		
+	<div class='description'><p>When this setting is set to something != 0 Xdebug's human-readable
+generated trace files will show the difference in memory usage between function
+calls. If Xdebug is configured to generate computer-readable trace files then
+they will always show this information.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='trace_enable_trigger'></a>
+	<a name='xdebug.trace_enable_trigger'></a>
+	<h4><span class='type'>boolean</span> xdebug.trace_enable_trigger = <span class='default'>false</span> <a href='execution_trace.html#trace_enable_trigger'>#</a></h4>
+
+	<p>Introduced in <span class='type'>Xdebug >= 2.2</span></p>	
+	<div class='description'><p>When this setting is set to 1, you can trigger the generation of trace
+files by using the XDEBUG_TRACE GET/POST parameter, or set a cookie with the
+name XDEBUG_TRACE. This will then write the trace data to
+<a href="all_settings.html#trace_output_dir">defined directory</a>. In order to prevent Xdebug
+to generate trace files for each request, you need to set
+<a href="all_settings.html#auto_trace">xdebug.auto_trace</a> to 0. Access to the trigger itself can be configured through
+<a href="all_settings.html#trace_enable_trigger_value">xdebug.trace_enable_trigger_value</a>.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='trace_enable_trigger_value'></a>
+	<a name='xdebug.trace_enable_trigger_value'></a>
+	<h4><span class='type'>string</span> xdebug.trace_enable_trigger_value = <span class='default'>""</span> <a href='execution_trace.html#trace_enable_trigger_value'>#</a></h4>
+
+	<p>Introduced in <span class='type'>Xdebug >= 2.3</span></p>	
+	<div class='description'><p>This setting can be used to restrict who can make use of the
+XDEBUG_TRACE functionality as outlined in <a href="all_settings.html#trace_enable_trigger">xdebug.trace_enable_trigger</a>. When
+changed from its default value of an empty string, the value of the cookie,
+GET or POST argument needs to match the shared secret set with this setting in
+order for the trace file to be generated.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='trace_format'></a>
+	<a name='xdebug.trace_format'></a>
+	<h4><span class='type'>integer</span> xdebug.trace_format = <span class='default'>0</span> <a href='execution_trace.html#trace_format'>#</a></h4>
+
+		
+	<div class='description'><p>The format of the trace file.</p>
+<table class='table'>
+<tr><th>Value</th><th>Description</th></tr>
+<tr><td class='ctr'>0</td><td>shows a human readable indented trace file with:
+<em>time index</em>, <em>memory usage</em>, <em>memory delta</em> (if the setting <a
+href='execution_trace.html#show_mem_delta'>xdebug.show_mem_delta</a> is enabled), <em>level</em>, <em>function name</em>,
+<em>function parameters</em> (if the setting <a href="all_settings.html#collect_params">xdebug.collect_params</a> is enabled),
+<em>filename</em> and <em>line number</em>.</td></tr>
+
+<tr><td class='ctr'>1</td><td>writes a computer readable format which has two
+different records. There are different records for entering a stack frame, and
+leaving a stack frame. The table below lists the fields in each type of record.
+Fields are tab separated.
+</td></tr>
+
+<tr><td class='ctr'>2</td><td>writes a trace formatted in (simple) HTML.</td></tr>
+</table>
+<p>
+Fields for the computerized format:
+</p>
+<table class='table'>
+<tr><th>Record type</th><th class='ctr'>1</th><th class='ctr'>2</th><th class='ctr'>3</th><th class='ctr'>4</th><th class='ctr'>5</th><th class='ctr'>6</th><th class='ctr'>7</th><th class='ctr'>8</th><th class='ctr'>9</th><th class='ctr'>10</th><th class='ctr'>11</th><th class='ctr'>12 - ...</th></tr>
+<tr>
+	<th class='ctr'>Entry</th>
+	<td>level</td>
+	<td>function #</td>
+	<td>always '0'</td>
+	<td>time index</td>
+	<td>memory usage</td>
+	<td>function name</td>
+	<td>user-defined (1) or internal function (0)</td>
+	<td>name of the include or require file</td>
+	<td>filename</td>
+	<td>line number</td>
+	<td>no. of arguments</td>
+	<td>arguments (as many as specified in field 11) - tab separated</td>
+</tr>
+<tr><th class='ctr'>Exit</th>
+	<td>level</td>
+	<td>function #</td>
+	<td>always '1'</td>
+	<td>time index</td>
+	<td>memory usage</td>
+	<td colspan='7' class='ctr'><em>empty</em></td>
+</tr>
+<tr><th class='ctr'>Return</th>
+	<td>level</td>
+	<td>function #</td>
+	<td>always 'R'</td>
+	<td colspan='2' class='ctr'><em>empty</em></td>
+	<td>return value</td>
+	<td colspan='6' class='ctr'><em>empty</em></td>
+</tr>
+</table>
+
+<p>
+See the introduction of <a href='execution_trace.html'>Function Trace</a> for a few examples.
+</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='trace_options'></a>
+	<a name='xdebug.trace_options'></a>
+	<h4><span class='type'>integer</span> xdebug.trace_options = <span class='default'>0</span> <a href='execution_trace.html#trace_options'>#</a></h4>
+
+		
+	<div class='description'><p>When set to '1' the trace files will be appended to, instead of
+being overwritten in subsequent requests.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='trace_output_dir'></a>
+	<a name='xdebug.trace_output_dir'></a>
+	<h4><span class='type'>string</span> xdebug.trace_output_dir = <span class='default'>/tmp</span> <a href='execution_trace.html#trace_output_dir'>#</a></h4>
+
+		
+	<div class='description'><p>The directory where the tracing files will be written to, make sure that
+the user who the PHP will be running as has write permissions to that
+directory.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='trace_output_name'></a>
+	<a name='xdebug.trace_output_name'></a>
+	<h4><span class='type'>string</span> xdebug.trace_output_name = <span class='default'>trace.%c</span> <a href='execution_trace.html#trace_output_name'>#</a></h4>
+
+		
+	<div class='description'><p>This setting determines the name of the file that is used to dump
+traces into. The setting specifies the format with format specifiers, very
+similar to sprintf() and strftime(). There are several format specifiers
+that can be used to format the file name. The '.xt' extension is always added
+automatically.</p>
+
+<p>
+The possible format specifiers are:
+</p>
+<table class='table'>
+<tr><th>Specifier</th><th>Meaning</th><th>Example Format</th><th>Example Filename</th></tr>
+<tr><td class='ctr'>%c</td><td>crc32 of the current working directory</td><td>trace.%c</td><td>trace.1258863198.xt</td></tr>
+<tr><td class='ctr'>%p</td><td>pid</td><td>trace.%p</td><td>trace.5174.xt</td></tr>
+<tr><td class='ctr'>%r</td><td>random number</td><td>trace.%r</td><td>trace.072db0.xt</td></tr>
+<tr><td class='ctr'>%s</td><td><p>script name <sup>2</sup></p></td><td>cachegrind.out.%s</td><td>cachegrind.out._home_httpd_html_test_xdebug_test_php</td></tr>
+<tr><td class='ctr'>%t</td><td>timestamp (seconds)</td><td>trace.%t</td><td>trace.1179434742.xt</td></tr>
+<tr><td class='ctr'>%u</td><td>timestamp (microseconds)</td><td>trace.%u</td><td>trace.1179434749_642382.xt</td></tr>
+<tr><td class='ctr'>%H</td><td>$_SERVER['HTTP_HOST']</td><td>trace.%H</td><td>trace.kossu.xt</td></tr>
+<tr><td class='ctr'>%R</td><td>$_SERVER['REQUEST_URI']</td><td>trace.%R</td><td>trace._test_xdebug_test_php_var=1_var2=2.xt</td></tr>
+<tr><td class='ctr'>%U</td><td>$_SERVER['UNIQUE_ID'] <sup>3</sup></td><td>trace.%U</td><td>trace.TRX4n38AAAEAAB9gBFkAAAAB.xt</td></tr>
+<tr><td class='ctr'>%S</td><td>session_id (from $_COOKIE if set)</td><td>trace.%S</td><td>trace.c70c1ec2375af58f74b390bbdd2a679d.xt</td></tr>
+<tr><td class='ctr'>%%</td><td>literal %</td><td>trace.%%</td><td>trace.%%.xt</td></tr>
+</table>
+<p><sup>2</sup></a> This one is only available for trace file names since Xdebug 2.6.</p>
+<p><sup>3</sup></a> New in version 2.2. This one is set by Apache's <a href='http://httpd.apache.org/docs/current/mod/mod_unique_id.html'>mod_unique_id module</a></p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='var_display_max_children'></a>
+	<a name='xdebug.var_display_max_children'></a>
+	<h4><span class='type'>integer</span> xdebug.var_display_max_children = <span class='default'>128</span> <a href='execution_trace.html#var_display_max_children'>#</a></h4>
+
+		
+	<div class='description'><p>Controls the amount of array children and object's properties are shown
+when variables are displayed with either <a href="all_functions.html#xdebug_var_dump">xdebug_var_dump()</a>,
+<a href="all_settings.html#show_local_vars">xdebug.show_local_vars</a> or through <a href='execution_trace.html'>Function Trace</a>.</p>
+<p>To disable any limitation, use <em>-1</em> as value.</p>
+<p>This setting does not have any influence on the number of children that is
+send to the client through the <a href='remote.html'>Step Debugging</a> feature.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='var_display_max_data'></a>
+	<a name='xdebug.var_display_max_data'></a>
+	<h4><span class='type'>integer</span> xdebug.var_display_max_data = <span class='default'>512</span> <a href='execution_trace.html#var_display_max_data'>#</a></h4>
+
+		
+	<div class='description'><p>Controls the maximum string length that is shown
+when variables are displayed with either <a href="all_functions.html#xdebug_var_dump">xdebug_var_dump()</a>,
+<a href="all_settings.html#show_local_vars">xdebug.show_local_vars</a> or through <a href='execution_trace.html'>Function Trace</a>.
+<p>To disable any limitation, use <em>-1</em> as value.</p>
+<p>This setting does not have any influence on the number of children that is
+send to the client through the <a href='remote.html'>Step Debugging</a> feature.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='var_display_max_depth'></a>
+	<a name='xdebug.var_display_max_depth'></a>
+	<h4><span class='type'>integer</span> xdebug.var_display_max_depth = <span class='default'>3</span> <a href='execution_trace.html#var_display_max_depth'>#</a></h4>
+
+		
+	<div class='description'><p>Controls how many nested levels of array elements and object properties are
+when variables are displayed with either <a href="all_functions.html#xdebug_var_dump">xdebug_var_dump()</a>,
+<a href="all_settings.html#show_local_vars">xdebug.show_local_vars</a> or through <a href='execution_trace.html'>Function Trace</a>.</p>
+<p>The maximum value you can select is 1023. You can also use <em>-1</em> as
+value to select this maximum number.</p>
+<p>This setting does not have any influence on the number of children that is
+send to the client through the <a href='remote.html'>Step Debugging</a> feature.</p>
+</div>
+</div>
+					</div>
+	
+	<a name='functions'></a>
+			<div class='functions'>
+			<h3>Functions</h3>
+
+							<hr>
+				<div class="doc_function">
+	<a name='xdebug_get_tracefile_name'></a>
+	<h3 class="name">
+					xdebug_get_tracefile_name()
+				<span class='type'> : mixed</span>
+		<a href='execution_trace.html#xdebug_get_tracefile_name'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the name of the function trace file</p></div>
+
+	
+	<div class='description'><p>
+Returns the name of the file which is used to trace the output of this
+ script to, or <code>null</code> if tracing is not active. This is useful
+ when traces are made with <a href="all_settings.html#auto_trace">xdebug.auto_trace</a> is enabled.
+
+</p></div>
+</div>
+							<hr>
+				<div class="doc_function">
+	<a name='xdebug_start_trace'></a>
+	<h3 class="name">
+					xdebug_start_trace( <span class='type'>?string $traceFile = null, int $options = 0</span> )
+				<span class='type'> : string</span>
+		<a href='execution_trace.html#xdebug_start_trace'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Starts a new function trace</p></div>
+
+	
+	<div class='description'><p>
+Start tracing function calls from this point to the file in the
+ <code>$trace_file</code> parameter. If no filename is given, then the trace file will
+ be placed in the directory as configured by the <a href="all_settings.html#trace_output_dir">xdebug.trace_output_dir</a> setting.
+ 
+
+</p><p>
+In case a file name is given as first parameter, the name is relative
+ to the current working directory. This current working directory might be
+ different than you expect it to be, so please use an absolute path in case you
+ specify a file name. Use the PHP function <a
+ href='http://php.net/getcwd'>getcwd()</a> to figure out what the current
+ working directory is.
+ 
+
+</p><p>
+The name of the trace file is "{trace_file}.xt". If <a href="all_settings.html#auto_trace">xdebug.auto_trace</a> is
+ enabled, then the format of the filename is "{filename}.xt" where the
+ "{filename}" part depends on the <a href="all_settings.html#trace_output_name">xdebug.trace_output_name</a> setting. The
+ <i>options</i> parameter is a bitfield; currently there are three options:
+ 
+
+</p><p>
+The <i>options</i> parameter is a bitfield;
+ currently there are three options:
+ 
+ <dl>
+ <dt>XDEBUG_TRACE_APPEND (1)</dt>
+ <dd>makes the trace file open in append mode rather than
+ overwrite mode</dd>
+ <dt>XDEBUG_TRACE_COMPUTERIZED (2)</dt>
+ <dd>creates a trace file with
+ the format as described under <i>1</i> "<a href="all_settings.html#trace_format">xdebug.trace_format</a>".</dd>
+ <dt>XDEBUG_TRACE_HTML (4)</dt>
+ <dd>creates a trace file as an HTML table</dd>
+ <dt>XDEBUG_TRACE_NAKED_FILENAME (8)</dt>
+ <dd>Normally, Xdebug always adds ".xt" to the end of the filename that you
+ pass in as first argument to this function. With the
+ <i>XDEBUG_TRACE_NAKED_FILENAME</i> flag set, ".xt" is not added.</dd>
+ </dl>
+ 
+
+</p><p>
+The settings <a href="all_settings.html#collect_assignments">xdebug.collect_assignments</a>, <a href="all_settings.html#collect_includes">xdebug.collect_includes</a>,
+ <a href="all_settings.html#collect_params">xdebug.collect_params</a> and <a href="all_settings.html#collect_return">xdebug.collect_return</a> influence what information is
+ logged to the trace file and the setting <a href="all_settings.html#trace_format">xdebug.trace_format</a> influences the
+ format of the trace file.
+ 
+
+</p><p>
+The full path and filename to which Xdebug traces is returned from this
+ function. This will be either the filename you pass in (potentially with ".xt"
+ added), or the auto generated filename if no filename has been passed in.
+
+</p></div>
+</div>
+							<hr>
+				<div class="doc_function">
+	<a name='xdebug_stop_trace'></a>
+	<h3 class="name">
+					xdebug_stop_trace()
+				<span class='type'> : string</span>
+		<a href='execution_trace.html#xdebug_stop_trace'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Stops the current function trace</p></div>
+
+	
+	<div class='description'><p>
+Stop tracing function calls and closes the trace file.
+ 
+
+</p><p>
+The function returns the filename of the file where the trace was written to.
+
+</p></div>
+</div>
+					</div>
+	</div>
+
+
+</main>
+
+
+	<footer class="content_width">
+		<p>
+		This site and all of its contents are Copyright &copy; 2002-2020 by Derick Rethans.<br />
+		All rights reserved.
+		</p>
+	</footer>
+</body>
+</html>

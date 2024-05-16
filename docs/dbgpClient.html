@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Xdebug: Documentation » Command Line Debug Client</title>
+	<meta name="ROBOTS" content="ALL" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta name="DESCRIPTION" content="Xdebug: A powerful debugger for PHP" />
+	<meta name="AUTHOR" content="Derick Rethans, as in derick@xdebug.org" />
+	<link rel="icon" type="image/png" href="../images/favicon.png">
+		<link rel="stylesheet" type="text/css" href="../core2.css" />
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<body>
+	<nav>
+	<div class="content_width">
+		<h1><a href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="351" height="181" viewBox="0 0 351 181"><title>Xdebug</title><g fill="none" fill-rule="evenodd" stroke="#FFF"><g transform="translate(5 5)"><path fill="#317E1E" fill-rule="nonzero" stroke-width="5" d="M127.9 85.5l68.2 70.7.4 17.3h-38.6l-60.8-59.7-60 59.7h-39v-17.6l69.7-69.8-69.6-71.2V-2.5h38.7l60.2 60 61-60h38.3v16l-68.5 72z"/><circle cx="75.9" cy="74.6" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="105.1" cy="85" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="158.4" cy="15" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="50.9" cy="140" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="180.4" cy="158.5" r="3.5" stroke-opacity=".8" stroke-width="4"/><path stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M32.6 158.2L42 149M104.3 69.1l49.4-49.4"/><path stroke-linejoin="round" stroke-width="4" d="M102.3 82.7L30.3 10H11.2M167.4 10H183M11.2 160.7l79.2-78"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 74.6L181 10"/><path stroke-linejoin="round" stroke-width="4" d="M20.7 19.7l52.7 52.6"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 96.7l32 32"/><path stroke-linejoin="round" stroke-width="4" d="M155.2 133.6l22.1 22M53.6 137.5L97 94.9l67.1 66.6h4.9"/></g><g fill="#000" fill-rule="nonzero" stroke-width="4"><path d="M158.3 107.7V72.9c0-.5 0-.5-.8-.5-.7 0-.7 0-.7.6v34.7c0 .6 0 .5.7.5.8 0 .7 0 .7-.5zm3.9 11.2a22.5 22.5 0 0 1-20-.7c-3.4-2-5.2-4.8-5.2-8.4V69.6c0-3 1.5-5.6 4.3-7.4a17 17 0 0 1 9.2-2.4c3 0 5.6.3 7.7 1V47H178v73h-15l-.8-1.1zM200.9 84V73.2c0-.8 0-.8-.8-.8s-.8 0-.8.8V84h1.6zm-1.6 12.5v11c0 .7 0 .7.8.7.7 0 .8 0 .8-.8V97.2h19.8v10.4c0 8.9-7.3 13.2-20.7 13.2-13.3 0-20.5-4.5-20.5-13.7V73.6c0-9.2 7.2-13.8 20.5-13.8 13.4 0 20.7 4.4 20.7 13.4v23.3h-21.4zM243.3 107.7V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.5v34.8c0 .6 0 .5.8.5.7 0 .7 0 .7-.5zm-5.4 11.1l-.9 1.3h-15V47h19.8v13.8c2.1-.7 4.7-1 7.9-1 3.1 0 6.1.8 8.8 2.3 3 1.6 4.6 4.2 4.6 7.5v40.2c0 3.6-1.8 6.4-5.3 8.4a22.5 22.5 0 0 1-19.9.6zM285.8 119.7c-2.1.8-4.7 1.1-7.8 1.1a17 17 0 0 1-9.1-2.4c-2.8-1.7-4.4-4.2-4.4-7.2v-51h19.8v47.5c0 .6 0 .5.8.5.7 0 .7 0 .7-.4V60h19.8v60h-19.8v-.4zM328.3 108.3V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.6V108c0 .6 0 .6.8.6.7 0 .7 0 .7-.4zm-.9 11.8c-2 .5-4.2.7-6.9.7a17 17 0 0 1-9.1-2.4c-2.9-1.7-4.4-4.2-4.4-7.2V71c0-7.4 5.2-11.2 14.6-11.2 2.3 0 5 .7 8.3 2l1.7-1.7H348v57.3c0 4.4-1 9.5-2.8 12-2.1 3.2-7.7 4.5-17 4.5h-18.4v-12h14.9c1.1 0 2-.7 2.7-1.8z"/></g></g></svg>
+</a></h1>
+		<ul id="menu">
+			<li><a href="install.html">Install</a></li>
+			<li><a href="index.html">Documentation</a></li>
+			<li><a href="../reporting-bugs.html">Report Issues</a></li>
+			<li><a href="https://github.com/xdebug/xdebug" target="_blank">GitHub</a></li>
+		</ul>
+	</div>
+</nav>
+<div class="deprecated">
+You're visiting the archived website and documentation of Xdebug 2, which is no longer supported. This website is temporarily available and will be discontinued on Dec 31st, 2021.
+</div>
+
+	<div class="content_width" id="support">If you find Xdebug useful, please consider <a href='../support.html'>supporting the project</a>.</div>
+
+	<main class="content_width">
+<h1>Command Line Debug Client</h1>
+
+<div class="doc_section">
+	<p class='intro'>The command line debug client allows you to debug PHP scripts
+			without having to set up an IDE.</p>
+	<a name='download'></a>
+<h2>Installation</h2>
+
+<p>
+A binary for Linux, macOS, and Windows is available on the <a href='../download.html#dbgpClient'>downloads</a> page.
+You only have to download the binary, which you can then run from a command line.
+</p>
+
+<a name='cmdline'></a>
+<h2>Command Line Options</h2>
+
+<p>The following command line options are available:</p>
+
+<table class="options">
+<tr><td><code>-1      </code></td>
+    <td>Debug once and then exit</td></tr>
+
+<tr><td><code>-f      </code></td>
+	<td>Whether act as fully featured DBGp client. If this is enabled, the
+		client will perform certain tasks for you, such as enabling
+		<em>async</em> support. In the future, this mode will turn the
+		dbgpClient in a fully fledged command line debugging client without the
+		need for you to remember all DBGp commands.</td></tr>
+
+<tr><td><code>-h      </code></td>
+    <td>Show this help</td></tr>
+
+<tr><td><code>-p&nbsp;value</code>&nbsp;</td>
+     <td>Specify the port to listen on [<code>9000</code>]. This is the same
+         port that Xdebug should initiate a connection on. On the Xdebug side,
+         this port can be configured with the <a href="all_settings.html#remote_port">xdebug.remote_port</a>
+         setting.</td></tr>
+
+<tr><td><code>-r&nbsp;idekey</code>&nbsp;</td>
+	<td>If the <code>-r</code> option is given, the client will register itself
+		with a debugging proxy (selected with <code>-y</code>), and then wait
+		for incoming debugging connections as usual on the port configured with
+		<code>-p</code>.</td></tr>
+
+<tr><td><code>-s      </code></td>
+	<td>Enables SSL. With this option on, the client expects incoming
+	connections on the configured port to be in SSL. This is an
+	<em>experimental feature</em> that is not fully finished. Right now, Xdebug
+	does not support SSL yet, but the <a href="dbgpProxy.html">dbgpProxy</a>
+	does.</td></tr>
+
+<tr><td><code>-u&nbsp;idekey</code>&nbsp;</td>
+	<td>If the <code>-u</code> option is given, the client will unregister itself
+		with a debugging proxy (selected with <code>-y</code>), and then quit.</td></tr>
+
+<tr><td><code>-v      </code></td>
+    <td>Show version number and exit</td></tr>
+
+<tr><td><code>-x      </code></td>
+    <td>Show protocol XML. With this option enabled, the client will also show
+        the raw XML data that the debugging engine sends back. This can be
+        useful for debugging issues with the interaction between the debugger
+        engine, for example Xdebug, and this client.</td></tr>
+
+<tr><td><code>-y&nbsp;host:port&nbsp;</code></td>
+	<td>Configures the host and port of an DBGp proxy. This option is used with
+	    <code>-r</code> and <code>-u</code> only.</td></tr>
+</table>
+
+<a name='usage'></a>
+<h2>Usage</h2>
+
+<p>To start the client on the command line on Linux, open a shell,
+and then run:</p>
+
+<pre>
+./dbgpClient
+</pre>
+
+<p>If the binary doesn't start or you get a <code>not found</code> message,
+please refer to this <a href='faq.html#linux-not-found'>FAQ entry</a>.</p>
+
+<p>To start the client on the command line on MacOS, open a shell,
+and then run:</p>
+
+<pre>
+./dbgpClient-macos
+</pre>
+
+<p>On Windows, open a command a <em>Command Prompt</em> and run:</p>
+
+<pre>
+dbgpClient.exe
+</pre>
+
+<p>In all cases, you can add the <a href="dbgpClient.html#cmdline">command line options</a>
+as described above.</p>
+
+<p>When the debug client starts, it shows some version information. It will
+then wait until a connection is made to it by a debugging engine (such as
+Xdebug):</p>
+
+<pre class="shell">Xdebug Simple DBGp client (<font color="#FFFFFF"><b>0.4.2</b></font>)
+Copyright 2019-2020 by Derick Rethans
+
+Waiting for debug server to connect on port 9000.
+</pre>
+
+
+<p>After a connection is received, the debug client shows basic information, and then shows the <code>(cmd) </code> prompt and waits for input:</p>
+
+<pre class="shell">Connect from [::1]:51884
+DBGp/<font color="#55FF55"><b>1.0</b></font>: <font color="#FFFFFF"><b>Xdebug</b></font> <font color="#55FF55"><b>2.9.2</b></font> — For <font color="#FFFFFF"><b>PHP</b></font> <font color="#55FF55"><b>7.4.3-dev</b></font>
+Debugging <font color="#FFFF55"><b>file:///tmp/xdebug-test-2.php</b></font> (ID: <font color="#FFFF55">5242</font>/<font color="#FFFF55">dr</font>)
+<font color="#FFFFFF"><b>(cmd) </b></font>
+</pre>
+
+<p>On this command prompt you can then enter the available DBGp commands. With
+<code>{tab}</code> you can auto complete your command. You can use arrow up to
+a previous line, and use <code>ctrl-R</code> to search through your previous
+issued commands.</p>
+
+<p>Here we step into the next line (the first line, in our case), and see which
+variables are available:</p>
+
+<pre class="shell"><font color="#FFFFFF"><b>(cmd) </b></font>step_into
+<font color="#AA5500">1</font> | <font color="#00AA00">step_into</font> &gt; <font color="#00AA00">break</font>/<font color="#00AA00">ok</font>
+<font color="#000000">1</font> | <font color="#55FF55"><b>file:///tmp/xdebug-test-2.php</b></font>:<font color="#55FF55"><b>14</b></font>
+
+<font color="#FFFFFF"><b>(cmd) </b></font>context_get
+<font color="#AA5500">2</font> | <font color="#00AA00">context_get</font>
+<font color="#000000">2</font> | uninitialized <font color="#55FF55"><b>$a</b></font>
+</pre>
+
+<p>The following commands and options are common:</p>
+
+<table class="table">
+<tr><th>Command</th><th>Description</th></tr>
+<tr><td><code><a href='../docs-dbgp.php.html#breakpoints'>breakpoint_set</a> -t line -f file:///xdebug-test-2.php -n 5</code></td>
+    <td>Sets a breakpoint on line <code>5</code> of <code>file:///xdebug-test-2.php</code></td></tr>
+<tr><td><code><a href='../docs-dbgp.php.html#continuation-commands'>step_into</a></code></td><td>Steps to the next executable line in the code</td></tr>
+<tr><td><code>run</code></td><td>Runs the script until the next breakpoint, or when the script ends</td></tr>
+<tr><td><code><a href='../docs-dbgp.php.html#context-get'>context_get</a></code></td><td>Lists the variables and their values in the current scope</td></tr>
+<tr><td><code><a href='../docs-dbgp.php.html#property-get-property-set-property-value'>property_get</a> -n $a</code></td>
+    <td>Retrieves the value of the property <code>$n</code></td></tr>
+</table>
+
+<p>There is a full description in the <a href="../docs-dbgp.php.html">DBGp
+documentation</a>.</p>
+
+<p>If the client has been started in "fully featured mode" (<code>-f</code>),
+and you're running the latest Xdebug from <a
+href="install.html#source">GitHub</a>, then it is possible to pause a running
+debugging session by pressing <code>Ctrl-C</code>. The client will return to
+the prompt where you can then issue commands as normal.</p>
+
+<p>On the client's prompt you can abort the debugging session, and then the
+client, with <code>Ctrl-C</code>.</p>
+
+	
+	<a name='settings'></a>
+	
+	<a name='functions'></a>
+	</div>
+
+
+</main>
+
+
+	<footer class="content_width">
+		<p>
+		This site and all of its contents are Copyright &copy; 2002-2020 by Derick Rethans.<br />
+		All rights reserved.
+		</p>
+	</footer>
+</body>
+</html>

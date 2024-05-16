@@ -1,0 +1,1633 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Xdebug: Documentation » All functions</title>
+	<meta name="ROBOTS" content="ALL" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta name="DESCRIPTION" content="Xdebug: A powerful debugger for PHP" />
+	<meta name="AUTHOR" content="Derick Rethans, as in derick@xdebug.org" />
+	<link rel="icon" type="image/png" href="../images/favicon.png">
+		<link rel="stylesheet" type="text/css" href="../core2.css" />
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<body>
+	<nav>
+	<div class="content_width">
+		<h1><a href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="351" height="181" viewBox="0 0 351 181"><title>Xdebug</title><g fill="none" fill-rule="evenodd" stroke="#FFF"><g transform="translate(5 5)"><path fill="#317E1E" fill-rule="nonzero" stroke-width="5" d="M127.9 85.5l68.2 70.7.4 17.3h-38.6l-60.8-59.7-60 59.7h-39v-17.6l69.7-69.8-69.6-71.2V-2.5h38.7l60.2 60 61-60h38.3v16l-68.5 72z"/><circle cx="75.9" cy="74.6" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="105.1" cy="85" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="158.4" cy="15" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="50.9" cy="140" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="180.4" cy="158.5" r="3.5" stroke-opacity=".8" stroke-width="4"/><path stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M32.6 158.2L42 149M104.3 69.1l49.4-49.4"/><path stroke-linejoin="round" stroke-width="4" d="M102.3 82.7L30.3 10H11.2M167.4 10H183M11.2 160.7l79.2-78"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 74.6L181 10"/><path stroke-linejoin="round" stroke-width="4" d="M20.7 19.7l52.7 52.6"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 96.7l32 32"/><path stroke-linejoin="round" stroke-width="4" d="M155.2 133.6l22.1 22M53.6 137.5L97 94.9l67.1 66.6h4.9"/></g><g fill="#000" fill-rule="nonzero" stroke-width="4"><path d="M158.3 107.7V72.9c0-.5 0-.5-.8-.5-.7 0-.7 0-.7.6v34.7c0 .6 0 .5.7.5.8 0 .7 0 .7-.5zm3.9 11.2a22.5 22.5 0 0 1-20-.7c-3.4-2-5.2-4.8-5.2-8.4V69.6c0-3 1.5-5.6 4.3-7.4a17 17 0 0 1 9.2-2.4c3 0 5.6.3 7.7 1V47H178v73h-15l-.8-1.1zM200.9 84V73.2c0-.8 0-.8-.8-.8s-.8 0-.8.8V84h1.6zm-1.6 12.5v11c0 .7 0 .7.8.7.7 0 .8 0 .8-.8V97.2h19.8v10.4c0 8.9-7.3 13.2-20.7 13.2-13.3 0-20.5-4.5-20.5-13.7V73.6c0-9.2 7.2-13.8 20.5-13.8 13.4 0 20.7 4.4 20.7 13.4v23.3h-21.4zM243.3 107.7V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.5v34.8c0 .6 0 .5.8.5.7 0 .7 0 .7-.5zm-5.4 11.1l-.9 1.3h-15V47h19.8v13.8c2.1-.7 4.7-1 7.9-1 3.1 0 6.1.8 8.8 2.3 3 1.6 4.6 4.2 4.6 7.5v40.2c0 3.6-1.8 6.4-5.3 8.4a22.5 22.5 0 0 1-19.9.6zM285.8 119.7c-2.1.8-4.7 1.1-7.8 1.1a17 17 0 0 1-9.1-2.4c-2.8-1.7-4.4-4.2-4.4-7.2v-51h19.8v47.5c0 .6 0 .5.8.5.7 0 .7 0 .7-.4V60h19.8v60h-19.8v-.4zM328.3 108.3V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.6V108c0 .6 0 .6.8.6.7 0 .7 0 .7-.4zm-.9 11.8c-2 .5-4.2.7-6.9.7a17 17 0 0 1-9.1-2.4c-2.9-1.7-4.4-4.2-4.4-7.2V71c0-7.4 5.2-11.2 14.6-11.2 2.3 0 5 .7 8.3 2l1.7-1.7H348v57.3c0 4.4-1 9.5-2.8 12-2.1 3.2-7.7 4.5-17 4.5h-18.4v-12h14.9c1.1 0 2-.7 2.7-1.8z"/></g></g></svg>
+</a></h1>
+		<ul id="menu">
+			<li><a href="install.html">Install</a></li>
+			<li><a href="index.html">Documentation</a></li>
+			<li><a href="../reporting-bugs.html">Report Issues</a></li>
+			<li><a href="https://github.com/xdebug/xdebug" target="_blank">GitHub</a></li>
+		</ul>
+	</div>
+</nav>
+<div class="deprecated">
+You're visiting the archived website and documentation of Xdebug 2, which is no longer supported. This website is temporarily available and will be discontinued on Dec 31st, 2021.
+</div>
+
+	<div class="content_width" id="support">If you find Xdebug useful, please consider <a href='../support.html'>supporting the project</a>.</div>
+
+	<main class="content_width">
+<h1>Documentation - all functions</h1>
+
+<p>
+This section describes all available functions available in Xdebug.
+</p>
+
+<div class='functions'>
+			<hr>
+		<div class="doc_function">
+	<a name='var_dump'></a>
+	<h3 class="name">
+					var_dump( <span class='type'>mixed ...$var</span> )
+				<span class='type'> : void</span>
+		<a href='all_functions.html#var_dump'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Displays detailed information about a variable</p></div>
+
+	
+	<div class='description'><p>
+This function is overloaded by Xdebug, see the description for
+ <a href="all_functions.html#xdebug_var_dump">xdebug_var_dump()</a>.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_break'></a>
+	<h3 class="name">
+					xdebug_break()
+				<span class='type'> : bool</span>
+		<a href='all_functions.html#xdebug_break'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Emits a breakpoint to the debug client</p></div>
+
+	
+	<div class='description'><p>
+This function makes the debugger break on the line it is called from, as if a
+ normal file/line breakpoint was set on this line through the debugger protocol.
+ 
+
+</p><p>
+The function returns <code>true</code> if a debugging session is (now) active,
+ and the breakpoint was succesfully set. It returns <code>false</code> if a
+ debugging session was not active and could not be activated.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_call_class'></a>
+	<h3 class="name">
+					xdebug_call_class( <span class='type'>int $depth = 2</span> )
+				<span class='type'> : mixed</span>
+		<a href='all_functions.html#xdebug_call_class'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the calling class</p></div>
+
+	
+	<div class='description'><p>
+This function returns the name of the class that defined the current method,
+ <code>NULL</code> if the stack frame does not exist, or <code>FALSE</code> if
+ no class is associated with this call.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">Strings<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;function&nbsp;</span><span style="color: #0000BB">fix_string</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_class</span><span style="color: #007700">().<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"::"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_function</span><span style="color: #007700">().<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&nbsp;is&nbsp;called&nbsp;at&nbsp;"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_file</span><span style="color: #007700">().<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">":"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_line</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">$ret&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">Strings</span><span style="color: #007700">::</span><span style="color: #0000BB">fix_string</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">'Derick'&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+Called @ /home/httpd/html/test/xdebug_caller.php:17 from ::{main}</pre></div>
+<p>
+To retrieve information from earlier stack frames, use the optional
+ <code>$depth</code> argument. A value of <code>1</code> returns
+ the call information of the method that executed <a href="all_functions.html#xdebug_call_class">xdebug_call_class()</a>:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">Strings<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;function&nbsp;</span><span style="color: #0000BB">fix_string</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_class</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">).<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"::"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_function</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">).<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&nbsp;is&nbsp;called&nbsp;at&nbsp;"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_file</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">).<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">":"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_line</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">1&nbsp;</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">$ret&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">Strings</span><span style="color: #007700">::</span><span style="color: #0000BB">fix_string</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">'Derick'&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+Strings::fix_string is called at /home/httpd/html/test/xdebug_caller:17</pre></div>
+<p>
+A value of <code>2</code> (the default) returns the call information of the
+ "grand parent" of the current method:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">Strings<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;function&nbsp;</span><span style="color: #0000BB">fix_string</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_class</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">2&nbsp;</span><span style="color: #007700">).<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"::"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_function</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">2&nbsp;</span><span style="color: #007700">).<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&nbsp;is&nbsp;called&nbsp;at&nbsp;"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_file</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">2&nbsp;</span><span style="color: #007700">).<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">":"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_line</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">2&nbsp;</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;function&nbsp;</span><span style="color: #0000BB">fix_strings</span><span style="color: #007700">(&nbsp;array&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$element&nbsp;</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">fix_string</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">$ret&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">Strings</span><span style="color: #007700">::</span><span style="color: #0000BB">fix_strings</span><span style="color: #007700">(&nbsp;[&nbsp;</span><span style="color: #DD0000">'Derick'&nbsp;</span><span style="color: #007700">]&nbsp;);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+Strings::fix_strings is called at /home/httpd/html/test/xdebug_caller:25</pre></div>
+<p>
+A value of <code>0</code> returns the call information of the call to
+ corresponding <code>xdebug_call_<i>*</i></code> method:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">Strings<br /></span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;function&nbsp;</span><span style="color: #0000BB">fix_string</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_class</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">).<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"::"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_function</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">).<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"&nbsp;is&nbsp;called&nbsp;at&nbsp;"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_file</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">).<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">":"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_call_line</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">0&nbsp;</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;function&nbsp;</span><span style="color: #0000BB">fix_strings</span><span style="color: #007700">(&nbsp;array&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$element&nbsp;</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">fix_string</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">$ret&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">Strings</span><span style="color: #007700">::</span><span style="color: #0000BB">fix_strings</span><span style="color: #007700">(&nbsp;[&nbsp;</span><span style="color: #DD0000">'Derick'&nbsp;</span><span style="color: #007700">]&nbsp;);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+::xdebug_call_function is called at /home/httpd/html/test/xdebug_caller:13</pre></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_call_file'></a>
+	<h3 class="name">
+					xdebug_call_file( <span class='type'>int $depth = 2</span> )
+				<span class='type'> : mixed</span>
+		<a href='all_functions.html#xdebug_call_file'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the calling file</p></div>
+
+	
+	<div class='description'><p>
+This function returns the filename from where the current function/method
+ was executed from, or <code>NULL</code> if the stack frame does not exist
+ 
+
+</p><p>
+To retrieve information from earlier stack frames, use the optional
+ <code>$depth</code> argument.
+ 
+
+</p><p>
+For examples and more extensive information, see <a href="all_functions.html#xdebug_call_class">xdebug_call_class()</a>.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_call_function'></a>
+	<h3 class="name">
+					xdebug_call_function( <span class='type'>int $depth = 2</span> )
+				<span class='type'> : mixed</span>
+		<a href='all_functions.html#xdebug_call_function'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the calling function/method</p></div>
+
+	
+	<div class='description'><p>
+This function returns the name of the current function/method, <code>NULL</code> if the stack frame does not exist, or <code>FALSE</code> if the stack frame has no function/method information
+ 
+
+</p><p>
+To retrieve information from earlier stack frames, use the optional
+ <code>$depth</code> argument.
+ 
+
+</p><p>
+For examples and more extensive information, see <a href="all_functions.html#xdebug_call_class">xdebug_call_class()</a>.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_call_line'></a>
+	<h3 class="name">
+					xdebug_call_line( <span class='type'>int $depth = 2</span> )
+				<span class='type'> : mixed</span>
+		<a href='all_functions.html#xdebug_call_line'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the calling line number</p></div>
+
+	
+	<div class='description'><p>
+This function returns the line number from where the current function/method was
+ called from, or <code>NULL</code> if the stack frame does not exist
+ 
+
+</p><p>
+To retrieve information from earlier stack frames, use the optional
+ <code>$depth</code> argument.
+ 
+
+</p><p>
+For examples and more extensive information, see <a href="all_functions.html#xdebug_call_class">xdebug_call_class()</a>.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_code_coverage_started'></a>
+	<h3 class="name">
+					xdebug_code_coverage_started()
+				<span class='type'> : bool</span>
+		<a href='all_functions.html#xdebug_code_coverage_started'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns whether code coverage is active</p></div>
+
+	
+	<div class='description'><p>
+Returns whether code coverage has been started.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;&nbsp;var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">xdebug_code_coverage_started</span><span style="color: #007700">());<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_start_code_coverage</span><span style="color: #007700">();<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">xdebug_code_coverage_started</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+bool(false)
+bool(true)</pre></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_debug_zval'></a>
+	<h3 class="name">
+					xdebug_debug_zval( <span class='type'>string ...$varname</span> )
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_debug_zval'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Displays information about a variable</p></div>
+
+	
+	<div class='description'><p>
+This function displays structured information about one or more variables
+ that includes its type, value and refcount information. Arrays are explored
+ recursively with values. This function is implemented differently from PHP's <a
+ href='http://php.net/debug-zval-dump'>debug_zval_dump()</a> function in order
+ to work around the problems that that function has because the variable itself
+ is actually passed to the function. Xdebug's version is better as it uses the
+ variable name to lookup the variable in the internal symbol table and accesses
+ all the properties directly without having to deal with actually passing a
+ variable to a function. The result is that the information that this function
+ returns is much more accurate than PHP's own function for showing zval
+ information.
+ 
+
+</p><p>
+Support for anything but simple variable names (such as <i>"a[2]"</i> below)
+ is supported since Xdebug 2.3.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;&nbsp;$a&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&amp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&amp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">];<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_debug_zval</span><span style="color: #007700">(</span><span style="color: #DD0000">'a'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_debug_zval</span><span style="color: #007700">(</span><span style="color: #DD0000">"a[2]"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+a: (refcount=2, is_ref=1)=array (
+	0 =&gt; (refcount=1, is_ref=0)=1, 
+	1 =&gt; (refcount=1, is_ref=0)=2, 
+	2 =&gt; (refcount=2, is_ref=1)=3)
+a[2]: (refcount=2, is_ref=1)=3</pre></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_debug_zval_stdout'></a>
+	<h3 class="name">
+					xdebug_debug_zval_stdout( <span class='type'>string ...$varname</span> )
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_debug_zval_stdout'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns information about variables to stdout</p></div>
+
+	
+	<div class='description'><p>
+This function displays structured information about one or more variables
+ that includes its type, value and refcount information. Arrays are explored
+ recursively with values. The difference with <a href="all_functions.html#xdebug_debug_zval">xdebug_debug_zval()</a> is that
+ the information is not displayed through a web server API layer, but directly
+ shown on stdout (so that when you run it with Apache in single process mode it
+ ends up on the console).
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;&nbsp;$a&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&amp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&amp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">];<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_debug_zval_stdout</span><span style="color: #007700">(</span><span style="color: #DD0000">'a'</span><span style="color: #007700">);</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+a: (refcount=2, is_ref=1)=array (
+	0 =&gt; (refcount=1, is_ref=0)=1, 
+	1 =&gt; (refcount=1, is_ref=0)=2, 
+	2 =&gt; (refcount=2, is_ref=1)=3)</pre></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_dump_superglobals'></a>
+	<h3 class="name">
+					xdebug_dump_superglobals()
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_dump_superglobals'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Displays information about super globals</p></div>
+
+	
+	<div class='description'><p>
+This function dumps the values of the elements of the super globals as
+ specified with the <a href="all_settings.html#dump.*">xdebug.dump.*</a> php.ini settings. For the example below the settings in php.ini are:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+xdebug.dump.GET=*<br />xdebug.dump.SERVER=REMOTE_ADDR<br /><br />Query&nbsp;string:<br />?var=fourty%20two&amp;array[a]=a&amp;array[9]=b</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+<table border='1' cellspacing='0'>
+<tr><th colspan='5' align='left' bgcolor='#e9b96e'>Dump <i>$_SERVER</i></th></tr>
+<tr><td colspan='2' align='right' bgcolor='#eeeeec' valign='top'><pre>$_SERVER['REMOTE_ADDR']&nbsp;=</pre></td><td colspan='3' bgcolor='#eeeeec'><pre><small>string</small> <font color='#cc0000'>'127.0.0.1'</font> <i>(length=9)</i>
+</pre></td></tr>
+<tr><th colspan='5' align='left' bgcolor='#e9b96e'>Dump <i>$_GET</i></th></tr>
+<tr><td colspan='2' align='right' bgcolor='#eeeeec' valign='top'><pre>$_GET['var']&nbsp;=</pre></td><td colspan='3' bgcolor='#eeeeec'><pre><small>string</small> <font color='#cc0000'>'fourty two'</font> <i>(length=10)</i>
+</pre></td></tr>
+<tr><td colspan='2' align='right' bgcolor='#eeeeec' valign='top'><pre>$_GET['array']&nbsp;=</pre></td><td colspan='3' bgcolor='#eeeeec'><pre>
+<b>array</b>
+  'a' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'a'</font> <i>(length=1)</i>
+  9 <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'b'</font> <i>(length=1)</i>
+</pre></td></tr>
+</table></pre></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_code_coverage'></a>
+	<h3 class="name">
+					xdebug_get_code_coverage()
+				<span class='type'> : array</span>
+		<a href='all_functions.html#xdebug_get_code_coverage'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns code coverage information</p></div>
+
+	
+	<div class='description'><p>
+Returns a structure which contains information about which lines were executed
+ in your script (including include files). The following example shows code
+ coverage for one specific file:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />xdebug_start_code_coverage</span><span style="color: #007700">(</span><span style="color: #0000BB">XDEBUG_CC_UNUSED&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">XDEBUG_CC_DEAD_CODE</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">a</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return;<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">*&nbsp;</span><span style="color: #0000BB">2.5</span><span style="color: #007700">;<br />}<br /><br />function&nbsp;</span><span style="color: #0000BB">b</span><span style="color: #007700">(</span><span style="color: #0000BB">$count</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$count&nbsp;</span><span style="color: #007700">&gt;&nbsp;</span><span style="color: #0000BB">25</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"too&nbsp;much\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">$count</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">++)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">a</span><span style="color: #007700">(</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">+&nbsp;</span><span style="color: #0000BB">0.17</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">b</span><span style="color: #007700">(</span><span style="color: #0000BB">6</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">b</span><span style="color: #007700">(</span><span style="color: #0000BB">10</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">xdebug_get_code_coverage</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+<b>array</b>
+  '/home/httpd/html/test/xdebug/docs/xdebug_get_code_coverage.php' <font color='#888a85'>=&gt;</font>
+    <b>array</b> <i>(size=11)</i>
+      5 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      6 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>-2</font>
+      7 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>-2</font>
+      10 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      11 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>-1</font>
+      13 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      14 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      16 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      18 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      19 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      21 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font></pre></div>
+<p>
+The information that is collected consists of an two dimensional array with as
+ primary index the executed filename and as secondary key the line number. The
+ value in the elements represents whether the line has been executed or whether
+ it has unreachable lines.
+ 
+
+</p><p>
+The returned values for each line are:
+ <ul>
+ 	<li><code>1</code>: this line was executed</li>
+ 	<li><code>-1</code>: this line was not executed</li>
+ 	<li><code>-2</code>: this line did not have executable code on it</li>
+ </ul>
+ 
+ Value <code>-1</code> is only returned when the <code>XDEBUG_CC_UNUSED</code>
+ is enabled and value <code>-2</code> is only returned when both
+ <code>XDEBUG_CC_UNUSED</code> and <code>XDEBUG_CC_DEAD_CODE</code> are enabled
+ when starting <a href='code_coverage.html'>Code Coverage Analysis</a> through <a href="all_functions.html#xdebug_start_code_coverage">xdebug_start_code_coverage()</a>.
+ 
+
+</p><p>
+If path and branch checking has been enabled with the
+ <code>XDEBUG_CC_BRANCH_CHECK</code> flag to <a href="all_functions.html#xdebug_start_code_coverage">xdebug_start_code_coverage()</a>
+ then the returned format is different. The lines array is returned in
+ a sub-array element <code>lines</code>, and separate information is returned
+ for each function in the <code>functions</code> element.
+ 
+
+</p><p>
+The following example illustrates that.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />xdebug_start_code_coverage</span><span style="color: #007700">(</span><span style="color: #0000BB">XDEBUG_CC_UNUSED&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">XDEBUG_CC_DEAD_CODE</span><span style="color: #007700">);<br /><br />function&nbsp;</span><span style="color: #0000BB">c</span><span style="color: #007700">(</span><span style="color: #0000BB">$count</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">$count</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">++)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">+=&nbsp;</span><span style="color: #0000BB">0.17</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #0000BB">c</span><span style="color: #007700">(</span><span style="color: #0000BB">10</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">xdebug_get_code_coverage</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+<b>array</b> <i>(size=1)</i>
+  '/tmp/foo2.php' <font color='#888a85'>=&gt;</font>
+    <b>array</b> <i>(size=2)</i>
+      'lines' <font color='#888a85'>=&gt;</font>
+        <b>array</b> <i>(size=5)</i>
+          5 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+          6 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+          8 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+          10 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+          12 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      'functions' <font color='#888a85'>=&gt;</font>
+        <b>array</b> <i>(size=1)</i>
+          'c' <font color='#888a85'>=&gt;</font>
+            <b>array</b> <i>(size=2)</i>
+              'branches' <font color='#888a85'>=&gt;</font>
+                <b>array</b> <i>(size=4)</i>
+                  0 <font color='#888a85'>=&gt;</font>
+                    <b>array</b> <i>(size=7)</i>
+                      'op_start' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>0</font>
+                      'op_end' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>4</font>
+                      'line_start' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>4</font>
+                      'line_end' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+                      'hit' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+                      'out' <font color='#888a85'>=&gt;</font>
+                        <b>array</b> <i>(size=1)</i>
+                          0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>9</font>
+                      'out_hit' <font color='#888a85'>=&gt;</font>
+                        <b>array</b> <i>(size=1)</i>
+                          0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+                  5 <font color='#888a85'>=&gt;</font>
+                    <b>array</b> <i>(size=7)</i>
+                      'op_start' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+                      'op_end' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>8</font>
+                      'line_start' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>6</font>
+                      'line_end' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+                      'hit' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+                      'out' <font color='#888a85'>=&gt;</font>
+                        <b>array</b> <i>(size=1)</i>
+                          0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>9</font>
+                      'out_hit' <font color='#888a85'>=&gt;</font>
+                        <b>array</b> <i>(size=1)</i>
+                          0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+                  9 <font color='#888a85'>=&gt;</font>
+                    <b>array</b> <i>(size=7)</i>
+                      'op_start' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>9</font>
+                      'op_end' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>11</font>
+                      'line_start' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+                      'line_end' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+                      'hit' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+                      'out' <font color='#888a85'>=&gt;</font>
+                        <b>array</b> <i>(size=2)</i>
+                          0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>12</font>
+                          1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+                      'out_hit' <font color='#888a85'>=&gt;</font>
+                        <b>array</b> <i>(size=2)</i>
+                          0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+                          1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+                  12 <font color='#888a85'>=&gt;</font>
+                    <b>array</b> <i>(size=7)</i>
+                      'op_start' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>12</font>
+                      'op_end' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>13</font>
+                      'line_start' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>8</font>
+                      'line_end' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>8</font>
+                      'hit' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+                      'out' <font color='#888a85'>=&gt;</font>
+                        <b>array</b> <i>(size=1)</i>
+                          0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>2147483645</font>
+                      'out_hit' <font color='#888a85'>=&gt;</font>
+                        <b>array</b> <i>(size=1)</i>
+                          0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>0</font>
+              'paths' <font color='#888a85'>=&gt;</font>
+                <b>array</b> <i>(size=2)</i>
+                  0 <font color='#888a85'>=&gt;</font>
+                    <b>array</b> <i>(size=2)</i>
+                      'path' <font color='#888a85'>=&gt;</font>
+                        <b>array</b> <i>(size=3)</i>
+                          0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>0</font>
+                          1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>9</font>
+                          2 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>12</font>
+                      'hit' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>0</font>
+                  1 <font color='#888a85'>=&gt;</font>
+                    <b>array</b> <i>(size=2)</i>
+                      'path' <font color='#888a85'>=&gt;</font>
+                        <b>array</b> <i>(size=5)</i>
+                          0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>0</font>
+                          1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>9</font>
+                          2 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+                          3 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>9</font>
+                          4 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>12</font>
+                      'hit' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font></pre></div>
+<p>
+Inside each function the <code>branches</code> element describes each branch.
+ 
+
+</p><div class='example-returns'><h4>Returns:</h4><pre>
+9 <font color='#888a85'>=&gt;</font>
+  <b>array</b> <i>(size=7)</i>
+    'op_start' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>9</font>
+    'op_end' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>11</font>
+    'line_start' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+    'line_end' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+    'hit' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+    'out' <font color='#888a85'>=&gt;</font>
+      <b>array</b> <i>(size=2)</i>
+        0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>12</font>
+        1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+    'out_hit' <font color='#888a85'>=&gt;</font>
+      <b>array</b> <i>(size=2)</i>
+        0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+        1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font></pre></div>
+<p>
+The index is the starting opcode, and the fields mean:
+ 
+ <dl>
+ <dt>op_start</dt>
+ <dd>The starting opcode. This is the same number as the array index.</dd>
+ 
+ <dt>op_end</dt>
+ <dd>The last opcode in the branch</dd>
+ 
+ <dt>line_start</dt>
+ <dd>The line number of the <code>op_start</code> opcode.</dd>
+ 
+ <dt>line_end</dt>
+ <dd>The line number of the <code>op_end</code> opcode. This can potentially be
+ a number that is lower than <code>line_start</code> due to the way the PHP
+ compiler generates opcodes.</dd>
+ 
+ <dt>hit</dt>
+ <dd>Whether the opcodes in this branch have been executed or not.</dd>
+ 
+ <dt>out</dt>
+ <dd>An array containing the <code>op_start</code> opcodes for branches that
+ can follow this one.</dd>
+ 
+ <dt>out_hit</dt>
+ <dd>Each element matches the same index as in <code>out</code> and indicates
+ whether this branch exit has been reached.</dd>
+ </dl>
+ 
+
+</p><p>
+Each function also contains a <code>paths</code> element, which shows all the
+ possible paths through the function, and whether they have been hit.
+ 
+
+</p><div class='example-returns'><h4>Returns:</h4><pre>
+1 =>
+  array (size=2)
+    'path' =>
+      array (size=5)
+        0 => int 0
+        1 => int 9
+        2 => int 5
+        3 => int 9
+        4 => int 12
+    'hit' => int 1</pre></div>
+<p>
+The index is a normal PHP array index, and the fields mean:
+ 
+ <dl>
+ <dt>path</dt>
+ <dd>An array containing the <code>op_start</code> opcodes indicating the
+ branches that make up this path. In the example, <code>9</code> features twice
+ because this path (the loop) has after branch <code>9</code> an exit to opcode
+ <code>5</code> (the start of the loop), and opcode <code>12</code> (the next
+ branch after the loop).</dd>
+ 
+ <dt>hit</dt>
+ <dd>Whether this specific path has been followed.</dd>
+ </dl>
+ 
+
+</p><p>
+The Xdebug source contains a
+ <a href='https://github.com/xdebug/xdebug/blob/master/tests/coverage/dump-branch-coverage.inc'>file</a>
+ containing a <code>dump_branch_coverage</code> function, which you can use the
+ show the information in a more concise way. The above array would instead be
+ shown as:
+ 
+
+</p><div class='example-returns'><h4>Returns:</h4><pre>
+c
+- branches
+  - 00; OP: 00-04; line: 06-07 HIT; out1: 09 HIT
+  - 05; OP: 05-08; line: 08-07 HIT; out1: 09 HIT
+  - 09; OP: 09-11; line: 07-07 HIT; out1: 12 HIT; out2: 05 HIT
+  - 12; OP: 12-13; line: 10-10 HIT; out1: EX  X
+- paths
+  - 0 9 12:  X
+  - 0 9 5 9 12: HIT</pre></div>
+<p>
+The function also generates a file <code>/tmp/paths.dot</code>, which can be
+ processed with the <em>dot</em> tool of the
+ <a href="https://www.graphviz.org/">Graphviz</a> software to create an image.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+dot&nbsp;-Tpng&nbsp;/tmp/paths.dot&nbsp;&gt;&nbsp;/tmp/paths.png</span>
+</code></div>
+<p>
+This generates an image where a solid line means that the path has been
+ followed, and a dashed line means that that path has not been followed.
+ 
+
+</p><p>
+<img src="../images/docs/cc-paths.png">
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_collected_errors'></a>
+	<h3 class="name">
+					xdebug_get_collected_errors( <span class='type'>bool $emptyList = false</span> )
+				<span class='type'> : array</span>
+		<a href='all_functions.html#xdebug_get_collected_errors'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns all collected error messages</p></div>
+
+	
+	<div class='description'><p>
+This function returns all errors from the collection buffer that contains all
+ errors that were stored there when error collection was started with
+ <a href="all_functions.html#xdebug_start_error_collection">xdebug_start_error_collection()</a>.
+ 
+
+</p><p>
+By default this function will not clear the error collection buffer. If you pass
+ <literal>true</literal> as argument to this function then the buffer will be
+ cleared as well.
+ 
+
+</p><p>
+This function returns a string containing all collected errors formatted as
+ an "Xdebug table".
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_declared_vars'></a>
+	<h3 class="name">
+					xdebug_get_declared_vars()
+				<span class='type'> : array</span>
+		<a href='all_functions.html#xdebug_get_declared_vars'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns declared variables</p></div>
+
+	
+	<div class='description'><p>
+Returns an array where each element is a variable name which is defined in the
+ current scope. The setting <a href="all_settings.html#collect_vars">xdebug.collect_vars</a> needs to be enabled.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">strings&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;function&nbsp;</span><span style="color: #0000BB">fix_strings</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$b</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$item</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">xdebug_get_declared_vars</span><span style="color: #007700">());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">strings</span><span style="color: #007700">::</span><span style="color: #0000BB">fix_strings</span><span style="color: #007700">(array(</span><span style="color: #0000BB">1</span><span style="color: #007700">,</span><span style="color: #0000BB">2</span><span style="color: #007700">,</span><span style="color: #0000BB">3</span><span style="color: #007700">),&nbsp;array(</span><span style="color: #0000BB">4</span><span style="color: #007700">,</span><span style="color: #0000BB">5</span><span style="color: #007700">,</span><span style="color: #0000BB">6</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+<b>array</b>
+  0 <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'a'</font> <i>(length=1)</i>
+  1 <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'b'</font> <i>(length=1)</i>
+  2 <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'item'</font> <i>(length=4)</i></pre></div>
+<p>
+In PHP versions before 5.1, the variable name "a" is not in the returned array,
+ as it is not used in the scope where the function xdebug_get_declared_vars() is
+ called in.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_function_count'></a>
+	<h3 class="name">
+					xdebug_get_function_count()
+				<span class='type'> : int</span>
+		<a href='all_functions.html#xdebug_get_function_count'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the number of functions that have been called</p></div>
+
+	
+	<div class='description'><p>
+This function returns the number of functions that have been called so far,
+ including this function itself.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_function_stack'></a>
+	<h3 class="name">
+					xdebug_get_function_stack()
+				<span class='type'> : array</span>
+		<a href='all_functions.html#xdebug_get_function_stack'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns information about the stack</p></div>
+
+	
+	<div class='description'><p>
+Returns an array which resembles the stack trace up to this point. The example script:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">strings&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">fix_string</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">xdebug_get_function_stack</span><span style="color: #007700">());<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">fix_strings</span><span style="color: #007700">(</span><span style="color: #0000BB">$b</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$item</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">fix_string</span><span style="color: #007700">(</span><span style="color: #0000BB">$item</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$s&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">strings</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$ret&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$s</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">fix_strings</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'Derick'</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+<b>array</b>
+  0 <font color='#888a85'>=&gt;</font> 
+    <b>array</b>
+      'function' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'{main}'</font> <i>(length=6)</i>
+      'file' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'/var/www/xdebug_get_function_stack.php'</font> <i>(length=63)</i>
+      'line' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>0</font>
+      'params' <font color='#888a85'>=&gt;</font> 
+        <b>array</b>
+          <i><font color='#888a85'>empty</font></i>
+  1 <font color='#888a85'>=&gt;</font> 
+    <b>array</b>
+      'function' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'fix_strings'</font> <i>(length=11)</i>
+      'class' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'strings'</font> <i>(length=7)</i>
+      'file' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'/var/www/xdebug_get_function_stack.php'</font> <i>(length=63)</i>
+      'line' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>18</font>
+      'params' <font color='#888a85'>=&gt;</font> 
+        <b>array</b>
+          'b' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'array (0 =&gt; &apos;Derick&apos;)'</font> <i>(length=21)</i>
+  2 <font color='#888a85'>=&gt;</font> 
+    <b>array</b>
+      'function' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'fix_string'</font> <i>(length=10)</i>
+      'class' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'strings'</font> <i>(length=7)</i>
+      'file' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'/var/www/xdebug_get_function_stack.php'</font> <i>(length=63)</i>
+      'line' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>12</font>
+      'params' <font color='#888a85'>=&gt;</font> 
+        <b>array</b>
+          'a' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'&apos;Derick&apos;'</font> <i>(length=8)</i></pre></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_gc_run_count'></a>
+	<h3 class="name">
+					xdebug_get_gc_run_count()
+				<span class='type'> : int</span>
+		<a href='all_functions.html#xdebug_get_gc_run_count'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the number of garbage collection runs that have been triggered so far</p></div>
+
+	
+	<div class='description'><p>
+The function returns the number of times the garbage collection has
+ been triggered in the currently running script.
+ 
+
+</p><p>
+This number is available even if the <a href="all_settings.html#gc_stats_enable">xdebug.gc_stats_enable</a> INI setting is set to false.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_gc_total_collected_roots'></a>
+	<h3 class="name">
+					xdebug_get_gc_total_collected_roots()
+				<span class='type'> : int</span>
+		<a href='all_functions.html#xdebug_get_gc_total_collected_roots'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the number of variable roots that have been collected so far</p></div>
+
+	
+	<div class='description'><p>
+The function returns the number of variable roots that the garbage collection has
+ collected during all runs of the garbage collector in the current script.
+ 
+
+</p><p>
+This number is available even if the <a href="all_settings.html#gc_stats_enable">xdebug.gc_stats_enable</a> INI setting is set to false.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_gcstats_filename'></a>
+	<h3 class="name">
+					xdebug_get_gcstats_filename()
+				<span class='type'> : mixed</span>
+		<a href='all_functions.html#xdebug_get_gcstats_filename'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the garbage collection statistics filename</p></div>
+
+	
+	<div class='description'><p>
+Returns the name of the file which is used to save garbage collection
+ information to, or <code>false</code> if statistics collection is not active.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_headers'></a>
+	<h3 class="name">
+					xdebug_get_headers()
+				<span class='type'> : array</span>
+		<a href='all_functions.html#xdebug_get_headers'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns all the headers as set by calls to PHP's header() function</p></div>
+
+	
+	<div class='description'><p>
+Returns all the headers that are set with PHP's header() function, or any other
+ header set internally within PHP (such as through setcookie()), as an array.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />header</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">"X-Test"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Testing"&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">setcookie</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">"TestCookie"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"test-value"&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">xdebug_get_headers</span><span style="color: #007700">()&nbsp;);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+array(2) {
+  [0]=>
+  string(6) "X-Test"
+  [1]=>
+  string(33) "Set-Cookie: TestCookie=test-value"
+}</pre></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_monitored_functions'></a>
+	<h3 class="name">
+					xdebug_get_monitored_functions()
+				<span class='type'> : array</span>
+		<a href='all_functions.html#xdebug_get_monitored_functions'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns information about monitored functions</p></div>
+
+	
+	<div class='description'><p>
+Returns a structure which contains information about where the monitored
+ functions were executed in your script. The following example shows how to use
+ this, and the returned information:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/*&nbsp;Start&nbsp;the&nbsp;function&nbsp;monitor&nbsp;for&nbsp;strrev&nbsp;and&nbsp;array_push:&nbsp;*/<br /></span><span style="color: #0000BB">xdebug_start_function_monitor</span><span style="color: #007700">(&nbsp;[&nbsp;</span><span style="color: #DD0000">'strrev'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'array_push'&nbsp;</span><span style="color: #007700">]&nbsp;);<br /><br /></span><span style="color: #FF8000">/*&nbsp;Run&nbsp;some&nbsp;code:&nbsp;*/<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">strrev</span><span style="color: #007700">(</span><span style="color: #DD0000">"yes!"</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br />echo&nbsp;</span><span style="color: #0000BB">strrev</span><span style="color: #007700">(</span><span style="color: #DD0000">"yes!"</span><span style="color: #007700">),&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">xdebug_get_monitored_functions</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">xdebug_stop_function_monitor</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+/tmp/monitor-example.php:10:
+array(2) {
+  [0] =>
+  array(3) {
+    'function' =>
+    string(6) "strrev"
+    'filename' =>
+    string(24) "/tmp/monitor-example.php"
+    'lineno' =>
+    int(6)
+  }
+  [1] =>
+  array(3) {
+    'function' =>
+    string(6) "strrev"
+    'filename' =>
+    string(24) "/tmp/monitor-example.php"
+    'lineno' =>
+    int(8)
+  }
+}</pre></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_profiler_filename'></a>
+	<h3 class="name">
+					xdebug_get_profiler_filename()
+				<span class='type'> : mixed</span>
+		<a href='all_functions.html#xdebug_get_profiler_filename'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the profile information filename</p></div>
+
+	
+	<div class='description'><p>
+Returns the name of the file which is used to save profile information to, or
+ <code>false</code> if the profiler is not active.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_stack_depth'></a>
+	<h3 class="name">
+					xdebug_get_stack_depth()
+				<span class='type'> : int</span>
+		<a href='all_functions.html#xdebug_get_stack_depth'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the current stack depth level</p></div>
+
+	
+	<div class='description'><p>
+Returns the stack depth level. The main body of a script is level 0 and
+ each include and/or function call adds one to the stack depth level.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_get_tracefile_name'></a>
+	<h3 class="name">
+					xdebug_get_tracefile_name()
+				<span class='type'> : mixed</span>
+		<a href='all_functions.html#xdebug_get_tracefile_name'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the name of the function trace file</p></div>
+
+	
+	<div class='description'><p>
+Returns the name of the file which is used to trace the output of this
+ script to, or <code>null</code> if tracing is not active. This is useful
+ when traces are made with <a href="all_settings.html#auto_trace">xdebug.auto_trace</a> is enabled.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_is_debugger_active'></a>
+	<h3 class="name">
+					xdebug_is_debugger_active()
+				<span class='type'> : bool</span>
+		<a href='all_functions.html#xdebug_is_debugger_active'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns whether a debugging session is active</p></div>
+
+	
+	<div class='description'><p>
+Returns <code>true</code> if a debugging session through DBGp is currently
+ active with a client attached; <code>false</code>, if not.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_memory_usage'></a>
+	<h3 class="name">
+					xdebug_memory_usage()
+				<span class='type'> : int</span>
+		<a href='all_functions.html#xdebug_memory_usage'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the current memory usage</p></div>
+
+	
+	<div class='description'><p>
+Returns the current amount of memory the script uses. Before PHP 5.2.1, this
+ only works if PHP is compiled with --enable-memory-limit. From PHP 5.2.1 and
+ later this function is always available.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_peak_memory_usage'></a>
+	<h3 class="name">
+					xdebug_peak_memory_usage()
+				<span class='type'> : int</span>
+		<a href='all_functions.html#xdebug_peak_memory_usage'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the peak memory usage</p></div>
+
+	
+	<div class='description'><p>
+Returns the maximum amount of memory the script used until now.  Before PHP
+ 5.2.1, this only works if PHP is compiled with --enable-memory-limit. From PHP
+ 5.2.1 and later this function is always available.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_print_function_stack'></a>
+	<h3 class="name">
+					xdebug_print_function_stack( <span class='type'>string $message = "user triggered", int $options = 0</span> )
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_print_function_stack'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Displays the current function stack</p></div>
+
+	
+	<div class='description'><p>
+Displays the current function stack, in a similar way as what Xdebug would
+ display in an error situation.
+ 
+
+</p><p>
+The "message" argument allows you to replace
+ the message in the header with your own.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">foo</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$far</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$out&nbsp;</span><span style="color: #007700">)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_print_function_stack</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">'Your&nbsp;own&nbsp;message'&nbsp;</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">42</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3141592654&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+<font size='1'><table class='xdebug-error' dir='ltr' border='1' cellspacing='0' cellpadding='1'>
+<tr><th align='left' bgcolor='#f57900' colspan="5"><span style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( ! )</span> Xdebug: Your own message in /home/httpd/html/test/xdebug/print_function_stack.php on line <i>5</i></th></tr>
+<tr><th align='left' bgcolor='#e9b96e' colspan='5'>Call Stack</th></tr>
+<tr><th align='center' bgcolor='#eeeeec'>#</th><th align='left' bgcolor='#eeeeec'>Time</th><th align='left' bgcolor='#eeeeec'>Memory</th><th align='left' bgcolor='#eeeeec'>Function</th><th align='left' bgcolor='#eeeeec'>Location</th></tr>
+<tr><td bgcolor='#eeeeec' align='center'>1</td><td bgcolor='#eeeeec' align='center'>0.0006</td><td bgcolor='#eeeeec' align='right'>653896</td><td bgcolor='#eeeeec'>{main}(  )</td><td title='/home/httpd/html/test/xdebug/print_function_stack.php' bgcolor='#eeeeec'>../print_function_stack.php<b>:</b>0</td></tr>
+<tr><td bgcolor='#eeeeec' align='center'>2</td><td bgcolor='#eeeeec' align='center'>0.0007</td><td bgcolor='#eeeeec' align='right'>654616</td><td bgcolor='#eeeeec'>foo( <span>42</span>, <span>3141592654</span> )</td><td title='/home/httpd/html/test/xdebug/print_function_stack.php' bgcolor='#eeeeec'>../print_function_stack.php<b>:</b>7</td></tr>
+<tr><td bgcolor='#eeeeec' align='center'>3</td><td bgcolor='#eeeeec' align='center'>0.0007</td><td bgcolor='#eeeeec' align='right'>654736</td><td bgcolor='#eeeeec'><a href='http://www.php.net/xdebug_print_function_stack' target='_new'>xdebug_print_function_stack</a>
+( <span>&apos;Your own message&apos;</span> )</td><td title='/home/httpd/html/test/xdebug/print_function_stack.php' bgcolor='#eeeeec'>../print_function_stack.php<b>:</b>5</td></tr>
+</table></font></pre></div>
+<p>
+The bitmask "options" allows you to configure a few extra options.
+ The following options are currently supported:
+ <dl>
+ <dt><code>XDEBUG_STACK_NO_DESC</code></dt>
+ <dd>If this option is set, then the printed stack trace will not have a
+ header. This is useful if you want to print a stack trace from your own error
+ handler, as otherwise the printed location is where
+ <code>xdebug_print_function_stack()</code> was called from.</dd>
+ </dl>
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_set_filter'></a>
+	<h3 class="name">
+					xdebug_set_filter( <span class='type'>int $group, int $listType, array $configuration</span> )
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_set_filter'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Set filter</p></div>
+
+	
+	<div class='description'><p>
+This function configures a filter that Xdebug employs when displaying stack
+ traces or recording function traces, or when gathering code coverage. Filter
+ configurations are applied to each execution unit (function, method, script
+ body) independently.
+ 
+
+</p><p>
+The first argument, <code>$group</code> selects for which feature you want to
+ set up a filter. Currently there are two groups:
+ 
+ <dl>
+ <dt>XDEBUG_FILTER_TRACING</dt>
+ <dd>The filter group used for filtering <a href='stack_trace.html'>Stack Traces</a> upon errors, as well
+ as <a href='execution_trace.html'>Function Trace</a>.</dd>
+ 
+ <dt>XDEBUG_FILTER_CODE_COVERAGE</dt>
+ <dd>The filter group used for restricting the file paths which Xdebug would use
+ for <a href='code_coverage.html'>Code Coverage Analysis</a>.</dd>
+ </dl>
+ 
+ Each group can be configured independently.
+ 
+
+</p><p>
+There are different kinds of filters that you can set. You can filter on either
+ file path prefix, or fully qualified class name prefix (i.e. namespace). For
+ each filter type you can a list of paths/namespaces to include or exclude. All
+ matches are done in a case-insensitive way.
+ 
+
+</p><p>
+The <code>XDEBUG_FILTER_CODE_COVERAGE</code> group only supports
+ <code>XDEBUG_PATH_WHITELIST</code>, <code>XDEBUG_PATH_BLACKLIST</code>, and
+ <code>XDEBUG_FILTER_NONE</code>. All matches are done in a case-insensitive
+ way.
+ 
+
+</p><p>
+The constants to use as second "<code>$list_type</code>" argument are:
+ 
+ <dl>
+ <dt>XDEBUG_PATH_WHITELIST</dt>
+ <dd><p>Configures a list of file paths to include. An execution unit is
+ included in the output if its file path is prefixed by any of the prefixes in
+ the array passed as third <code>$configuration</code> argument.</p><p>Please
+ note that a prefix of <code>/home/derick</code> would also match files in
+ <code>/home/derickrethans</code>, so it is recommended that you add the
+ trailing slash to the prefix in order to prevent this.</p></dd>
+ 
+ <dt>XDEBUG_PATH_BLACKLIST</dt>
+ <dd><p>Sets up a list of paths to exclude. An execution unit will be excluded
+ from the output if its file path is prefixed by any of the prefixes from the
+ <code>$configuration</code> array.</p></dd>
+ 
+ <dt>XDEBUG_NAMESPACE_WHITELIST</dt>
+ <dd><p>Configures a list of class name prefixes to include. An execution unit is included in
+ the output if the class name, after namespace expansion, matches one of the
+ prefixes in the <code>$configuration</code> array. An empty string value is
+ special, and means functions that do not belong to a class. These are either
+ user-defined, or built-in PHP functions (e.g. <code>strlen()</code>).</p>
+ <p>Name space expansion happens automatically in PHP, and its engine will
+ always see the full qualified class name. In the code below, the
+ fully qualified class name <code>DramIO\Whisky</code>:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">namespace&nbsp;</span><span style="color: #0000BB">DramIO</span><span style="color: #007700">;<br /><br />class&nbsp;</span><span style="color: #0000BB">Whisky&nbsp;</span><span style="color: #007700">{<br />}</span>
+</span>
+</code></div>
+<p>
+<p>
+ In order to match for all clases within a namespace, it is recommended to specify the prefix with the namespace separator
+ </p></dd>
+ 
+ <dt>XDEBUG_NAMESPACE_BLACKLIST</dt>
+ <dd>Sets up a list of namespaces to exclude. Execution units are excluded only
+ if their prefix matches one of the prefixes in the <code>$configuration</code>
+ array.</dd>
+ 
+ <dt>XDEBUG_FILTER_NONE</dt>
+ <dd>Turns off the filter for the selected <code>$group</code>.</dd>
+ </dl>
+ 
+
+</p><p>
+It is not possible to configure a filter for paths/namespaces at the same time,
+ and neither is it possible to configure which paths to exclude and include at
+ the same time. Only one of the four list types can be active at any one time.
+ 
+ It is possible however, to turn off the filter altogether by using
+ <code>XDEBUG_FILTER_NONE</code>.
+ 
+
+</p><p>
+To exclude all files in the <code>vendor</code> sub-directory in traces:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />xdebug_set_filter</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">XDEBUG_FILTER_TRACING</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XDEBUG_PATH_BLACKLIST</span><span style="color: #007700">,&nbsp;[&nbsp;</span><span style="color: #0000BB">__DIR__&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"/vendor/"&nbsp;</span><span style="color: #007700">]&nbsp;);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<p>
+To include only function calls (without class name), and methods calls for the
+ <code>ezc</code> and <code>DramIO\</code> classes in traces:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />xdebug_set_filter</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">XDEBUG_FILTER_TRACING</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XDEBUG_NAMESPACE_WHITELIST</span><span style="color: #007700">,&nbsp;[&nbsp;</span><span style="color: #DD0000">""</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"ezc"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"DramIO\"&nbsp;]&nbsp;);<br />?&gt;</span>
+</span>
+</code></div>
+<p>
+To only perform code-coverage analysis for files in the <code>src</code> sub-directory:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />xdebug_set_filter</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">XDEBUG_FILTER_CODE_COVERAGE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">XDEBUG_PATH_WHITELIST</span><span style="color: #007700">,&nbsp;[&nbsp;</span><span style="color: #0000BB">__DIR__&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"/src/"&nbsp;</span><span style="color: #007700">]&nbsp;);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_start_code_coverage'></a>
+	<h3 class="name">
+					xdebug_start_code_coverage( <span class='type'>int $options = 0</span> )
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_start_code_coverage'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Starts code coverage</p></div>
+
+	
+	<div class='description'><p>
+This function starts gathering the information for code coverage. The information
+ can be retrieved with the <a href="all_functions.html#xdebug_get_code_coverage">xdebug_get_code_coverage()</a> function.
+ 
+
+</p><p>
+This function has three options, which act as a bitfield:
+ 
+ <dl>
+ <dt>XDEBUG_CC_UNUSED</dt>
+ <dd>Enables scanning of code to figure out which line has executable code.
+ Without this option the returned array will only have lines in them that were
+ actually executed.</dd>
+ 
+ <dt>XDEBUG_CC_DEAD_CODE</dt>
+ <dd>Enables branch analyzes to figure out whether code can be executed.</dd>
+ 
+ <dt>XDEBUG_CC_BRANCH_CHECK</dt>
+ <dd>Enables path execution analysis.</dd>
+ </dl>
+ 
+ Enabling those options make code coverage drastically slower.
+ 
+
+</p><p>
+You can use the options as shown in the following example.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />xdebug_start_code_coverage</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">XDEBUG_CC_UNUSED&nbsp;</span><span style="color: #007700">|&nbsp;</span><span style="color: #0000BB">XDEBUG_CC_DEAD_CODE&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_start_error_collection'></a>
+	<h3 class="name">
+					xdebug_start_error_collection()
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_start_error_collection'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Starts recording all notices, warnings and errors and prevents their display</p></div>
+
+	
+	<div class='description'><p>
+When this function is executed, Xdebug will cause PHP not to display any
+ notices, warnings or errors. Instead, they are formatted according to Xdebug's
+ normal error formatting rules (ie, the error table with the red exclamation
+ mark) and then stored in a buffer. This will continue until you call
+ <a href="all_functions.html#xdebug_stop_error_collection">xdebug_stop_error_collection()</a>.
+ 
+
+</p><p>
+This buffer's contents can be retrieved by calling
+ <a href="all_functions.html#xdebug_get_collected_errors">xdebug_get_collected_errors()</a> and then subsequently displayed. This is
+ really useful if you want to prevent Xdebug's powerful error reporting features
+ from destroying your layout.
+ 
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_start_function_monitor'></a>
+	<h3 class="name">
+					xdebug_start_function_monitor( <span class='type'>array $listOfFunctionsToMonitor</span> )
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_start_function_monitor'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Starts function monitoring</p></div>
+
+	
+	<div class='description'><p>
+This function starts the monitoring of functions that were given in a list as
+ argument to this function. Function monitoring allows you to find out where in
+ your code the functions that you provided as argument are called from. This can
+ be used to track where old, or, discouraged functions are used.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />xdebug_start_function_monitor</span><span style="color: #007700">(&nbsp;[&nbsp;</span><span style="color: #DD0000">'strrev'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'array_push'&nbsp;</span><span style="color: #007700">]&nbsp;);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<p>
+You can also add class methods and static methods to the array that defines
+ which functions to monitor. For example, to catch static calls to
+ DramModel::canSee and dynamic calls to Whisky->drink, you would start the
+ monitor with:
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />xdebug_start_function_monitor</span><span style="color: #007700">(&nbsp;[&nbsp;</span><span style="color: #DD0000">'DramModel::canSee'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Whisky-&gt;drink'</span><span style="color: #007700">]&nbsp;);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<p>
+The defined functions are case sensitive, and a dynamic call to a static method
+ will not be caught.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_start_gcstats'></a>
+	<h3 class="name">
+					xdebug_start_gcstats( <span class='type'>?string $gcstatsFile = null</span> )
+				<span class='type'> : mixed</span>
+		<a href='all_functions.html#xdebug_start_gcstats'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Start the collection of garbage collection statistics</p></div>
+
+	
+	<div class='description'><p>
+Start tracing garbage collection attempts from this point to the file in the
+ <i>gcstatsFile</i> parameter. If no filename is given, then garbage collection stats file
+ will be placed in the directory as configured by the <a href="all_settings.html#gc_stats_output_dir">xdebug.gc_stats_output_dir</a> setting.
+ 
+
+</p><p>
+In case a file name is given as first parameter, the name is relative
+ to the current working directory. This current working directory might be
+ different than you expect it to be, so please use an absolute path in case you
+ specify a file name. Use the PHP function <a
+ href='http://php.net/getcwd'>getcwd()</a> to figure out what the current
+ working directory is.
+ 
+
+</p><p>
+If <a href="all_settings.html#gc_stats_enable">xdebug.gc_stats_enable</a> is
+ enabled, then filename depends on the <a href="all_settings.html#gc_stats_output_name">xdebug.gc_stats_output_name</a> setting.
+ 
+
+</p><p>
+The full path and filename to which Xdebug collects statistics into is returned from this
+ function. This will be either the filename you pass in, or the auto generated filename if no
+ filename has been passed in.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_start_trace'></a>
+	<h3 class="name">
+					xdebug_start_trace( <span class='type'>?string $traceFile = null, int $options = 0</span> )
+				<span class='type'> : string</span>
+		<a href='all_functions.html#xdebug_start_trace'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Starts a new function trace</p></div>
+
+	
+	<div class='description'><p>
+Start tracing function calls from this point to the file in the
+ <code>$trace_file</code> parameter. If no filename is given, then the trace file will
+ be placed in the directory as configured by the <a href="all_settings.html#trace_output_dir">xdebug.trace_output_dir</a> setting.
+ 
+
+</p><p>
+In case a file name is given as first parameter, the name is relative
+ to the current working directory. This current working directory might be
+ different than you expect it to be, so please use an absolute path in case you
+ specify a file name. Use the PHP function <a
+ href='http://php.net/getcwd'>getcwd()</a> to figure out what the current
+ working directory is.
+ 
+
+</p><p>
+The name of the trace file is "{trace_file}.xt". If <a href="all_settings.html#auto_trace">xdebug.auto_trace</a> is
+ enabled, then the format of the filename is "{filename}.xt" where the
+ "{filename}" part depends on the <a href="all_settings.html#trace_output_name">xdebug.trace_output_name</a> setting. The
+ <i>options</i> parameter is a bitfield; currently there are three options:
+ 
+
+</p><p>
+The <i>options</i> parameter is a bitfield;
+ currently there are three options:
+ 
+ <dl>
+ <dt>XDEBUG_TRACE_APPEND (1)</dt>
+ <dd>makes the trace file open in append mode rather than
+ overwrite mode</dd>
+ <dt>XDEBUG_TRACE_COMPUTERIZED (2)</dt>
+ <dd>creates a trace file with
+ the format as described under <i>1</i> "<a href="all_settings.html#trace_format">xdebug.trace_format</a>".</dd>
+ <dt>XDEBUG_TRACE_HTML (4)</dt>
+ <dd>creates a trace file as an HTML table</dd>
+ <dt>XDEBUG_TRACE_NAKED_FILENAME (8)</dt>
+ <dd>Normally, Xdebug always adds ".xt" to the end of the filename that you
+ pass in as first argument to this function. With the
+ <i>XDEBUG_TRACE_NAKED_FILENAME</i> flag set, ".xt" is not added.</dd>
+ </dl>
+ 
+
+</p><p>
+The settings <a href="all_settings.html#collect_assignments">xdebug.collect_assignments</a>, <a href="all_settings.html#collect_includes">xdebug.collect_includes</a>,
+ <a href="all_settings.html#collect_params">xdebug.collect_params</a> and <a href="all_settings.html#collect_return">xdebug.collect_return</a> influence what information is
+ logged to the trace file and the setting <a href="all_settings.html#trace_format">xdebug.trace_format</a> influences the
+ format of the trace file.
+ 
+
+</p><p>
+The full path and filename to which Xdebug traces is returned from this
+ function. This will be either the filename you pass in (potentially with ".xt"
+ added), or the auto generated filename if no filename has been passed in.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_stop_code_coverage'></a>
+	<h3 class="name">
+					xdebug_stop_code_coverage( <span class='type'>bool $cleanUp = true</span> )
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_stop_code_coverage'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Stops code coverage</p></div>
+
+	
+	<div class='description'><p>
+This function stops collecting information, the information in memory will
+ be destroyed. If you pass 0 as an argument, then the code coverage
+ information will not be destroyed so that you can resume the gathering of
+ information with the <a href="all_functions.html#xdebug_start_code_coverage">xdebug_start_code_coverage()</a> function again.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_stop_error_collection'></a>
+	<h3 class="name">
+					xdebug_stop_error_collection()
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_stop_error_collection'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Stops recording of all notices, warnings and errors as started by <a href="all_functions.html#xdebug_start_error_collection">xdebug_start_error_collection()</a></p></div>
+
+	
+	<div class='description'><p>
+When this function is executed, error collection as started by
+ <a href="all_functions.html#xdebug_start_error_collection">xdebug_start_error_collection()</a> is aborted.  The errors stored in the
+ collection buffer are not deleted and still available to be fetched through
+ <a href="all_functions.html#xdebug_get_collected_errors">xdebug_get_collected_errors()</a>.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_stop_function_monitor'></a>
+	<h3 class="name">
+					xdebug_stop_function_monitor()
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_stop_function_monitor'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Stops monitoring functions</p></div>
+
+	
+	<div class='description'><p>
+This function stops the function monitor. In order to get the list of monitored
+ functions, you need to use the <a href="all_functions.html#xdebug_get_monitored_functions">xdebug_get_monitored_functions()</a> function.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_stop_gcstats'></a>
+	<h3 class="name">
+					xdebug_stop_gcstats()
+				<span class='type'> : string</span>
+		<a href='all_functions.html#xdebug_stop_gcstats'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Stops the current garbage collection statistics collection</p></div>
+
+	
+	<div class='description'><p>
+Stop garbage collection statistics collection and closes the output file.
+ 
+
+</p><p>
+The function returns the filename of the file where the statistics were written to.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_stop_trace'></a>
+	<h3 class="name">
+					xdebug_stop_trace()
+				<span class='type'> : string</span>
+		<a href='all_functions.html#xdebug_stop_trace'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Stops the current function trace</p></div>
+
+	
+	<div class='description'><p>
+Stop tracing function calls and closes the trace file.
+ 
+
+</p><p>
+The function returns the filename of the file where the trace was written to.
+
+</p></div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_time_index'></a>
+	<h3 class="name">
+					xdebug_time_index()
+				<span class='type'> : float</span>
+		<a href='all_functions.html#xdebug_time_index'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns the current time index</p></div>
+
+	
+	<div class='description'><p>
+Returns the current time index since the starting of the script in
+ seconds.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">xdebug_time_index</span><span style="color: #007700">(),&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />for&nbsp;(</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i&nbsp;</span><span style="color: #007700">&lt;&nbsp;</span><span style="color: #0000BB">250000</span><span style="color: #007700">;&nbsp;</span><span style="color: #0000BB">$i</span><span style="color: #007700">++)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;do&nbsp;nothing<br /></span><span style="color: #007700">}<br />echo&nbsp;</span><span style="color: #0000BB">xdebug_time_index</span><span style="color: #007700">(),&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+0.00038003921508789
+0.76580691337585</pre></div>
+</div>
+</div>
+			<hr>
+		<div class="doc_function">
+	<a name='xdebug_var_dump'></a>
+	<h3 class="name">
+					xdebug_var_dump( <span class='type'>mixed ...$variable</span> )
+				<span class='type'> : void</span>
+		<a href='all_functions.html#xdebug_var_dump'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Displays detailed information about a variable</p></div>
+
+	
+	<div class='description'><p>
+This function displays structured information about one or more expressions
+ that includes its type and value. Arrays are explored recursively with values.
+ See the introduction of <a href='display.html'>Variable Display Features</a> on which php.ini settings affect this
+ function.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />ini_set</span><span style="color: #007700">(</span><span style="color: #DD0000">'xdebug.var_display_max_children'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">stdClass</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$c</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'bar'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$c</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">file&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">'/etc/passwd'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'r'&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(<br />&nbsp;&nbsp;&nbsp;&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(</span><span style="color: #0000BB">TRUE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3.14</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'foo'</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'object'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$c<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">)<br />);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+<pre>
+<b>array</b>
+  0 <font color='#888a85'>=&gt;</font> 
+    <b>array</b>
+      0 <font color='#888a85'>=&gt;</font> <small>boolean</small> <font color='#75507b'>true</font>
+      1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>2</font>
+      2 <font color='#888a85'>=&gt;</font> <small>float</small> <font color='#f57900'>3.14</font>
+      <i>more elements...</i>
+  'object' <font color='#888a85'>=&gt;</font> 
+    <b>object</b>(<i>stdClass</i>)[<i>1</i>]
+      <i>public</i> 'foo' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'bar'</font> <i>(length=3)</i>
+      <i>public</i> 'file' <font color='#888a85'>=&gt;</font> <b>resource</b>(<i>3</i><font color='#2e3436'>,</font> <i>stream</i>)
+</pre></pre></div>
+</div>
+</div>
+	</div>
+<hr />
+
+
+
+</main>
+
+
+	<footer class="content_width">
+		<p>
+		This site and all of its contents are Copyright &copy; 2002-2020 by Derick Rethans.<br />
+		All rights reserved.
+		</p>
+	</footer>
+</body>
+</html>

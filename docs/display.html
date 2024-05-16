@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Xdebug: Documentation » Variable Display Features</title>
+	<meta name="ROBOTS" content="ALL" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta name="DESCRIPTION" content="Xdebug: A powerful debugger for PHP" />
+	<meta name="AUTHOR" content="Derick Rethans, as in derick@xdebug.org" />
+	<link rel="icon" type="image/png" href="../images/favicon.png">
+		<link rel="stylesheet" type="text/css" href="../yui/build/tabview/assets/tabview.css"/>
+	<link rel="stylesheet" type="text/css" href="../yui/build/tabview/assets/border_tabs.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Old+Standard+TT:400,400italic,700" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../yui/build/yahoo/yahoo.js"></script>
+	<script type="text/javascript" src="../yui/build/event/event.js"></script>
+	<script type="text/javascript" src="../yui/build/dom/dom.js"></script>
+	<script type="text/javascript" src="../yui/build/element/element-beta.js"></script>
+
+	<script type="text/javascript" src="../yui/build/tabview/tabview.js"></script>
+
+	<style type="text/css">
+					#demosettings .yui-content { padding:1em; } /* pad content container */
+			</style>
+
+	<script type="text/javascript">
+	YAHOO.example.init = function() {
+		    var tabViewdemosettings = new YAHOO.widget.TabView('demosettings');
+		};
+
+	YAHOO.example.init();
+	</script>
+	<link rel="stylesheet" type="text/css" href="../core2.css" />
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<body>
+	<nav>
+	<div class="content_width">
+		<h1><a href="../index.html"><svg xmlns="http://www.w3.org/2000/svg" width="351" height="181" viewBox="0 0 351 181"><title>Xdebug</title><g fill="none" fill-rule="evenodd" stroke="#FFF"><g transform="translate(5 5)"><path fill="#317E1E" fill-rule="nonzero" stroke-width="5" d="M127.9 85.5l68.2 70.7.4 17.3h-38.6l-60.8-59.7-60 59.7h-39v-17.6l69.7-69.8-69.6-71.2V-2.5h38.7l60.2 60 61-60h38.3v16l-68.5 72z"/><circle cx="75.9" cy="74.6" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="105.1" cy="85" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="158.4" cy="15" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="50.9" cy="140" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="180.4" cy="158.5" r="3.5" stroke-opacity=".8" stroke-width="4"/><path stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M32.6 158.2L42 149M104.3 69.1l49.4-49.4"/><path stroke-linejoin="round" stroke-width="4" d="M102.3 82.7L30.3 10H11.2M167.4 10H183M11.2 160.7l79.2-78"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 74.6L181 10"/><path stroke-linejoin="round" stroke-width="4" d="M20.7 19.7l52.7 52.6"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 96.7l32 32"/><path stroke-linejoin="round" stroke-width="4" d="M155.2 133.6l22.1 22M53.6 137.5L97 94.9l67.1 66.6h4.9"/></g><g fill="#000" fill-rule="nonzero" stroke-width="4"><path d="M158.3 107.7V72.9c0-.5 0-.5-.8-.5-.7 0-.7 0-.7.6v34.7c0 .6 0 .5.7.5.8 0 .7 0 .7-.5zm3.9 11.2a22.5 22.5 0 0 1-20-.7c-3.4-2-5.2-4.8-5.2-8.4V69.6c0-3 1.5-5.6 4.3-7.4a17 17 0 0 1 9.2-2.4c3 0 5.6.3 7.7 1V47H178v73h-15l-.8-1.1zM200.9 84V73.2c0-.8 0-.8-.8-.8s-.8 0-.8.8V84h1.6zm-1.6 12.5v11c0 .7 0 .7.8.7.7 0 .8 0 .8-.8V97.2h19.8v10.4c0 8.9-7.3 13.2-20.7 13.2-13.3 0-20.5-4.5-20.5-13.7V73.6c0-9.2 7.2-13.8 20.5-13.8 13.4 0 20.7 4.4 20.7 13.4v23.3h-21.4zM243.3 107.7V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.5v34.8c0 .6 0 .5.8.5.7 0 .7 0 .7-.5zm-5.4 11.1l-.9 1.3h-15V47h19.8v13.8c2.1-.7 4.7-1 7.9-1 3.1 0 6.1.8 8.8 2.3 3 1.6 4.6 4.2 4.6 7.5v40.2c0 3.6-1.8 6.4-5.3 8.4a22.5 22.5 0 0 1-19.9.6zM285.8 119.7c-2.1.8-4.7 1.1-7.8 1.1a17 17 0 0 1-9.1-2.4c-2.8-1.7-4.4-4.2-4.4-7.2v-51h19.8v47.5c0 .6 0 .5.8.5.7 0 .7 0 .7-.4V60h19.8v60h-19.8v-.4zM328.3 108.3V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.6V108c0 .6 0 .6.8.6.7 0 .7 0 .7-.4zm-.9 11.8c-2 .5-4.2.7-6.9.7a17 17 0 0 1-9.1-2.4c-2.9-1.7-4.4-4.2-4.4-7.2V71c0-7.4 5.2-11.2 14.6-11.2 2.3 0 5 .7 8.3 2l1.7-1.7H348v57.3c0 4.4-1 9.5-2.8 12-2.1 3.2-7.7 4.5-17 4.5h-18.4v-12h14.9c1.1 0 2-.7 2.7-1.8z"/></g></g></svg>
+</a></h1>
+		<ul id="menu">
+			<li><a href="install.html">Install</a></li>
+			<li><a href="index.html">Documentation</a></li>
+			<li><a href="../reporting-bugs.html">Report Issues</a></li>
+			<li><a href="https://github.com/xdebug/xdebug" target="_blank">GitHub</a></li>
+		</ul>
+	</div>
+</nav>
+<div class="deprecated">
+You're visiting the archived website and documentation of Xdebug 2, which is no longer supported. This website is temporarily available and will be discontinued on Dec 31st, 2021.
+</div>
+
+	<div class="content_width" id="support">If you find Xdebug useful, please consider <a href='../support.html'>supporting the project</a>.</div>
+
+	<main class="content_width">
+<h1>Variable Display Features</h1>
+
+<div class="doc_section">
+	<p class='intro'>Xdebug replaces PHP's var_dump() function for displaying variables.
+			Xdebug's version includes different colors for different types and
+			places limits on the amount of array elements/object properties,
+			maximum depth and string lengths. There are a few other functions
+			dealing with variable display as well.</p>
+	<h2>Effect of settings on var_dump()</h2>
+<p>
+There is a number of settings that control the output of Xdebug's modified
+<a href="all_functions.html#var_dump">var_dump()</a> function: <a href="all_settings.html#var_display_max_children">xdebug.var_display_max_children</a>,
+<a href="all_settings.html#var_display_max_data">xdebug.var_display_max_data</a>
+and <a href="all_settings.html#var_display_max_depth">xdebug.var_display_max_depth</a>. The effect of these three settings is best
+shown with an example. The script below is run four time, each time with
+different settings. You can use the tabs to see the difference.
+</p>
+<h3>The script</h3>
+<div class="example">
+
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">test&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;</span><span style="color: #0000BB">$pub&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;</span><span style="color: #0000BB">$priv&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;protected&nbsp;</span><span style="color: #0000BB">$prot&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">42</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">$t&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">test</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$t</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">pub&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$t</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$data&nbsp;</span><span style="color: #007700">=&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'one'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'a&nbsp;somewhat&nbsp;long&nbsp;string!'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'two'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'two.one'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'two.one.zero'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">210</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'two.one.one'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'two.one.one.zero'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">3.141592564</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'two.one.one.one'&nbsp;&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">2.7</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br />&nbsp;&nbsp;&nbsp;&nbsp;),<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'three'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$t</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'four'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">range</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">5</span><span style="color: #007700">),<br />);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">$data&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;<br /></span>
+
+</span>
+</code>
+
+</div>
+<h3>The results</h3>
+    <div id="demosettings" class="yui-navset">
+        <ul class="yui-nav">
+            <li class="selected"><a href="display.html#default"><em>default</em></a></li>
+            <li><a href="display.html#children"><em>children=2</em></a></li>
+            <li><a href="display.html#data"><em>data=16</em></a></li>
+            <li><a href="display.html#depth"><em>depth=2</em></a></li>
+			<li><a href="display.html#multiple"><em>children=3, data=8, depth=1</em></a></li>
+        </ul>
+        <div class="yui-content">
+            <div id="default">
+<pre>
+<b>array</b>
+  'one' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'a somewhat long string!'</font> <i>(length=23)</i>
+  'two' <font color='#888a85'>=&gt;</font>
+    <b>array</b>
+      'two.one' <font color='#888a85'>=&gt;</font>
+        <b>array</b>
+          'two.one.zero' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>210</font>
+          'two.one.one' <font color='#888a85'>=&gt;</font>
+            <b>array</b>
+              ...
+  'three' <font color='#888a85'>=&gt;</font>
+    <b>object</b>(<i>test</i>)[<i>1</i>]
+      <i>public</i> 'pub' <font color='#888a85'>=&gt;</font>
+        <i>&</i><b>object</b>(<i>test</i>)[<i>1</i>]
+      <i>private</i> 'priv' <font color='#888a85'>=&gt;</font> <small>boolean</small> <font color='#75507b'>true</font>
+      <i>protected</i> 'prot' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>42</font>
+  'four' <font color='#888a85'>=&gt;</font>
+    <b>array</b>
+      0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>0</font>
+      1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      2 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>2</font>
+      3 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>3</font>
+      4 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>4</font>
+      5 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+</pre>
+            </div>
+            <div id="children">
+<pre>
+<b>array</b>
+  'one' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'a somewhat long string!'</font> <i>(length=23)</i>
+  'two' <font color='#888a85'>=&gt;</font>
+    <b>array</b>
+      'two.one' <font color='#888a85'>=&gt;</font>
+        <b>array</b>
+          'two.one.zero' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>210</font>
+          'two.one.one' <font color='#888a85'>=&gt;</font>
+            <b>array</b>
+              ...
+  <i>more elements...</i>
+</pre>
+            </div>
+            <div id="data">
+<pre>
+<b>array</b>
+  'one' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'a somewhat long '...</font> <i>(length=23)</i>
+  'two' <font color='#888a85'>=&gt;</font>
+    <b>array</b>
+      'two.one' <font color='#888a85'>=&gt;</font>
+        <b>array</b>
+          'two.one.zero' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>210</font>
+          'two.one.one' <font color='#888a85'>=&gt;</font>
+            <b>array</b>
+              ...
+  'three' <font color='#888a85'>=&gt;</font>
+    <b>object</b>(<i>test</i>)[<i>1</i>]
+      <i>public</i> 'pub' <font color='#888a85'>=&gt;</font>
+        <i>&</i><b>object</b>(<i>test</i>)[<i>1</i>]
+      <i>private</i> 'priv' <font color='#888a85'>=&gt;</font> <small>boolean</small> <font color='#75507b'>true</font>
+      <i>protected</i> 'prot' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>42</font>
+  'four' <font color='#888a85'>=&gt;</font>
+    <b>array</b>
+      0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>0</font>
+      1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      2 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>2</font>
+      3 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>3</font>
+      4 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>4</font>
+      5 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+</pre>
+            </div>
+            <div id="depth">
+<pre>
+<b>array</b>
+  'one' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'a somewhat long string!'</font> <i>(length=23)</i>
+  'two' <font color='#888a85'>=&gt;</font>
+    <b>array</b>
+      'two.one' <font color='#888a85'>=&gt;</font>
+        <b>array</b>
+          ...
+  'three' <font color='#888a85'>=&gt;</font>
+    <b>object</b>(<i>test</i>)[<i>1</i>]
+      <i>public</i> 'pub' <font color='#888a85'>=&gt;</font>
+        <i>&</i><b>object</b>(<i>test</i>)[<i>1</i>]
+      <i>private</i> 'priv' <font color='#888a85'>=&gt;</font> <small>boolean</small> <font color='#75507b'>true</font>
+      <i>protected</i> 'prot' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>42</font>
+  'four' <font color='#888a85'>=&gt;</font>
+    <b>array</b>
+      0 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>0</font>
+      1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
+      2 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>2</font>
+      3 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>3</font>
+      4 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>4</font>
+      5 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>5</font>
+</pre>
+            </div>
+            <div id="multiple">
+<pre>
+<b>array</b>
+  'one' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'a somewh'...</font> <i>(length=23)</i>
+  'two' <font color='#888a85'>=&gt;</font>
+    <b>array</b>
+      ...
+  'three' <font color='#888a85'>=&gt;</font>
+    <b>object</b>(<i>test</i>)[<i>1</i>]
+      ...
+  <i>more elements...</i>
+</pre>
+            </div>
+        </div>
+    </div>'
+
+			<h2>Related Settings and Functions</h2>
+		<ul>
+							<li><span class='type'>integer</span> <a href='display.html#cli_color'>xdebug.cli_color</a> = <span class='default'>0</span></li>
+							<li><span class='type'>integer</span> <a href='display.html#overload_var_dump'>xdebug.overload_var_dump</a> = <span class='default'>2</span></li>
+							<li><span class='type'>integer</span> <a href='display.html#var_display_max_children'>xdebug.var_display_max_children</a> = <span class='default'>128</span></li>
+							<li><span class='type'>integer</span> <a href='display.html#var_display_max_data'>xdebug.var_display_max_data</a> = <span class='default'>512</span></li>
+							<li><span class='type'>integer</span> <a href='display.html#var_display_max_depth'>xdebug.var_display_max_depth</a> = <span class='default'>3</span></li>
+					</ul>
+		<ul>
+							<li><a href='display.html#var_dump'><span class='name'>var_dump</span></a>()<span class='type'> : void</span></li>
+							<li><a href='display.html#xdebug_debug_zval'><span class='name'>xdebug_debug_zval</span></a>()<span class='type'> : void</span></li>
+							<li><a href='display.html#xdebug_debug_zval_stdout'><span class='name'>xdebug_debug_zval_stdout</span></a>()<span class='type'> : void</span></li>
+							<li><a href='display.html#xdebug_var_dump'><span class='name'>xdebug_var_dump</span></a>()<span class='type'> : void</span></li>
+					</ul>
+	
+	<a name='settings'></a>
+			<div class='settings'>
+			<h3>Settings</h3>
+
+							<hr>
+				<div class="doc_setting">
+	<a name='cli_color'></a>
+	<a name='xdebug.cli_color'></a>
+	<h4><span class='type'>integer</span> xdebug.cli_color = <span class='default'>0</span> <a href='display.html#cli_color'>#</a></h4>
+
+	<p>Introduced in <span class='type'>Xdebug >= 2.2</span></p>	
+	<div class='description'><p>If this setting is 1, Xdebug will color var_dumps and stack traces
+		output when in CLI mode and when the output is a tty. On Windows, the
+		<a href="http://adoxa.altervista.org/ansicon/">ANSICON</a> tool needs to be
+		installed.</p>
+		<p>If the setting is 2, then Xdebug will always color var_dumps and stack
+		trace, no matter whether it's connected to a tty or whether ANSICON is
+		installed. In this case, you might end up seeing escape codes.</p>
+		<p>See <a href="https://derickrethans.nl/cli-color.html">this article</a> for some
+		more information.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='overload_var_dump'></a>
+	<a name='xdebug.overload_var_dump'></a>
+	<h4><span class='type'>integer</span> xdebug.overload_var_dump = <span class='default'>2</span> <a href='display.html#overload_var_dump'>#</a></h4>
+
+	<p>Introduced in <span class='type'>Xdebug > 2.1</span></p>	
+	<div class='description'><p>By default Xdebug overloads var_dump() with its own improved version
+		for displaying variables when the <a href='https://www.php.net/manual/en/errorfunc.configuration.php#ini.html-errors'>html_errors</a> php.ini setting is set to
+		<code>true</code>. In case you do not want that, you can
+		set this setting to <code>0</code>, but check first if it's not smarter
+		to turn off <code>html_errors</code>.</p>
+		<p><em>New in Xdebug 2.3</em>: You can also use <code>2</code> as value for this setting. Besides
+		formatting the var_dump() output nicely, it will also add filename and
+		line number to the output. The <a href="all_settings.html#file_link_format">xdebug.file_link_format</a> setting is also
+		respected.</p>
+		<p><em>Before Xdebug 2.4</em>: the default value of this setting was
+		<code>1</code>.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='var_display_max_children'></a>
+	<a name='xdebug.var_display_max_children'></a>
+	<h4><span class='type'>integer</span> xdebug.var_display_max_children = <span class='default'>128</span> <a href='display.html#var_display_max_children'>#</a></h4>
+
+		
+	<div class='description'><p>Controls the amount of array children and object's properties are shown
+when variables are displayed with either <a href="all_functions.html#xdebug_var_dump">xdebug_var_dump()</a>,
+<a href="all_settings.html#show_local_vars">xdebug.show_local_vars</a> or through <a href='execution_trace.html'>Function Trace</a>.</p>
+<p>To disable any limitation, use <em>-1</em> as value.</p>
+<p>This setting does not have any influence on the number of children that is
+send to the client through the <a href='remote.html'>Step Debugging</a> feature.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='var_display_max_data'></a>
+	<a name='xdebug.var_display_max_data'></a>
+	<h4><span class='type'>integer</span> xdebug.var_display_max_data = <span class='default'>512</span> <a href='display.html#var_display_max_data'>#</a></h4>
+
+		
+	<div class='description'><p>Controls the maximum string length that is shown
+when variables are displayed with either <a href="all_functions.html#xdebug_var_dump">xdebug_var_dump()</a>,
+<a href="all_settings.html#show_local_vars">xdebug.show_local_vars</a> or through <a href='execution_trace.html'>Function Trace</a>.
+<p>To disable any limitation, use <em>-1</em> as value.</p>
+<p>This setting does not have any influence on the number of children that is
+send to the client through the <a href='remote.html'>Step Debugging</a> feature.</p>
+</div>
+</div>
+							<hr>
+				<div class="doc_setting">
+	<a name='var_display_max_depth'></a>
+	<a name='xdebug.var_display_max_depth'></a>
+	<h4><span class='type'>integer</span> xdebug.var_display_max_depth = <span class='default'>3</span> <a href='display.html#var_display_max_depth'>#</a></h4>
+
+		
+	<div class='description'><p>Controls how many nested levels of array elements and object properties are
+when variables are displayed with either <a href="all_functions.html#xdebug_var_dump">xdebug_var_dump()</a>,
+<a href="all_settings.html#show_local_vars">xdebug.show_local_vars</a> or through <a href='execution_trace.html'>Function Trace</a>.</p>
+<p>The maximum value you can select is 1023. You can also use <em>-1</em> as
+value to select this maximum number.</p>
+<p>This setting does not have any influence on the number of children that is
+send to the client through the <a href='remote.html'>Step Debugging</a> feature.</p>
+</div>
+</div>
+					</div>
+	
+	<a name='functions'></a>
+			<div class='functions'>
+			<h3>Functions</h3>
+
+							<hr>
+				<div class="doc_function">
+	<a name='var_dump'></a>
+	<h3 class="name">
+					var_dump( <span class='type'>mixed ...$var</span> )
+				<span class='type'> : void</span>
+		<a href='display.html#var_dump'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Displays detailed information about a variable</p></div>
+
+	
+	<div class='description'><p>
+This function is overloaded by Xdebug, see the description for
+ <a href="all_functions.html#xdebug_var_dump">xdebug_var_dump()</a>.
+
+</p></div>
+</div>
+							<hr>
+				<div class="doc_function">
+	<a name='xdebug_debug_zval'></a>
+	<h3 class="name">
+					xdebug_debug_zval( <span class='type'>string ...$varname</span> )
+				<span class='type'> : void</span>
+		<a href='display.html#xdebug_debug_zval'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Displays information about a variable</p></div>
+
+	
+	<div class='description'><p>
+This function displays structured information about one or more variables
+ that includes its type, value and refcount information. Arrays are explored
+ recursively with values. This function is implemented differently from PHP's <a
+ href='http://php.net/debug-zval-dump'>debug_zval_dump()</a> function in order
+ to work around the problems that that function has because the variable itself
+ is actually passed to the function. Xdebug's version is better as it uses the
+ variable name to lookup the variable in the internal symbol table and accesses
+ all the properties directly without having to deal with actually passing a
+ variable to a function. The result is that the information that this function
+ returns is much more accurate than PHP's own function for showing zval
+ information.
+ 
+
+</p><p>
+Support for anything but simple variable names (such as <i>"a[2]"</i> below)
+ is supported since Xdebug 2.3.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;&nbsp;$a&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&amp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&amp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">];<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_debug_zval</span><span style="color: #007700">(</span><span style="color: #DD0000">'a'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_debug_zval</span><span style="color: #007700">(</span><span style="color: #DD0000">"a[2]"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+a: (refcount=2, is_ref=1)=array (
+	0 =&gt; (refcount=1, is_ref=0)=1, 
+	1 =&gt; (refcount=1, is_ref=0)=2, 
+	2 =&gt; (refcount=2, is_ref=1)=3)
+a[2]: (refcount=2, is_ref=1)=3</pre></div>
+</div>
+</div>
+							<hr>
+				<div class="doc_function">
+	<a name='xdebug_debug_zval_stdout'></a>
+	<h3 class="name">
+					xdebug_debug_zval_stdout( <span class='type'>string ...$varname</span> )
+				<span class='type'> : void</span>
+		<a href='display.html#xdebug_debug_zval_stdout'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Returns information about variables to stdout</p></div>
+
+	
+	<div class='description'><p>
+This function displays structured information about one or more variables
+ that includes its type, value and refcount information. Arrays are explored
+ recursively with values. The difference with <a href="all_functions.html#xdebug_debug_zval">xdebug_debug_zval()</a> is that
+ the information is not displayed through a web server API layer, but directly
+ shown on stdout (so that when you run it with Apache in single process mode it
+ ends up on the console).
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;&nbsp;$a&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$b&nbsp;</span><span style="color: #007700">=&amp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&amp;&nbsp;</span><span style="color: #0000BB">$a</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">];<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">xdebug_debug_zval_stdout</span><span style="color: #007700">(</span><span style="color: #DD0000">'a'</span><span style="color: #007700">);</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+a: (refcount=2, is_ref=1)=array (
+	0 =&gt; (refcount=1, is_ref=0)=1, 
+	1 =&gt; (refcount=1, is_ref=0)=2, 
+	2 =&gt; (refcount=2, is_ref=1)=3)</pre></div>
+</div>
+</div>
+							<hr>
+				<div class="doc_function">
+	<a name='xdebug_var_dump'></a>
+	<h3 class="name">
+					xdebug_var_dump( <span class='type'>mixed ...$variable</span> )
+				<span class='type'> : void</span>
+		<a href='display.html#xdebug_var_dump'>#</a>
+	</h3>
+
+	<div class='short-description'><p>Displays detailed information about a variable</p></div>
+
+	
+	<div class='description'><p>
+This function displays structured information about one or more expressions
+ that includes its type and value. Arrays are explored recursively with values.
+ See the introduction of <a href='display.html'>Variable Display Features</a> on which php.ini settings affect this
+ function.
+ 
+
+</p><div class='example'><h4>Example:</h4>
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />ini_set</span><span style="color: #007700">(</span><span style="color: #DD0000">'xdebug.var_display_max_children'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$c&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">stdClass</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$c</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">foo&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'bar'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$c</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">file&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(&nbsp;</span><span style="color: #DD0000">'/etc/passwd'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'r'&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(<br />&nbsp;&nbsp;&nbsp;&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(</span><span style="color: #0000BB">TRUE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3.14</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'foo'</span><span style="color: #007700">),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'object'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$c<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">)<br />);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+<div class='example-returns'><h4>Returns:</h4><pre>
+<pre>
+<b>array</b>
+  0 <font color='#888a85'>=&gt;</font> 
+    <b>array</b>
+      0 <font color='#888a85'>=&gt;</font> <small>boolean</small> <font color='#75507b'>true</font>
+      1 <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>2</font>
+      2 <font color='#888a85'>=&gt;</font> <small>float</small> <font color='#f57900'>3.14</font>
+      <i>more elements...</i>
+  'object' <font color='#888a85'>=&gt;</font> 
+    <b>object</b>(<i>stdClass</i>)[<i>1</i>]
+      <i>public</i> 'foo' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'bar'</font> <i>(length=3)</i>
+      <i>public</i> 'file' <font color='#888a85'>=&gt;</font> <b>resource</b>(<i>3</i><font color='#2e3436'>,</font> <i>stream</i>)
+</pre></pre></div>
+</div>
+</div>
+					</div>
+	</div>
+
+
+</main>
+
+
+	<footer class="content_width">
+		<p>
+		This site and all of its contents are Copyright &copy; 2002-2020 by Derick Rethans.<br />
+		All rights reserved.
+		</p>
+	</footer>
+</body>
+</html>

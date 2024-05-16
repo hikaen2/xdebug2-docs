@@ -1,0 +1,3488 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/2000/REC-xhtml1-20000126/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Xdebug: Log</title>
+	<meta name="ROBOTS" content="ALL" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<meta name="DESCRIPTION" content="Xdebug: A powerful debugger for PHP" />
+	<meta name="AUTHOR" content="Derick Rethans, as in derick@xdebug.org" />
+	<link rel="icon" type="image/png" href="images/favicon.png">
+		<link rel="stylesheet" type="text/css" href="core2.css" />
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<body>
+	<nav>
+	<div class="content_width">
+		<h1><a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="351" height="181" viewBox="0 0 351 181"><title>Xdebug</title><g fill="none" fill-rule="evenodd" stroke="#FFF"><g transform="translate(5 5)"><path fill="#317E1E" fill-rule="nonzero" stroke-width="5" d="M127.9 85.5l68.2 70.7.4 17.3h-38.6l-60.8-59.7-60 59.7h-39v-17.6l69.7-69.8-69.6-71.2V-2.5h38.7l60.2 60 61-60h38.3v16l-68.5 72z"/><circle cx="75.9" cy="74.6" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="105.1" cy="85" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="158.4" cy="15" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="50.9" cy="140" r="3.5" stroke-opacity=".8" stroke-width="4"/><circle cx="180.4" cy="158.5" r="3.5" stroke-opacity=".8" stroke-width="4"/><path stroke-linecap="square" stroke-linejoin="round" stroke-width="4" d="M32.6 158.2L42 149M104.3 69.1l49.4-49.4"/><path stroke-linejoin="round" stroke-width="4" d="M102.3 82.7L30.3 10H11.2M167.4 10H183M11.2 160.7l79.2-78"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 74.6L181 10"/><path stroke-linejoin="round" stroke-width="4" d="M20.7 19.7l52.7 52.6"/><path stroke-linejoin="round" stroke-opacity=".7" stroke-width="4" d="M116.3 96.7l32 32"/><path stroke-linejoin="round" stroke-width="4" d="M155.2 133.6l22.1 22M53.6 137.5L97 94.9l67.1 66.6h4.9"/></g><g fill="#000" fill-rule="nonzero" stroke-width="4"><path d="M158.3 107.7V72.9c0-.5 0-.5-.8-.5-.7 0-.7 0-.7.6v34.7c0 .6 0 .5.7.5.8 0 .7 0 .7-.5zm3.9 11.2a22.5 22.5 0 0 1-20-.7c-3.4-2-5.2-4.8-5.2-8.4V69.6c0-3 1.5-5.6 4.3-7.4a17 17 0 0 1 9.2-2.4c3 0 5.6.3 7.7 1V47H178v73h-15l-.8-1.1zM200.9 84V73.2c0-.8 0-.8-.8-.8s-.8 0-.8.8V84h1.6zm-1.6 12.5v11c0 .7 0 .7.8.7.7 0 .8 0 .8-.8V97.2h19.8v10.4c0 8.9-7.3 13.2-20.7 13.2-13.3 0-20.5-4.5-20.5-13.7V73.6c0-9.2 7.2-13.8 20.5-13.8 13.4 0 20.7 4.4 20.7 13.4v23.3h-21.4zM243.3 107.7V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.5v34.8c0 .6 0 .5.8.5.7 0 .7 0 .7-.5zm-5.4 11.1l-.9 1.3h-15V47h19.8v13.8c2.1-.7 4.7-1 7.9-1 3.1 0 6.1.8 8.8 2.3 3 1.6 4.6 4.2 4.6 7.5v40.2c0 3.6-1.8 6.4-5.3 8.4a22.5 22.5 0 0 1-19.9.6zM285.8 119.7c-2.1.8-4.7 1.1-7.8 1.1a17 17 0 0 1-9.1-2.4c-2.8-1.7-4.4-4.2-4.4-7.2v-51h19.8v47.5c0 .6 0 .5.8.5.7 0 .7 0 .7-.4V60h19.8v60h-19.8v-.4zM328.3 108.3V73c0-.6 0-.6-.7-.6-.8 0-.8 0-.8.6V108c0 .6 0 .6.8.6.7 0 .7 0 .7-.4zm-.9 11.8c-2 .5-4.2.7-6.9.7a17 17 0 0 1-9.1-2.4c-2.9-1.7-4.4-4.2-4.4-7.2V71c0-7.4 5.2-11.2 14.6-11.2 2.3 0 5 .7 8.3 2l1.7-1.7H348v57.3c0 4.4-1 9.5-2.8 12-2.1 3.2-7.7 4.5-17 4.5h-18.4v-12h14.9c1.1 0 2-.7 2.7-1.8z"/></g></g></svg>
+</a></h1>
+		<ul id="menu">
+			<li><a href="docs/install.html">Install</a></li>
+			<li><a href="docs/index.html">Documentation</a></li>
+			<li><a href="reporting-bugs.html">Report Issues</a></li>
+			<li><a href="https://github.com/xdebug/xdebug" target="_blank">GitHub</a></li>
+		</ul>
+	</div>
+</nav>
+<div class="deprecated">
+You're visiting the archived website and documentation of Xdebug 2, which is no longer supported. This website is temporarily available and will be discontinued on Dec 31st, 2021.
+</div>
+
+
+	<main class="content_width">
+<h1>Xdebug Log</h1>
+
+<div class="log_left">
+			<h2>September 2020</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 48.05%'></div>
+			<div title='Business Support' class='business' style='width: 3.33%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.83%'></div>
+			<div title='Patrons' class='patreon' style='width: 9.76%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 8.32%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 48.25%'></div>
+							<div title='talk' class='type-talk' style='width: 2.5%'></div>
+							<div title='release' class='type-release' style='width: 2%'></div>
+							<div title='docs' class='type-docs' style='width: 4%'></div>
+							<div title='bug' class='type-bug' style='width: 4.5%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Updating upgrading guide</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8 support for match in tracing and code coverage</td>
+					<td class='hours'>3.75</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Checking out PHP 8/match patch for ASSIGN line; Fixed off-by-one error in cloud host generation (Xdebug, and dbgpClient)</td>
+					<td class='hours'>4.25</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Renaming remote_host and remote_port settings, adding support for XDEBUG_CONFIG for these new settings</td>
+					<td class='hours'>4.25</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Update docs due to renamed settings; rename “remote” page to “step_debug”</td>
+					<td class='hours'>1.75</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Add deprecation warnings for renamed/removed settings; Issues with AppVeyor’s cache</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Update compatibility table</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8 and fixing filename as zend_string changes; Fixed Azure pipelines ZTS tests; Profiler memory leaks</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8 changes due to ASSIGN operator fixes; fixing filename as zend_string changes</td>
+					<td class='hours'>4.75</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Finalising changes due to script filename no longer be interned</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Keepalive fixes for OSX, and adding log messages; Releasing 2.9.7; PHP 8 fixes due to error message changes</td>
+					<td class='hours'>5.50</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Change default port to 9003 (including docs)</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>21</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8 test changes due to NOP being removed; Keepalive fix for FreeBSD; Fix logo on CLI</td>
+					<td class='hours'>3.25</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Only show open/close log when there is a message; #1781 (include “Xdebug” ins some error messages)</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>24</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>#1850 (Array syntax in output), #1837 (Associative variadics for PHP 8)</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>25</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>#1851 (Paths and branches are not always covered with loops)</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-release'>release</div>
+					</td>
+					<td>Release Xdebug 2.9.8 with keepalive and branch coverage fixes</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-talk'>talk</div>
+					</td>
+					<td>Xdebug 3 talk for PHP WVL</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Rename xdebug.remote_connect_back and xdebug.remote_addr_header; PHP 8 test fixes due to argument renaming; keep alive conditional</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Document changes to remote connect back and header settings</td>
+					<td class='hours'>0.50</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-september-2020.html'>monthly</a> report.</p>
+				<br/>
+			<h2>August 2020</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 48.30%'></div>
+			<div title='Business Support' class='business' style='width: 5.00%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.99%'></div>
+			<div title='Patrons' class='patreon' style='width: 9.20%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 8.58%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 51.75%'></div>
+							<div title='talk' class='type-talk' style='width: 4%'></div>
+							<div title='docs' class='type-docs' style='width: 13.25%'></div>
+							<div title='ci' class='type-ci' style='width: 7%'></div>
+							<div title='bug' class='type-bug' style='width: 1.25%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>1</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Reviewing profile PRS #618, #619, and #620; Making PR #621 to optimise the size of function_stack_entry</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Xdebug Cloud presentation</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Xdebug Cloud retake of video</td>
+					<td class='hours'>1.25</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>clock_gettime/MONOTONIC is relative</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Azure Pipelines set-up for OSX</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Azure Pipelines set-up for OSX</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8 compat, and refactoring collecting variables</td>
+					<td class='hours'>6.00</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8 compat, and refactoring collecting variables</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Adding xdebug_info()</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Extract logging into new mechanism</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Diagnostics into xdebug_info()</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Diagnostics into xdebug_info()</td>
+					<td class='hours'>4.75</td>
+				</tr>
+							<tr>
+					<td class='day'>15</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Extend logging into xdebug_info() with links to documentation; investigate #1830</td>
+					<td class='hours'>5.25</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Rewriting “develop” docs</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Rewriting “develop” docs</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Adding XDEBUG_MODE environment variable on stream; Issue #1834: Return type must be bool in overloaded set_time_limit</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>21</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Rewrite “develop” docs (and remove stack_trace, display, and basic pages)</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>variables names for internal functions in traces and stacktraces</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>variables names for internal functions in traces and stacktraces</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>24</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>#1836: variable names for internal function, #1810: Remove collect_vars and xdebug_get_declared_vars(), #1838: Remove collect_params setting</td>
+					<td class='hours'>8.25</td>
+				</tr>
+							<tr>
+					<td class='day'>26</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Keepalive patch</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-talk'>talk</div>
+					</td>
+					<td>Preparing and giving Xdebug 3 talk for PHP UG Mannheim</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Adding documentation for errors through diagnostics log</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Keepalive patch</td>
+					<td class='hours'>0.50</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-august-2020.html'>monthly</a> report.</p>
+				<br/>
+			<h2>July 2020</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 48.30%'></div>
+			<div title='Business Support' class='business' style='width: 5.00%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.99%'></div>
+			<div title='Patrons' class='patreon' style='width: 9.08%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 8.71%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 90.25%'></div>
+							<div title='docs' class='type-docs' style='width: 5.5%'></div>
+							<div title='ci' class='type-ci' style='width: 1%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>1</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Changing all filenames from char* to zend_string*</td>
+					<td class='hours'>5.25</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8 compat; #1811: Remove xdebug.collect_includes; #1812: Remove show_mem_delta; #1819: Remove overloaded_var_dump</td>
+					<td class='hours'>7.00</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>#1819: Remove overloaded_var_dump</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>PhpStorm web cast issues</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Use zend_string for variable names</td>
+					<td class='hours'>1.75</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Xdebug Cloud/Player/3 docs for Jetbrains</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>PHP 8 on Windows/AppVeyor compatibility</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>dbgpProxy (check for SSL, and build with no-cloud) updates, and deployment automation</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1818: Switch to using zend_string for variable names</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Improving performance</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Improving performance</td>
+					<td class='hours'>4.75</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Streaming Xdebug performance enhancements</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Improving performance</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>15</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Switch alloc-less string formatting for building xdebug_str's</td>
+					<td class='hours'>6.50</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Merging and testing allocation patch</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>xdebug_func_format to use a static buffer, PHP 8 compat</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Stream with Matt about setting up Xdebug</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Reviewing PR #602: Increate profile time precision</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>19</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Reviewing PR #602: Increate profile time precision</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>19</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Reviewing PR #604: Profiler + fflush after every function end</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>20</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Converting stack llist to vector</td>
+					<td class='hours'>2.75</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Converting stack llist to vector</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Converting stack llist to vector; Use early return as often as possible</td>
+					<td class='hours'>6.00</td>
+				</tr>
+							<tr>
+					<td class='day'>24</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Reviewing “timezone” PR; finalising timing precision patch; merging early return patch, and fixes; review profiler flush PR</td>
+					<td class='hours'>7.00</td>
+				</tr>
+							<tr>
+					<td class='day'>25</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Profiling Xdebug, and the profiler specifically; Making profiles of Xdebug for benchmarking purposes</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>26</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Removing two lines in php-code-coverage and making it a lot faster</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Profiler improvements</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Profiler improvements; Code coverage benchmark graph</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Profiler improvements (issues #1825 and #1826); PR and issue #1824 review; better precision timing</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Finalising PR for issue #1820 (more precise timing), and benchmarks</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>31</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Benchmarks and profiling</td>
+					<td class='hours'>5.00</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-july-2020.html'>monthly</a> report.</p>
+				<br/>
+			<h2>June 2020</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 48.30%'></div>
+			<div title='Business Support' class='business' style='width: 5.00%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.99%'></div>
+			<div title='Patrons' class='patreon' style='width: 10.57%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 6.60%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 88.5%'></div>
+							<div title='docs' class='type-docs' style='width: 5%'></div>
+							<div title='ci' class='type-ci' style='width: 1.25%'></div>
+							<div title='bug' class='type-bug' style='width: 1.5%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>1</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Fixed issue #1762: Introduce feature modes</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>4</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Documentation for feature modes, start_up_request and related changs</td>
+					<td class='hours'>6.00</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Documentation for feature modes, start_up_request and related changs</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Initial Xdebug 3 upgrade guide</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Issue #1794: Replace the filter's blacklist/whitelist with exclude/include</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1792: Change start_with_request=always/never to start_with_request=yes/no</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1793: Add xdebug.start_upon_error setting to cover the removed xdebug.remote_mode=jit feature</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1793 and docs/upgrade guide; remove version info from Xdebug 3 docs; rewriting things</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8: zend_error_cb API changes</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Stubs, and updating documentation to have the right types (and syntax)</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Removing PHP 7.2 (and earlier) support</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Debugging CI environment</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Fixing parallelization with CI environment</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Removing PHP 7.2 (and earlier) support; and updating all the tests</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Separating more code into the modules so that less works gets done when not needed</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Separating more code into the modules so that less works gets done when not needed</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Separating more code into the modules so that less works gets done when not needed</td>
+					<td class='hours'>3.75</td>
+				</tr>
+							<tr>
+					<td class='day'>15</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Hunting down bugs in xdebugCloud</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Separating more code into the modules so that less works gets done when not needed</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>18</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Separating more code into the modules so that less works gets done when not needed</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>19</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Separating more code into the modules so that less works gets done when not needed</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>21</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Making graphic/animation to illustrate how Xdebug interacts with browser and IDE</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Testing and merging Prs; Renaming “display” mode to “develop”; rearringing header capturing</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Stream with Matt about setting up Xdebug with Valet and VS Code</td>
+					<td class='hours'>1.25</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Improving xdebug.remote_log documentation, adding tickets for documentation tasks</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>24</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1801: Rename mode 'display' to mode 'develop', and split out from 'base'</td>
+					<td class='hours'>5.75</td>
+				</tr>
+							<tr>
+					<td class='day'>25</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1801: Rename mode 'display' to mode 'develop', and split out from 'base'</td>
+					<td class='hours'>5.25</td>
+				</tr>
+							<tr>
+					<td class='day'>26</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1801 / #1816: Using an Exception breakpoint leaks memory</td>
+					<td class='hours'>5.50</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Changing all filenames from char* to zend_string*</td>
+					<td class='hours'>2.75</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Changing all filenames from char* to zend_string*</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Discussing Xdebug 3 and Xdebug Cloud with JetBrains</td>
+					<td class='hours'>1.00</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-june-2020.html'>monthly</a> report.</p>
+				<br/>
+			<h2>May 2020</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 48.00%'></div>
+			<div title='Business Support' class='business' style='width: 5.00%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.99%'></div>
+			<div title='Patrons' class='patreon' style='width: 10.35%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 7.07%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 59.25%'></div>
+							<div title='release' class='type-release' style='width: 1%'></div>
+							<div title='bug' class='type-bug' style='width: 8%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>1</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Reorganise logger infrastructure in dbgpTools/xdebugCloud</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Timeouts with cloud client</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>4</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Handling interrupts and safely shutting down of binaries</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Timeouts and network read/write IO errors checking</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Supporting multiple connections through dbgpProxy/xdebugCloud combination</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Handle MongoDB connection/query timeouts for xdebugCloud</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging #1783/#1784</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1762: Introduce feature modes</td>
+					<td class='hours'>6.00</td>
+				</tr>
+							<tr>
+					<td class='day'>15</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1762: Introduce feature modes</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1762: Introduce feature modes</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1762: Introduce feature modes</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>18</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1762: Introduce feature modes</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>18</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging #1784: Values inside the array are being treated as non-executable code.</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>20</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1785: Replace xdebug.remote_mode and xdebug.auto_trace with generic 'start-upon-request' setting</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>21</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1785: Replace xdebug.remote_mode and xdebug.auto_trace with generic 'start-upon-request' setting</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1791: Replace individual trigger mechanisms with global one</td>
+					<td class='hours'>6.00</td>
+				</tr>
+							<tr>
+					<td class='day'>26</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1791: Replace individual trigger mechanisms with global one</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging, fixing, and testing fix for bug #1790: Segfault in var_dump() or while debugging with protobuf extension</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Bug #1787: Branch coverage data does not always follow the lines/functions format</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging #1788: Branch coverage data does not always get returned in the lines/functions format (w/Opcache)</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Bug triage and bug system maintenance</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-release'>release</div>
+					</td>
+					<td>Make Xdebug 2.9.6 release</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Tests for Xdebug’s debug mode</td>
+					<td class='hours'>2.00</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-may-2020.html'>monthly</a> report.</p>
+				<br/>
+			<h2>April 2020</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 48.00%'></div>
+			<div title='Business Support' class='business' style='width: 4.16%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.99%'></div>
+			<div title='Patrons' class='patreon' style='width: 10.59%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 5.32%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 48%'></div>
+							<div title='support' class='type-support' style='width: 4%'></div>
+							<div title='release' class='type-release' style='width: 1.5%'></div>
+							<div title='bug' class='type-bug' style='width: 16.75%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8: Warning format for “undefined variable” changed</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Issue triage and StackOverflow</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Trying to reproduce #1768: XDEBUG ignored by browser invocation (CentOS 8 - nginx 1.14.1 - PHP 7.4.4 - php-fpm (using socket) - xdebug 2.9.3)</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Issue #1773: Replace all xdebug.*_output_dir settings with xdebug.output_dir</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Issue #1772: Crash with exception thrown inside a destructor</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Trying to reproduce #1775: Segfault when another extension compiles a PHP file during RINIT</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Trying to reproduce #1775: Segfault when another extension compiles a PHP file during RINIT (it was a duplicate)</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Xdebug Cloud</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Xdebug Cloud</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging #1778: Running xdebug with php built in php server does not give always give trace file</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>15</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Xdebug Cloud (the annoying “second request just hangs” issue)</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging #1778: Running xdebug with php built in php server does not give always give trace file</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixing #1775: Segfault when another extension compiles a PHP file during RINIT</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Allow for Xdebug to connect to Xdebug Cloud, add preliminary dbgpClient support</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>20</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Migrating to go modules</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>21</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Implementing logger interfaces for dbgpClient and dbgpProxy, and a database (mongoDB) logger for xdebugCloud</td>
+					<td class='hours'>5.50</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>AccountInfo, only one session at a time</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>24</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixing #1779: Nested multi-line function showing 'Not executed'</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>25</td>
+					<td class='type'>
+						<div class='type-release'>release</div>
+					</td>
+					<td>Releasing 2.9.5</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Fighting with go “nil != nil” idiosyncrazy, selection of right cloud host</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Connection management</td>
+					<td class='hours'>5.75</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Detecting IDE connection closing for xdebugCloud</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging older bug reports</td>
+					<td class='hours'>0.75</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-april-2020.html'>monthly</a> report.</p>
+				<br/>
+			<h2>March 2020</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 48.00%'></div>
+			<div title='Business Support' class='business' style='width: 4.16%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.99%'></div>
+			<div title='Patrons' class='patreon' style='width: 11.12%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 4.30%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 14.5%'></div>
+							<div title='website' class='type-website' style='width: 1.75%'></div>
+							<div title='support' class='type-support' style='width: 1.5%'></div>
+							<div title='release' class='type-release' style='width: 2.5%'></div>
+							<div title='docs' class='type-docs' style='width: 6%'></div>
+							<div title='bug' class='type-bug' style='width: 49%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>1</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Removing debugclient from Xdebug source, and fixing DOM test due to changes in PHP 8</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>1</td>
+					<td class='type'>
+						<div class='type-website'>website</div>
+					</td>
+					<td>Fixed Xdebug’s websites config and redirection</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Document dbgpClient, dbgpProxy, and rewrite README</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Write monthly update report</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Checking out issue #1701 and blog post https://joshbutts.com/posts/patching-xdebug-docker-for-mac/</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Investigating and fixing timeout issues with dbgpProxy</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>StackOverflow</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>4</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Added rendering of “eval” output to dbgpClient</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>4</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating issue #1753: Xdebug behaviour depends on a number of empty lines in another file</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating and fixing issue #1753: Xdebug behaviour depends on a number of empty lines in another file</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>StackOverflow and issue triaging</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Finalizing for for issue #1753: Xdebug behaviour depends on a number of empty lines in another file</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-website'>website</div>
+					</td>
+					<td>Fixed issue #1746: Have wizard show both CLI and Apache php.ini paths</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating issue #1754: Incorrect code coverage in nested ifs</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating issue #1757: Pause-execution feature degrades performance</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Reviewing PR #556: Only check the pid and restart the debugger when running pcntl_fork</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixing issue #1759: User registered opcode handlers should call ones already set by other extensions</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixing issue #1759: User registered opcode handlers should call ones already set by other extensions</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixing issue #1759: User registered opcode handlers should call ones already set by other extensions</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Document how to do opcode handlers in PHP for http://www.phpinternalsbook.com/php7/extensions_design/hooks.html#replacing-opcode-handlers</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8 compat, due to changes in comparison function</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating #1758: Xdebug changes error_get_last results inside a try catch</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating #1760: xdebug appears the line that's not exist at all (PHP 5 only)</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging all open issues</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating #1758: Xdebug changes error_get_last results inside a try catch</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-release'>release</div>
+					</td>
+					<td>Releasing 2.9.3</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>SSL for dbgpClient and Xdebug</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>18</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Checking out test failures for #389 with PHP 8</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>18</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Finding and debugging #1766: detach doesn’t detach</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>19</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixing #1766: detach doesn’t detach</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>19</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Trying to reproduce #1763: Crashes with Xdebug 2.9.3</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>20</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixing #1766: detach doesn’t detach</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>20</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Fixing #1764: Undocumented coverage line constants and branch analysis format</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>20</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>SSL for dbgpClient and Xdebug</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>21</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triying to reproduce #1763: apache 2.4.41 crashes with PHP 7.3.15 and xdebug 2.9.3</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Reproduced #1763: Xdebug 2.9.3 crashes in ZTS mode</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-release'>release</div>
+					</td>
+					<td>Releasing 2.9.4</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging bugs</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Implemented #1712: Add unit to profiler data types (and tidied up profiler tests)</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>SSL for dbgpProxy to dbgpClient connections</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>24</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Trying to reproduce #1770: fpm child process crashes when there is a php error</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>26</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Trying to reproduce #1770: fpm child process crashes when there is a php error</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-website'>website</div>
+					</td>
+					<td>Fixed xdebug.org issue #83 (Git clone on Windows), and allow website to be served with “php -S”</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Finalize SSL for dbgpProxy to dbgpClient connections</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixed #1756 with a workaround for a bug in PhpStorm’s end-of-debug-request handling</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Reviewed, tested, and merged fix for #1755: Overload pcntl_fork() to prevent performance degradation by calling xdebug_get_pid often</td>
+					<td class='hours'>2.00</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-march-2020.html'>monthly</a> report.</p>
+				<br/>
+			<h2>February 2020</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 48.00%'></div>
+			<div title='Business Support' class='business' style='width: 4.16%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.99%'></div>
+			<div title='Patrons' class='patreon' style='width: 10.68%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 15.49%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 61%'></div>
+							<div title='talk' class='type-talk' style='width: 6%'></div>
+							<div title='support' class='type-support' style='width: 5%'></div>
+							<div title='docs' class='type-docs' style='width: 1%'></div>
+							<div title='ci' class='type-ci' style='width: 2.5%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>1</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Fixing links, rename download files, and making sure AppVeyor generates the right file names</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8: Making it compile again</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8: Assert tests</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8 compat</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>PHP 8 compat</td>
+					<td class='hours'>7.00</td>
+				</tr>
+							<tr>
+					<td class='day'>4</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Testing and merging PHP 8 compat patch</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Fixed CI runs with missing USER env (which meant a missing idekey element in some test runs)</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Testing and merging PHP 8 compat patch</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Triaging and answering StackOverflow questions, and IRC query about function traces</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-talk'>talk</div>
+					</td>
+					<td>Preparing Sunshine PHP Xdebug talk</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-talk'>talk</div>
+					</td>
+					<td>Giving Xdebug 3.0 talk and interviews</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Fix tests that rely on specific settings to have been set</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Review and test PR #1743: Check ZEND_ACC_CLOSURE flag instead of string comparison</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>StackOverflow, and triaging bugs</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Debug client unregistering with proxy</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>StackOverflow, and triaging bugs</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>15</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Proxy’s client side – piping and copying</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>SSL support for dbgpProxy and dbgpClient</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Researching SSL library for Xdebug side</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Researching SSL library for Xdebug side</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>19</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Researching and vendorizing BearSSL</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Researching certificates</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Reviewing and testing PR #477: Fixed issue #1016: Support for pause-execution</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>24</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Testing PR #477, and adding async support to dbgpClient</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>25</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>StackOverflow</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Adding async support to dbgpClient</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Review PR #552: Use a pool to manage stack entries</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Adding async support to dbgpClient, merge PR #476/Issue #1016: Support for pause-execution</td>
+					<td class='hours'>4.50</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>BearSSL integration</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>StackOverflow</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Docs for dbgpProxy tool</td>
+					<td class='hours'>1.00</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-february-2020.html'>monthly</a> report.</p>
+				<br/>
+			<h2>January 2020</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 76.95%'></div>
+			<div title='Business Support' class='business' style='width: 2.50%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.99%'></div>
+			<div title='Patrons' class='patreon' style='width: 13.26%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 0.00%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 38%'></div>
+							<div title='website' class='type-website' style='width: 7.25%'></div>
+							<div title='support' class='type-support' style='width: 2%'></div>
+							<div title='release' class='type-release' style='width: 4%'></div>
+							<div title='ci' class='type-ci' style='width: 5%'></div>
+							<div title='bug' class='type-bug' style='width: 34%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>1</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Rewriting ‘debugclient’, and writing `dbgpProxy` in Go</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Rewriting ‘debugclient’, and writing `dbgpProxy` in Go</td>
+					<td class='hours'>3.25</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-website'>website</div>
+					</td>
+					<td>Writing “monthly report” for December</td>
+					<td class='hours'>1.25</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Looking at upcoming debugInfo visibility bug PR</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Working on issue #1727: Resolved breakpoints make things stop too often</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Added breakpoint visualisation to debugclient</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Look at PRs and merge fixes</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Add `feature_get` and `feature_set` visibility to debugclient</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Testing DateTime debug visibility PR, and figuring out the memleak</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Working on issue #1727: Resolved breakpoints make things stop too often</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Added stream and notify packet visualisation to debugclient to add 1727 work</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Working on issue #1727: Resolved breakpoints make things stop too often</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Tweaking debugclient in Go as we go along fixing #1727</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Issue #1733: SEND_VAR_NO_REF_EX opcode, used for require(), is not overloaded</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Reviewing PR #536: DateTime debug visibility</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Working on issue #1727: Resolved breakpoints make things stop too often</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Finalising issue #1727: Resolved breakpoints make things stop too often</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Testing and merging PR #536: DateTime debug visibility</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Re-work script that builds nightly PHP versions, which stopped working after /tmp got cleared</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating #1721: Unable to stop debug session - XDEBUG_SESSION cookie not deleted</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging #1729: Upgrading to newer version of Xdebug using PECL when older version is enabled results in segmentation fault.</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Finalising and merging issue #1727: Resolved breakpoints make things stop too often</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Reviewing PR #477: Issue #1016: Support for pause-execution</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Refactoring formatting logic, including storing “source” begin counter</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>15</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixing bug #1727: Segfault with DBGp "source" with a out-of-range start line number</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-release'>release</div>
+					</td>
+					<td>Releasing 2.9.1</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Re-do AppVeyor builds to make it 3 times as fast</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Fix AppVeyor warning due to duplicated directory name in “move”</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Researching and fixing bug #1735: DBGp eval warning promoted to Exception can cause out-of-sync responses</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Make a start with dbgpProxy implementation in Go</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>19</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>dbgpProxy implementation (server set-up)</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>20</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>dbgpProxy implementation (IDE registration side)</td>
+					<td class='hours'>7.00</td>
+				</tr>
+							<tr>
+					<td class='day'>21</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Removing unmaintained PHP 7 code and tests</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Removing unmaintained PHP 7 code and tests</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Testing and merging PR #544: Fix segmentation fault when other extensions run PHP in RINIT</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>debug client registering with proxy</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Triaging and answering StackOverflow questions</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging and fixing bug #1739: Tracing footer not written</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Investigating #1738: Ability to send text over stream (Feature Request)</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging bug reports, and StackOverflow questions</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging and answering StackOverflow questions</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Test debug client on Windows and macOS, and use the right ansicon on Windows</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-website'>website</div>
+					</td>
+					<td>Set-up separate download, and historical download pages</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Checking out issue of extra memory usage in Xdebug 2.9.1</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>31</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Triaging and answering StackOverflow questions</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>31</td>
+					<td class='type'>
+						<div class='type-release'>release</div>
+					</td>
+					<td>Releasing 2.9.2</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>31</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>More testing of debugclient, packaging it up, and releasing it</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>31</td>
+					<td class='type'>
+						<div class='type-website'>website</div>
+					</td>
+					<td>Finishing up separate download, and historical download pages</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>31</td>
+					<td class='type'>
+						<div class='type-website'>website</div>
+					</td>
+					<td>Writing “monthly report” for January</td>
+					<td class='hours'>1.00</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-january-2020.html'>monthly</a> report.</p>
+				<br/>
+			<h2>December 2019</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 53.25%'></div>
+			<div title='Business Support' class='business' style='width: 2.50%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.50%'></div>
+			<div title='Patrons' class='patreon' style='width: 13.16%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 0.00%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 9.5%'></div>
+							<div title='website' class='type-website' style='width: 0.5%'></div>
+							<div title='support' class='type-support' style='width: 0.75%'></div>
+							<div title='generic' class='type-generic' style='width: 11.25%'></div>
+							<div title='docs' class='type-docs' style='width: 2%'></div>
+							<div title='bug' class='type-bug' style='width: 24.5%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Releasing 2.8.1</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-website'>website</div>
+					</td>
+					<td>Pull requests and issues for xdebug/xdebug.org</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Triaging StackOverflow questions</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>xdebug.ini documentation updates, and fixing up the script for it</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Removing xdebug.remote_handler setting, as it is superfluous</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Sorting out the GIT mess that I created :-(</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixing #1717: Code coverage slow down</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>4</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Improving on fix for #1717: Code coverage slow down</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Reviewing PR #527: https://github.com/xdebug/xdebug/pull/527</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Trying to squeeze even more performance out of code coverage (without luck)</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Triaging StackOverflow questions</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Merging #1723: Class/function pre-analysis for code coverage speed improvements</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Issue #1724: Missing property types and uninitialised variables in variable dumping routines</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Making 2.9.0RC1 release, and preparing 2.9.0 release</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Issue #1724: Missing property types and uninitialised variables in variable dumping routines</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Reviewing PR #527: https://github.com/xdebug/xdebug/pull/527 again, and merging it</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Reviewing PR #529: https://github.com/xdebug/xdebug/pull/531</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging issues in feedback</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging, fixing, and testing issue #1728: INIT_STATIC_METHOD_CALL is not overloaded</td>
+					<td class='hours'>1.25</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Testing and releasing 2.9.0</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-docs'>docs</div>
+					</td>
+					<td>Writing article to describe code coverage in 2.9 speedup</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating #1727: Resolved breakpoints make things stop too often</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Discussing resolving breakpoints with Nikita on video chat</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Working on issue #1727: Resolved breakpoints make things stop too often</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>18</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Rewriting ‘debugclient’ in Go</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>19</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Working on issue #1727: Resolved breakpoints make things stop too often</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>20</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Working on issue #1727: Resolved breakpoints make things stop too often</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>20</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging bug with var_dump() and DateTime* classes</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>31</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Rewriting ‘debugclient’, and writing `dbgpProxy` in Go</td>
+					<td class='hours'>6.00</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-december-2019.html'>monthly</a> report.</p>
+				<br/>
+			<h2>November 2019</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 34.62%'></div>
+			<div title='Business Support' class='business' style='width: 2.50%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.50%'></div>
+			<div title='Patrons' class='patreon' style='width: 13.44%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 0.00%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 14.5%'></div>
+							<div title='support' class='type-support' style='width: 2%'></div>
+							<div title='generic' class='type-generic' style='width: 4.5%'></div>
+							<div title='bug' class='type-bug' style='width: 10%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Modularizing the debugger mode</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>4</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Answering Stackoverflow questions</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Modularizing the debugger mode</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Checking out new website design, and making some tweaks</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Modularizing the tracing mode</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Making things static, splitting up the variable rendering code</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Website redesign</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>15</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Website redesign</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>24</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating #1717: Code coverage turned slow after update from 2.7.2 to 2.8.0</td>
+					<td class='hours'>4.00</td>
+				</tr>
+							<tr>
+					<td class='day'>18</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>StackOverflow, and triading bugs</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixing #1717, and improving speed related to the bug; preparing 2.8.1 release</td>
+					<td class='hours'>6.00</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Removing TSRMLS macros</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Splitting up the variable rendering code</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Integrating, rebasing, and adjusting patch for #1717 2.8.1 release</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Implemented #1301: Removed aggregated profiler feature</td>
+					<td class='hours'>0.50</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-november-2019.html'>monthly</a> report.</p>
+				<br/>
+			<h2>October 2019</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 15.63%'></div>
+			<div title='Business Support' class='business' style='width: 1.67%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.17%'></div>
+			<div title='Patrons' class='patreon' style='width: 12.76%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 0.00%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 12%'></div>
+							<div title='talk' class='type-talk' style='width: 13.25%'></div>
+							<div title='support' class='type-support' style='width: 3.25%'></div>
+							<div title='release' class='type-release' style='width: 4%'></div>
+							<div title='generic' class='type-generic' style='width: 1%'></div>
+							<div title='ci' class='type-ci' style='width: 1.5%'></div>
+							<div title='bug' class='type-bug' style='width: 2.75%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>2</td>
+					<td class='type'>
+						<div class='type-talk'>talk</div>
+					</td>
+					<td>Preparing Dresden UG talk and workshop</td>
+					<td class='hours'>5.00</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-talk'>talk</div>
+					</td>
+					<td>Preparing Dresden UG talk and workshop</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-talk'>talk</div>
+					</td>
+					<td>Giving Xdebug 3.0 UG talk</td>
+					<td class='hours'>1.25</td>
+				</tr>
+							<tr>
+					<td class='day'>4</td>
+					<td class='type'>
+						<div class='type-talk'>talk</div>
+					</td>
+					<td>Giving Xdebug workshop</td>
+					<td class='hours'>6.00</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triage and fix #1708: Crash on evaluating object with properties</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Finding out that tests for #778 and #987-006 are failing due to change in PHP 7.4</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Creating tickets discovered at PHP UG Dresden talk/workshop</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging #1701 – slow gettimeofday() with docker on resumed Mac</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>8</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Answering Stackoverflow questions</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>9</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Answering Stackoverflow questions</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Modularizing the gcstats functionality</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Triaging #1714: mysqli_options with xdebug.collect_params=3 and above creates Warning: Property access is not allowed yet</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>11</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Answering Stackoverflow questions</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging and fixing bug #1713: INIT_FCALL is not overloaded in code coverage</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Modularizing the code coverage mode</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-ci'>ci</div>
+					</td>
+					<td>Debugging test framework anomalies</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>15</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Answering Stackoverflow questions</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>21</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Answering Stackoverflow questions</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>21</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Modularizing the code coverage mode</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-support'>support</div>
+					</td>
+					<td>Answering Stackoverflow questions</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Resolve outstanding issues with code coverage modularization</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Modularizing the profiler mode</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>31</td>
+					<td class='type'>
+						<div class='type-release'>release</div>
+					</td>
+					<td>Releasing 2.8.0</td>
+					<td class='hours'>4.00</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-october-2019.html'>monthly</a> report.</p>
+				<br/>
+			<h2>September 2019</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 3.96%'></div>
+			<div title='Business Support' class='business' style='width: 1.67%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.17%'></div>
+			<div title='Patrons' class='patreon' style='width: 15.42%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 0.00%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='xdebug3' class='type-xdebug3' style='width: 15.5%'></div>
+							<div title='website' class='type-website' style='width: 1%'></div>
+							<div title='generic' class='type-generic' style='width: 2.5%'></div>
+							<div title='bug' class='type-bug' style='width: 9.75%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Writing Xdebug August 2019 update</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigate Pull Request #474 for issue #1534 and #1665</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>5</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Fixed issue #1665: Segfault with garbage collection and complex function arguments</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>6</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Investigating #1699: Crash during debugging Phalcon project</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Failing again to reproduce #1699: Crash during debugging Phalcon project</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>16</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging OSX bug #1701: Slowness due to calls to getTimeOfDay</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>17</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Reproduced #1699, and provided a fix</td>
+					<td class='hours'>1.25</td>
+				</tr>
+							<tr>
+					<td class='day'>19</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging bug #1703 (Symbol not found: _compiler_globals)</td>
+					<td class='hours'>0.25</td>
+				</tr>
+							<tr>
+					<td class='day'>19</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging bug #1704 (Xdebug requires Zend Engine API version 320190529), starting and publishing new Windows builds of 2.8.0beta2</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>20</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Refactoring Xdebug globlas into constituent parts</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>21</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Refactoring Xdebug globlas into constituent parts</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>22</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Refactoring Xdebug globlas into constituent parts</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-website'>website</div>
+					</td>
+					<td>Merging Matt’s website re-architecture PR, added caching for download and log</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>23</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Windows part of moving files, and fixing the “core” issue/directory.</td>
+					<td class='hours'>3.00</td>
+				</tr>
+							<tr>
+					<td class='day'>26</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Moving and renaming the files again</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>27</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Moving and renaming the files</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Moving and renaming the files</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triaging and fixing bug #1705: Crash while debugging with ionCube being used</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Refactoring initialisation (part 1 of n)</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Writing Xdebug September 2019 update</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>30</td>
+					<td class='type'>
+						<div class='type-xdebug3'>xdebug3</div>
+					</td>
+					<td>Streaming the fix for the crash that I had introduced during refactoring (part 1)</td>
+					<td class='hours'>0.50</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-september-2019.html'>monthly</a> report.</p>
+				<br/>
+			<h2>June 2019</h2>
+		<div class='funding'>
+			<div title='Funding Partners' class='others' style='width: 3.71%'></div>
+			<div title='Business Support' class='business' style='width: 0.00%'></div>
+			<div title='Pro Support' class='pro' style='width: 0.00%'></div>
+			<div title='Patrons' class='patreon' style='width: 8.62%'></div>
+			<div title='GitHub Sponsors' class='github' style='width: 0.00%'></div>
+			<div class='comment'>Time Funded</div>
+		</div>
+
+		<div class='spend'>
+							<div title='test' class='type-test' style='width: 8%'></div>
+							<div title='release' class='type-release' style='width: 2%'></div>
+							<div title='php' class='type-php' style='width: 2%'></div>
+							<div title='generic' class='type-generic' style='width: 5.25%'></div>
+							<div title='bug' class='type-bug' style='width: 2.5%'></div>
+						<div class='comment'>Time Spent</div>
+		</div>
+
+		<table class='log'>
+			<tr>
+				<th class='day'>Day</th>
+				<th class='type'>Type</th>
+				<th class='description'>Description</th>
+				<th class='hours'>Hours</th>
+			</tr>
+							<tr>
+					<td class='day'>3</td>
+					<td class='type'>
+						<div class='type-test'>test</div>
+					</td>
+					<td>Working on making the test suite easier to maintain wrt to versions</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>4</td>
+					<td class='type'>
+						<div class='type-test'>test</div>
+					</td>
+					<td>Working on making the test suite easier to maintain wrt to versions</td>
+					<td class='hours'>3.50</td>
+				</tr>
+							<tr>
+					<td class='day'>7</td>
+					<td class='type'>
+						<div class='type-test'>test</div>
+					</td>
+					<td>Working on making the test suite easier to maintain wrt to versions</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>10</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Solving ArrayObject test, and additional test splits due to PHP 7.4 changes</td>
+					<td class='hours'>2.50</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-php'>php</div>
+					</td>
+					<td>PHP 7.4 support with removal of DELAYED_CLASS_INIT</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>12</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Checking out Svetlana’s email with issues regarding resolved breakpoints</td>
+					<td class='hours'>0.75</td>
+				</tr>
+							<tr>
+					<td class='day'>13</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>Checking out Svetlana’s email with issues regarding resolved breakpoints</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>14</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>PHP 7.4 on Windows compat</td>
+					<td class='hours'>0.50</td>
+				</tr>
+							<tr>
+					<td class='day'>15</td>
+					<td class='type'>
+						<div class='type-generic'>generic</div>
+					</td>
+					<td>PHP 7.4 on Windows compat; triaging bug reports</td>
+					<td class='hours'>1.00</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Triage reports in preparation for alpha1</td>
+					<td class='hours'>1.50</td>
+				</tr>
+							<tr>
+					<td class='day'>28</td>
+					<td class='type'>
+						<div class='type-release'>release</div>
+					</td>
+					<td>Release Xdebug 2.8.0alpha1</td>
+					<td class='hours'>2.00</td>
+				</tr>
+							<tr>
+					<td class='day'>29</td>
+					<td class='type'>
+						<div class='type-bug'>bug</div>
+					</td>
+					<td>Looking at shutdown/trace issue (#1676)</td>
+					<td class='hours'>1.00</td>
+				</tr>
+					</table>
+
+					<p>For additional information, please see the <a href='https://derickrethans.nl/xdebug-update-june-2019.html'>monthly</a> report.</p>
+				<br/>
+	</div>
+</main>
+
+
+	<footer class="content_width">
+		<p>
+		This site and all of its contents are Copyright &copy; 2002-2020 by Derick Rethans.<br />
+		All rights reserved.
+		</p>
+	</footer>
+</body>
+</html>
